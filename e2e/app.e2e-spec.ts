@@ -1,10 +1,10 @@
-import { AlgamoneyUiPage } from './app.po';
+import { MedicaoFrontendPage } from './app.po';
 
-describe('algamoney-ui App', () => {
-  let page: AlgamoneyUiPage;
+describe('medicao-frontend App', () => {
+  let page: MedicaoFrontendPage;
 
   beforeEach(() => {
-    page = new AlgamoneyUiPage();
+    page = new MedicaoFrontendPage();
   });
 
   it('should display welcome message', () => {

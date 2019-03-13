@@ -1,7 +1,7 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://algamoney-api.herokuapp.com',
+  apiUrl: 'https://medicaobackend.herokuapp.com',
 
-  tokenWhitelistedDomains: [ new RegExp('algamoney-api.herokuapp.com') ],
+  tokenWhitelistedDomains: [ new RegExp('medicaobackend.herokuapp.com') ],
   tokenBlacklistedRoutes: [ new RegExp('\/oauth\/token') ]
 };

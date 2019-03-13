@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class AlgamoneyUiPage {
+export class MedicaoFrontendPage {
   navigateTo() {
     return browser.get('/');
   }
