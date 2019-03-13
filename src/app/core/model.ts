@@ -35,6 +35,13 @@ export class Contato {
   }
 }
 
+export class Construtora {
+  codigo: number;
+  razaoSocial: string;
+  cnpj : string;
+  ativo = true;
+}
+
 export class Pessoa {
   codigo: number;
   nome: string;

@@ -11,13 +11,15 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { GrowlModule } from 'primeng/growl';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-import { AuthService } from './../seguranca/auth.service';
-import { ErrorHandlerService } from './error-handler.service';
+import { ConstrutoraService } from 'app/construtoras/construtora.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { CategoriaService } from './../categorias/categoria.service';
 import { DashboardService } from './../dashboard/dashboard.service';
 import { RelatoriosService } from './../relatorios/relatorios.service';
+
+import { AuthService } from './../seguranca/auth.service';
+import { ErrorHandlerService } from './error-handler.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
@@ -47,6 +49,7 @@ registerLocaleData(localePt);
   providers: [
     LancamentoService,
     PessoaService,
+    ConstrutoraService,
     CategoriaService,
     DashboardService,
     RelatoriosService,
