@@ -1,3 +1,36 @@
-<p>
-  construtora-cadastro works!
-</p>
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
+
+    <div class="ui-g">
+      <div class="ui-g-12">
+        <h1>{{title.getTitle()}}</h1>
+      </div>
+
+      <div class="ui-g-12 ui-fluid">
+        <label>Razão social</label>
+        <input pInputText type="text" name="razaoSocial"
+          [(ngModel)]="construtora.razaoSocial"
+          #razaoSocial="ngModel" required minlength="1">
+
+        <app-message [control]="razaoSocial" error="required"
+          text="Informe a razão social"></app-message>
+        <app-message [control]="razaoSocial" error="minlength"
+          text="Mínimo de {{ razaoSocial.errors?.minlength?.requiredLength }} caracteres"></app-message>
+      </div>
+
+      <div class="ui-g-12 ui-md-2 ui-fluid">
+        <label>CNPJ</label>
+          <p-inputMask name="cnpj" mask="99.999.999/9999-99"
+          [(ngModel)]="construtora.cnpj"></p-inputMask>
+      </div>
+      <div class="ui-g-12">
+        <button pButton type="submit" label="Salvar" [disabled]="f.invalid"></button>
+        <button pButton type="button" label="Nova" class="ui-button-info"
+          (click)="nova(f)"></button>
+
+        <a routerLink="/construtoras">Voltar para a pesquisa</a>
+      </div>
+    </div>
+
+  </form>
+</div>
