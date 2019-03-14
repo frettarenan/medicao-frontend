@@ -8,6 +8,7 @@ import { MoneyHttp } from '../seguranca/money-http';
 export class UsuarioFiltro {
   nome: string;
   email: string;
+  idConstrutora : number;
   pagina = 0;
   itensPorPagina = 5;
 }
@@ -35,6 +36,10 @@ export class UsuarioService {
 
     if (filtro.email) {
       params = params.append('email', filtro.email);
+    }
+
+    if (filtro.idConstrutora) {
+      params = params.append('idConstrutora', filtro.idConstrutora.toString());
     }
 
     return this.http.get<any>(`${this.usuariosUrl}`, { params })

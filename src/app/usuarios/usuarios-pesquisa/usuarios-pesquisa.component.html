@@ -10,12 +10,14 @@
         </div>
         <div class="ui-g-12 ui-fluid">
           <label>E-mail</label>
-
-          <input pInputText type="email" name="email"
-            required email [(ngModel)]="filtro.email" #contatoEmail="ngModel"/>
-
-          <app-message [control]="contatoEmail" error="required" text="Informe o email"></app-message>
-          <app-message [control]="contatoEmail" error="email" text="Informe um e-mail válido"></app-message>
+          <input pInputText icon="fa fa-search" type="text" name="email" [(ngModel)]="filtro.email">
+        </div>
+        <div class="ui-g-12 ui-fluid">
+          <label>Construtora</label>
+  
+          <p-dropdown placeholder="Selecione..."
+            [filter]="true" [options]="construtoras"
+            [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"></p-dropdown>
         </div>
 
         <div class="ui-g-12">
@@ -46,7 +48,7 @@
           <tr>
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.email }}</td>
-            <td>{{ usuario.construtora.razaoSocial }}</td>
+            <td>{{ (usuario.construtora == null) ? '' : usuario.construtora.razaoSocial }}</td>
             <td>
               <a href="javascript:;"
                 [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
