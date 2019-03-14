@@ -45,12 +45,12 @@ export class PessoaCadastroContatoComponent implements OnInit {
   }
 
   clonarContato(contato: Contato): Contato {
-    return new Contato(contato.codigo,
+    return new Contato(contato.id,
       contato.nome, contato.email, contato.telefone);
   }
 
   get editando() {
-    return this.contato && this.contato.codigo;
+    return this.contato && this.contato.id;
   }
 
 }

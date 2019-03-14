@@ -66,8 +66,8 @@ export class LancamentoService {
       });
   }
 
-  excluir(codigo: number): Promise<void> {
-    return this.http.delete(`${this.lancamentosUrl}/${codigo}`)
+  excluir(id: number): Promise<void> {
+    return this.http.delete(`${this.lancamentosUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
@@ -78,7 +78,7 @@ export class LancamentoService {
   }
 
   atualizar(lancamento: Lancamento): Promise<Lancamento> {
-    return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.codigo}`, lancamento)
+    return this.http.put<Lancamento>(`${this.lancamentosUrl}/${lancamento.id}`, lancamento)
       .toPromise()
       .then(response => {
         const lancamentoAlterado = response;
@@ -89,8 +89,8 @@ export class LancamentoService {
       });
   }
 
-  buscarPorCodigo(codigo: number): Promise<Lancamento> {
-    return this.http.get<Lancamento>(`${this.lancamentosUrl}/${codigo}`)
+  buscarPorId(id: number): Promise<Lancamento> {
+    return this.http.get<Lancamento>(`${this.lancamentosUrl}/${id}`)
       .toPromise()
       .then(response => {
         const lancamento = response;

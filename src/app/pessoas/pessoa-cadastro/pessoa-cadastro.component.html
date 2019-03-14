@@ -82,7 +82,7 @@
 
           <p-dropdown placeholder="Selecione..."
             [filter]="true" [options]="cidades"
-            [(ngModel)]="pessoa.endereco.cidade.codigo" name="cidade"
+            [(ngModel)]="pessoa.endereco.cidade.id" name="cidade"
             #cidade="ngModel" required
             [disabled]="!estadoSelecionado"></p-dropdown>
 

@@ -57,7 +57,7 @@ export class PessoasPesquisaComponent implements OnInit {
   }
 
   excluir(pessoa: any) {
-    this.pessoaService.excluir(pessoa.codigo)
+    this.pessoaService.excluir(pessoa.id)
       .then(() => {
         if (this.grid.first === 0) {
           this.pesquisar();
@@ -73,7 +73,7 @@ export class PessoasPesquisaComponent implements OnInit {
   alternarStatus(pessoa: any): void {
     const novoStatus = !pessoa.ativo;
 
-    this.pessoaService.mudarStatus(pessoa.codigo, novoStatus)
+    this.pessoaService.mudarStatus(pessoa.id, novoStatus)
       .then(() => {
         const acao = novoStatus ? 'ativada' : 'desativada';
 

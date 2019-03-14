@@ -12,6 +12,7 @@ import { GrowlModule } from 'primeng/growl';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { ConstrutoraService } from 'app/construtoras/construtora.service';
+import { UsuarioService } from 'app/usuarios/usuario.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { CategoriaService } from './../categorias/categoria.service';
@@ -47,9 +48,10 @@ registerLocaleData(localePt);
     ConfirmDialogModule
   ],
   providers: [
+    ConstrutoraService,
+    UsuarioService,
     LancamentoService,
     PessoaService,
-    ConstrutoraService,
     CategoriaService,
     DashboardService,
     RelatoriosService,

@@ -19,7 +19,7 @@ const routes: Routes = [
     data: { roles: ['ROLE_CADASTRAR_LANCAMENTO'] }
   },
   {
-    path: ':codigo',
+    path: ':id',
     component: LancamentoCadastroComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_CADASTRAR_LANCAMENTO'] }

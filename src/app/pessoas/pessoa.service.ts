@@ -58,17 +58,17 @@ export class PessoaService {
       .then(response => response.content);
   }
 
-  excluir(codigo: number): Promise<void> {
-    return this.http.delete(`${this.pessoasUrl}/${codigo}`)
+  excluir(id: number): Promise<void> {
+    return this.http.delete(`${this.pessoasUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
-  mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+  mudarStatus(id: number, ativo: boolean): Promise<void> {
     const headers = new HttpHeaders()
         .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.pessoasUrl}/${codigo}/ativo`, ativo, { headers })
+    return this.http.put(`${this.pessoasUrl}/${id}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);
   }
@@ -79,12 +79,12 @@ export class PessoaService {
   }
 
   atualizar(pessoa: Pessoa): Promise<Pessoa> {
-    return this.http.put<Pessoa>(`${this.pessoasUrl}/${pessoa.codigo}`, pessoa)
+    return this.http.put<Pessoa>(`${this.pessoasUrl}/${pessoa.id}`, pessoa)
       .toPromise();
   }
 
-  buscarPorCodigo(codigo: number): Promise<Pessoa> {
-    return this.http.get<Pessoa>(`${this.pessoasUrl}/${codigo}`)
+  buscarPorId(id: number): Promise<Pessoa> {
+    return this.http.get<Pessoa>(`${this.pessoasUrl}/${id}`)
       .toPromise();
   }
 

@@ -44,12 +44,12 @@ export class LancamentoCadastroComponent implements OnInit {
   ngOnInit() {
     this.configurarFormulario();
 
-    const codigoLancamento = this.route.snapshot.params['codigo'];
+    const idLancamento = this.route.snapshot.params['id'];
 
     this.title.setTitle('Novo lançamento');
 
-    if (codigoLancamento) {
-      this.carregarLancamento(codigoLancamento);
+    if (idLancamento) {
+      this.carregarLancamento(idLancamento);
     }
 
     this.carregarCategorias();
@@ -102,18 +102,18 @@ export class LancamentoCadastroComponent implements OnInit {
 
   configurarFormulario() {
     this.formulario = this.formBuilder.group({
-      codigo: [],
+      id: [],
       tipo: [ 'RECEITA', Validators.required ],
       dataVencimento: [ null, Validators.required ],
       dataPagamento: [],
       descricao: [null, [ this.validarObrigatoriedade, this.validarTamanhoMinimo(5) ]],
       valor: [ null, Validators.required ],
       pessoa: this.formBuilder.group({
-        codigo: [ null, Validators.required ],
+        id: [ null, Validators.required ],
         nome: []
       }),
       categoria: this.formBuilder.group({
-        codigo: [ null, Validators.required ],
+        id: [ null, Validators.required ],
         nome: []
       }),
       observacao: [],
@@ -133,11 +133,11 @@ export class LancamentoCadastroComponent implements OnInit {
   }
 
   get editando() {
-    return Boolean(this.formulario.get('codigo').value);
+    return Boolean(this.formulario.get('id').value);
   }
 
-  carregarLancamento(codigo: number) {
-    this.lancamentoService.buscarPorCodigo(codigo)
+  carregarLancamento(id: number) {
+    this.lancamentoService.buscarPorId(id)
       .then(lancamento => {
         // this.lancamento = lancamento;
         this.formulario.patchValue(lancamento);
@@ -161,7 +161,7 @@ export class LancamentoCadastroComponent implements OnInit {
 
         // form.reset();
         // this.lancamento = new Lancamento();
-        this.router.navigate(['/lancamentos', lancamentoAdicionado.codigo]);
+        this.router.navigate(['/lancamentos', lancamentoAdicionado.id]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -182,7 +182,7 @@ export class LancamentoCadastroComponent implements OnInit {
     return this.categoriaService.listarTodas()
       .then(categorias => {
         this.categorias = categorias
-          .map(c => ({ label: c.nome, value: c.codigo }));
+          .map(c => ({ label: c.nome, value: c.id }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -191,7 +191,7 @@ export class LancamentoCadastroComponent implements OnInit {
     this.pessoaService.listarTodas()
       .then(pessoas => {
         this.pessoas = pessoas
-          .map(p => ({ label: p.nome, value: p.codigo }));
+          .map(p => ({ label: p.nome, value: p.id }));
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

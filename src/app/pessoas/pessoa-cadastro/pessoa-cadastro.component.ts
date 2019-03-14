@@ -31,42 +31,42 @@ export class PessoaCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    const codigoPessoa = this.route.snapshot.params['codigo'];
+    const idPessoa = this.route.snapshot.params['id'];
 
     this.title.setTitle('Nova pessoa');
 
     this.carregarEstados();
 
-    if (codigoPessoa) {
-      this.carregarPessoa(codigoPessoa);
+    if (idPessoa) {
+      this.carregarPessoa(idPessoa);
     }
   }
 
   carregarEstados() {
     this.pessoaService.listarEstados().then(lista => {
-      this.estados = lista.map(uf => ({ label: uf.nome, value: uf.codigo }));
+      this.estados = lista.map(uf => ({ label: uf.nome, value: uf.id }));
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarCidades() {
     this.pessoaService.pesquisarCidades(this.estadoSelecionado).then(lista => {
-      this.cidades = lista.map(c => ({ label: c.nome, value: c.codigo }));
+      this.cidades = lista.map(c => ({ label: c.nome, value: c.id }));
     })
     .catch(erro => this.errorHandler.handle(erro));
   }
 
   get editando() {
-    return Boolean(this.pessoa.codigo)
+    return Boolean(this.pessoa.id)
   }
 
-  carregarPessoa(codigo: number) {
-    this.pessoaService.buscarPorCodigo(codigo)
+  carregarPessoa(id: number) {
+    this.pessoaService.buscarPorId(id)
       .then(pessoa => {
         this.pessoa = pessoa;
 
         this.estadoSelecionado = (this.pessoa.endereco.cidade) ?
-                this.pessoa.endereco.cidade.estado.codigo : null;
+                this.pessoa.endereco.cidade.estado.id : null;
 
         if (this.estadoSelecionado) {
           this.carregarCidades();
@@ -89,7 +89,7 @@ export class PessoaCadastroComponent implements OnInit {
     this.pessoaService.adicionar(this.pessoa)
       .then(pessoaAdicionada => {
         this.messageService.add({ severity: 'success', detail: 'Pessoa adicionada com sucesso!' });
-        this.router.navigate(['/pessoas', pessoaAdicionada.codigo]);
+        this.router.navigate(['/pessoas', pessoaAdicionada.id]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

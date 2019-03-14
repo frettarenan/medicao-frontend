@@ -52,17 +52,17 @@ export class ConstrutoraService {
       .then(response => response.content);
   }
 
-  excluir(codigo: number): Promise<void> {
-    return this.http.delete(`${this.construtorasUrl}/${codigo}`)
+  excluir(id: number): Promise<void> {
+    return this.http.delete(`${this.construtorasUrl}/${id}`)
       .toPromise()
       .then(() => null);
   }
 
-  mudarStatus(codigo: number, ativo: boolean): Promise<void> {
+  mudarStatus(id: number, ativo: boolean): Promise<void> {
     const headers = new HttpHeaders()
         .append('Content-Type', 'application/json');
 
-    return this.http.put(`${this.construtorasUrl}/${codigo}/ativo`, ativo, { headers })
+    return this.http.put(`${this.construtorasUrl}/${id}/ativo`, ativo, { headers })
       .toPromise()
       .then(() => null);
   }
@@ -73,12 +73,12 @@ export class ConstrutoraService {
   }
 
   atualizar(construtora: Construtora): Promise<Construtora> {
-    return this.http.put<Construtora>(`${this.construtorasUrl}/${construtora.codigo}`, construtora)
+    return this.http.put<Construtora>(`${this.construtorasUrl}/${construtora.id}`, construtora)
       .toPromise();
   }
 
-  buscarPorCodigo(codigo: number): Promise<Construtora> {
-    return this.http.get<Construtora>(`${this.construtorasUrl}/${codigo}`)
+  buscarPorId(id: number): Promise<Construtora> {
+    return this.http.get<Construtora>(`${this.construtorasUrl}/${id}`)
       .toPromise();
   }
 

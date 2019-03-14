@@ -4,10 +4,18 @@
         <div class="ui-g-12">
           <h1>{{title.getTitle()}}</h1>
         </div>
-
         <div class="ui-g-12 ui-fluid">
-          <label>Razão social</label>
-          <input pInputText icon="fa fa-search" type="text" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">
+          <label>Nome</label>
+          <input pInputText icon="fa fa-search" type="text" name="nome" [(ngModel)]="filtro.nome">
+        </div>
+        <div class="ui-g-12 ui-fluid">
+          <label>E-mail</label>
+
+          <input pInputText type="email" name="email"
+            required email [(ngModel)]="filtro.email" #contatoEmail="ngModel"/>
+
+          <app-message [control]="contatoEmail" error="required" text="Informe o email"></app-message>
+          <app-message [control]="contatoEmail" error="email" text="Informe um e-mail válido"></app-message>
         </div>
 
         <div class="ui-g-12">
@@ -18,47 +26,50 @@
 
   <div class="ui-g">
     <div class="ui-g-12">
-      <p-table [value]="construtoras" [responsive]="true"
+
+      <p-table [value]="usuarios" [responsive]="true"
         [paginator]="true" [rows]="filtro.itensPorPagina"
         [lazy]="true" [totalRecords]="totalRegistros"
         (onLazyLoad)="aoMudarPagina($event)"
         #tabela>
         <ng-template pTemplate="header">
           <tr>
-            <th>Razão Social</th>
-            <th class="width170px">CNPJ</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Construtora</th>
             <th class="width100px">Situação</th>
             <th class="col-acoes-header">Ações</th>
           </tr>
         </ng-template>
 
-        <ng-template pTemplate="body" let-construtora>
+        <ng-template pTemplate="body" let-usuario>
           <tr>
-            <td>{{ construtora.razaoSocial }}</td>
-            <td>{{ construtora.cnpj }}</td>
+            <td>{{ usuario.nome }}</td>
+            <td>{{ usuario.email }}</td>
+            <td>{{ usuario.construtora.razaoSocial }}</td>
             <td>
               <a href="javascript:;"
-                [pTooltip]="construtora.ativo ? 'Desativar' : 'Ativar'"
+                [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
                 tooltipPosition="top"
-                (click)="alternarStatus(construtora)">
-                {{ construtora.ativo ? 'Ativo' : 'Inativo' }}
+                (click)="alternarStatus(usuario)">
+                {{ usuario.ativo ? 'Ativo' : 'Inativo' }}
               </a>
             </td>
             <td class="col-acoes">
               <a pButton icon="fa fa-pencil" class="width25px"
                 pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/construtoras', construtora.id]"></a>
+                [routerLink]="['/usuarios', usuario.id]"></a>
 
               <button pButton icon="fa fa-trash" class="width25px"
                 pTooltip="Excluir" tooltipPosition="top"
-                (click)="confirmarExclusao(construtora)"></button>
+                (click)="confirmarExclusao(usuario)"></button>
             </td>
           </tr>
         </ng-template>
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="4">
+            <td colspan="5">
               Nenhum registro encontrado
             </td>
           </tr>
@@ -67,7 +78,7 @@
     </div>
 
     <div class="ui-g-12">
-      <a pButton icon="fa fa-file" label="Novo" routerLink="/construtoras/novo"></a>
+      <a pButton icon="fa fa-file" label="Novo" routerLink="/usuarios/novo"></a>
     </div>
   </div>
 

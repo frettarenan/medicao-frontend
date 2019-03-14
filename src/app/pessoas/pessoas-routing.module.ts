@@ -19,7 +19,7 @@ const routes: Routes = [
     data: { roles: ['ROLE_CADASTRAR_PESSOA'] }
   },
   {
-    path: ':codigo',
+    path: ':id',
     component: PessoaCadastroComponent,
     canActivate: [AuthGuard],
     data: { roles: ['ROLE_CADASTRAR_PESSOA'] }

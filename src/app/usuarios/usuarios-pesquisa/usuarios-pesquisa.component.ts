@@ -5,22 +5,22 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/components/common/ap
 import { MessageService } from 'primeng/components/common/messageservice';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
-import { ConstrutoraFiltro, ConstrutoraService } from './../construtora.service';
+import { UsuarioFiltro, UsuarioService } from './../usuario.service';
 
 @Component({
-  selector: 'app-construtoras-pesquisa',
-  templateUrl: './construtoras-pesquisa.component.html',
-  styleUrls: ['./construtoras-pesquisa.component.css']
+  selector: 'app-usuarios-pesquisa',
+  templateUrl: './usuarios-pesquisa.component.html',
+  styleUrls: ['./usuarios-pesquisa.component.css']
 })
-export class ConstrutorasPesquisaComponent implements OnInit {
+export class UsuariosPesquisaComponent implements OnInit {
 
   totalRegistros = 0;
-  filtro = new ConstrutoraFiltro();
-  construtoras = [];
+  filtro = new UsuarioFiltro();
+  usuarios = [];
   @ViewChild('tabela') grid;
 
   constructor(
-    private construtoraService: ConstrutoraService,
+    private usuarioService: UsuarioService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
     private messageService: MessageService,
@@ -28,36 +28,36 @@ export class ConstrutorasPesquisaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Pesquisa de Construtoras');
+    this.title.setTitle('Pesquisa de Usuários');
   }
 
   pesquisar(pagina = 0) {
-    this.filtro.pagina = pagina;
+    /*this.filtro.pagina = pagina;
 
-    this.construtoraService.pesquisar(this.filtro)
+    this.usuarioService.pesquisar(this.filtro)
       .then(resultado => {
         this.totalRegistros = resultado.total;
-        this.construtoras = resultado.construtoras;
+        this.usuarios = resultado.usuarios;
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => this.errorHandler.handle(erro));*/
   }
 
   aoMudarPagina(event: LazyLoadEvent) {
-    const pagina = event.first / event.rows;
-    this.pesquisar(pagina);
+    /*const pagina = event.first / event.rows;
+    this.pesquisar(pagina);*/
   }
 
-  confirmarExclusao(construtora: any) {
-    this.confirmation.confirm({
+  confirmarExclusao(usuario: any) {
+    /*this.confirmation.confirm({
       message: 'Tem certeza que deseja excluir?',
       accept: () => {
-        this.excluir(construtora);
+        this.excluir(usuario);
       }
-    });
+    });*/
   }
 
-  excluir(construtora: any) {
-    this.construtoraService.excluir(construtora.id)
+  excluir(usuario: any) {
+    /*this.usuarioService.excluir(usuario.id)
       .then(() => {
         if (this.grid.first === 0) {
           this.pesquisar();
@@ -67,20 +67,20 @@ export class ConstrutorasPesquisaComponent implements OnInit {
 
         this.messageService.add({ severity: 'success', detail: 'Registro excluído com sucesso!' });
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => this.errorHandler.handle(erro));*/
   }
 
-  alternarStatus(construtora: any): void {
-    const novoStatus = !construtora.ativo;
+  alternarStatus(usuario: any): void {
+    /*const novoStatus = !usuario.ativo;
 
-    this.construtoraService.mudarStatus(construtora.id, novoStatus)
+    this.usuarioService.mudarStatus(usuario.id, novoStatus)
       .then(() => {
         const acao = novoStatus ? 'ativado' : 'desativado';
 
-        construtora.ativo = novoStatus;
+        usuario.ativo = novoStatus;
         this.messageService.add({ severity: 'success', detail: `Registro ${acao} com sucesso!` });
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => this.errorHandler.handle(erro));*/
   }
 
 }
