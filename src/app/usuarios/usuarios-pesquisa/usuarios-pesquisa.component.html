@@ -1,16 +1,16 @@
 <div class="container">
-  <form autocomplete="off" (ngSubmit)="pesquisar()">
+  <form #form autocomplete="off" (ngSubmit)="pesquisar()">
     <div class="ui-g">
         <div class="ui-g-12">
           <h1>{{title.getTitle()}}</h1>
         </div>
         <div class="ui-g-12 ui-fluid">
           <label>Nome</label>
-          <input pInputText icon="fa fa-search" type="text" name="nome" [(ngModel)]="filtro.nome">
+          <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
         </div>
         <div class="ui-g-12 ui-fluid">
           <label>E-mail</label>
-          <input pInputText icon="fa fa-search" type="text" name="email" [(ngModel)]="filtro.email">
+          <input pInputText type="text" name="email" [(ngModel)]="filtro.email">
         </div>
         <div class="ui-g-12 ui-fluid">
           <label>Construtora</label>
@@ -21,7 +21,8 @@
         </div>
 
         <div class="ui-g-12">
-          <button pButton type="submit" label="Pesquisar"></button>
+          <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
+          <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
         </div>
     </div>
   </form>
@@ -80,7 +81,7 @@
     </div>
 
     <div class="ui-g-12">
-      <a pButton icon="fa fa-file" label="Novo" routerLink="/usuarios/novo"></a>
+      <button pButton icon="fa fa-file" label="Novo" routerLink="/usuarios/novo"></button>
     </div>
   </div>
 

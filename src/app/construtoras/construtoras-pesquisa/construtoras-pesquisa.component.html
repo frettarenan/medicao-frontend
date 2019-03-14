@@ -1,5 +1,5 @@
 <div class="container">
-  <form autocomplete="off" (ngSubmit)="pesquisar()">
+  <form #form autocomplete="off" (ngSubmit)="pesquisar()">
     <div class="ui-g">
         <div class="ui-g-12">
           <h1>{{title.getTitle()}}</h1>
@@ -7,11 +7,12 @@
 
         <div class="ui-g-12 ui-fluid">
           <label>Razão social</label>
-          <input pInputText icon="fa fa-search" type="text" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">
+          <input pInputText type="text" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">
         </div>
 
         <div class="ui-g-12">
-          <button pButton type="submit" label="Pesquisar"></button>
+          <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
+          <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
         </div>
     </div>
   </form>
@@ -67,7 +68,7 @@
     </div>
 
     <div class="ui-g-12">
-      <a pButton icon="fa fa-file" label="Novo" routerLink="/construtoras/novo"></a>
+      <button pButton icon="fa fa-file" label="Novo" routerLink="/construtoras/novo"></button>
     </div>
   </div>
 
