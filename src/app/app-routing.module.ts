@@ -12,6 +12,7 @@ const routes: Routes = [
 
   { path: 'construtoras', loadChildren: 'app/construtoras/construtoras.module#ConstrutorasModule' },
   { path: 'usuarios', loadChildren: 'app/usuarios/usuarios.module#UsuariosModule' },
+  { path: 'matrizes-medicoes', loadChildren: 'app/matrizes-medicoes/matrizes-medicoes.module#MatrizesMedicoesModule' },
 
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   { path: 'nao-autorizado', component: NaoAutorizadoComponent },
