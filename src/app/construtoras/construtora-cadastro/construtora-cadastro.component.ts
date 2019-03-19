@@ -78,7 +78,7 @@ export class ConstrutoraCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  nova(form: FormControl) {
+  novo(form: FormControl) {
     form.reset();
 
     setTimeout(function() {

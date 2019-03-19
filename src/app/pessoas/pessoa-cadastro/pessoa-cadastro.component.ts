@@ -105,14 +105,14 @@ export class PessoaCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  nova(form: FormControl) {
+  novo(form: FormControl) {
     form.reset();
 
     setTimeout(function() {
       this.pessoa = new Pessoa();
     }.bind(this), 1);
 
-    this.router.navigate(['/pessoas/nova']);
+    this.router.navigate(['/pessoas/novo']);
   }
 
   atualizarTituloEdicao() {
