@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+export class MatrizMedicaoFiltro {
+  idObra: Number;
+  idContrato: Number;
+  idMedicao: Number;
+}
+
+@Injectable()
 export class MatrizMedicaoService {
 
   constructor() { }

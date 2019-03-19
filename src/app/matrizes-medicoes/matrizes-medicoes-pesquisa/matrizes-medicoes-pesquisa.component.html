@@ -1,3 +1,114 @@
-<p>
-  matrizes-medicoes-pesquisa works!
-</p>
+<div class="container">
+  <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+        <div class="ui-g-12">
+          <h1>{{title.getTitle()}}</h1>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+          <label>Construtora</label>
+          <p-dropdown placeholder="Selecione..."
+            [filter]="true" [options]="construtoras"
+            [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"
+            #ddConstrutora="ngModel" required></p-dropdown>
+
+          <app-message [control]="ddConstrutora" error="required"
+            text="Informe a construtora"></app-message>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+          <label>Obra</label>
+          <p-dropdown placeholder="Selecione..."
+            [filter]="true" [options]="obras"
+            [(ngModel)]="idObraSelecionada" name="idObraSelecionada"
+            #ddObra="ngModel" required [disabled]="!idConstrutoraSelecionada"></p-dropdown>
+
+            <app-message [control]="ddObra" error="required"
+            text="Informe a obra"></app-message>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+          <label>Contrato</label>
+          <p-dropdown placeholder="Selecione..."
+            [filter]="true" [options]="contratos"
+            [(ngModel)]="idContratoSelecionado" name="idContratoSelecionado"
+            #ddContrato="ngModel" required [disabled]="!idObraSelecionada"></p-dropdown>
+
+          <app-message [control]="ddContrato" error="required"
+            text="Informe o contrato"></app-message>
+        </div>
+
+        <div class="ui-g-12 ui-fluid">
+          <label>Medição</label>
+          <p-dropdown placeholder="Selecione..."
+            [filter]="true" [options]="medicoes"
+            [(ngModel)]="idMedicaoSelecionada" name="idMedicaoSelecionada"
+            #ddMedicao="ngModel" required [disabled]="!idContratoSelecionado"></p-dropdown>
+
+          <app-message [control]="ddMedicao" error="required"
+            text="Informe a medi;áo"></app-message>
+        </div>
+
+        <div class="ui-g-12">
+          <button pButton icon="fa fa-folder-open" type="submit" label="Abrir" [disabled]="f.invalid"></button>
+          <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
+        </div>
+    </div>
+  </form>
+<!--
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <p-table [value]="construtoras" [responsive]="true"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Razão Social</th>
+            <th class="width170px">CNPJ</th>
+            <th class="width100px">Situação</th>
+            <th class="col-acoes-header">Ações</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-construtora>
+          <tr>
+            <td>{{ construtora.razaoSocial }}</td>
+            <td>{{ construtora.cnpj }}</td>
+            <td>
+              <a href="javascript:;"
+                [pTooltip]="construtora.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(construtora)">
+                {{ construtora.ativo ? 'Ativo' : 'Inativo' }}
+              </a>
+            </td>
+            <td class="col-acoes">
+              <a pButton icon="fa fa-pencil" class="width25px"
+                pTooltip="Editar" tooltipPosition="top"
+                [routerLink]="['/construtoras', construtora.id]"></a>
+
+              <button pButton icon="fa fa-trash" class="width25px"
+                pTooltip="Excluir" tooltipPosition="top"
+                (click)="confirmarExclusao(construtora)"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="4">
+              Nenhum registro encontrado
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton icon="fa fa-file" label="Novo" routerLink="/construtoras/novo"></button>
+    </div>
+  </div>
+-->
+</div>
