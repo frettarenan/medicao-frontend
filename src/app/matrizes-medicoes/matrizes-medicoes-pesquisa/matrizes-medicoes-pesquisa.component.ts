@@ -22,7 +22,7 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   obras: any[];
   idObraSelecionada: number;
 
-  contratros: any[];
+  contratos: any[];
   idContratoSelecionado: number;
 
   medicoes: any[];
@@ -54,6 +54,13 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   carregarObras() {
     this.obraService.listarObrasAtivasPorConstrutora(this.idConstrutoraSelecionada).then(lista => {
       this.obras = lista.map(obra => ({ label: obra.nome, value: obra.id }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarContratos() {
+    this.contratoService.listarContratosAtivosPorObra(this.idObraSelecionada).then(lista => {
+      this.contratos = lista.map(contrato => ({ label: contrato.descricao, value: contrato.id }));
     })
     .catch(erro => this.errorHandler.handle(erro));
   }

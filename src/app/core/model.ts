@@ -50,6 +50,13 @@ export class Obra {
   ativo = true;
 }
 
+export class Contrato {
+  id: number;
+  numero: string;
+  descricao: string;
+  obra : Obra;
+}
+
 export class Usuario {
   id: number;
   nome: string;

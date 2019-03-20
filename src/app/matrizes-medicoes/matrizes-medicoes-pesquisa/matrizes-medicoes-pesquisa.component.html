@@ -21,6 +21,7 @@
           <label>Obra</label>
           <p-dropdown placeholder="Selecione..."
             [filter]="true" [options]="obras"
+            (onChange)="carregarContratos()"
             [(ngModel)]="idObraSelecionada" name="idObraSelecionada"
             #ddObra="ngModel" required [disabled]="!idConstrutoraSelecionada"></p-dropdown>
 
