@@ -6,6 +6,7 @@ import { Title } from '@angular/platform-browser';
 import { ConstrutoraService } from 'app/construtoras/construtora.service';
 import { ObraService } from 'app/obras/obra.service';
 import { ContratoService } from 'app/contratos/contrato.service';
+import { MedicaoService } from 'app/medicoes/medicao.service';
 
 @Component({
   selector: 'app-matrizes-medicoes-pesquisa',
@@ -33,6 +34,7 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
     private construtoraService: ConstrutoraService,
     private obraService: ObraService,
     private contratoService: ContratoService,
+    private medicaoService: MedicaoService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
     private messageService: MessageService,
@@ -61,6 +63,13 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   carregarContratos() {
     this.contratoService.listarContratosAtivosPorObra(this.idObraSelecionada).then(lista => {
       this.contratos = lista.map(contrato => ({ label: contrato.descricao, value: contrato.id }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarMedicoes() {
+    this.medicaoService.listarMedicoesAtivasPorContrato(this.idContratoSelecionado).then(lista => {
+      this.medicoes = lista.map(medicao => ({ label: medicao.nome, value: medicao.id }));
     })
     .catch(erro => this.errorHandler.handle(erro));
   }

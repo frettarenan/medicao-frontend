@@ -33,6 +33,7 @@
           <label>Contrato</label>
           <p-dropdown placeholder="Selecione..."
             [filter]="true" [options]="contratos"
+            (onChange)="carregarMedicoes()"
             [(ngModel)]="idContratoSelecionado" name="idContratoSelecionado"
             #ddContrato="ngModel" required [disabled]="!idObraSelecionada"></p-dropdown>
 

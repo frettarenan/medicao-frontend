@@ -57,6 +57,12 @@ export class Contrato {
   obra : Obra;
 }
 
+export class Medicao {
+  id: number;
+  nome: string;
+  contrato : Contrato;
+}
+
 export class Usuario {
   id: number;
   nome: string;
