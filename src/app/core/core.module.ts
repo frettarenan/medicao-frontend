@@ -18,8 +18,6 @@ import { ContratoService } from './../contratos/contrato.service';
 import { MedicaoService } from './../medicoes/medicao.service';
 import { MatrizMedicaoService } from './../matrizes-medicoes/matriz-medicao.service';
 import { PessoaService } from './../pessoas/pessoa.service';
-import { LancamentoService } from './../lancamentos/lancamento.service';
-import { CategoriaService } from './../categorias/categoria.service';
 import { DashboardService } from './../dashboard/dashboard.service';
 import { RelatoriosService } from './../relatorios/relatorios.service';
 
@@ -54,13 +52,11 @@ registerLocaleData(localePt);
   providers: [
     ConstrutoraService,
     UsuarioService,
-    LancamentoService,
     PessoaService,
     ObraService,
     ContratoService,
     MedicaoService,
     MatrizMedicaoService,
-    CategoriaService,
     DashboardService,
     RelatoriosService,
     ErrorHandlerService,

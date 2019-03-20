@@ -10,6 +10,8 @@ import { DashboardService } from './../dashboard.service';
 })
 export class DashboardComponent implements OnInit {
 
+  ngOnInit() { }
+/*
   pieChartData: any;
   lineChartData: any;
 
@@ -112,4 +114,5 @@ export class DashboardComponent implements OnInit {
 
     return dias;
   }
+  */
 }
