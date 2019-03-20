@@ -42,6 +42,14 @@ export class Construtora {
   ativo = true;
 }
 
+export class Obra {
+  id: number;
+  nome: string;
+  construtora : Construtora;
+  usuarioResponsavel : Usuario;
+  ativo = true;
+}
+
 export class Usuario {
   id: number;
   nome: string;

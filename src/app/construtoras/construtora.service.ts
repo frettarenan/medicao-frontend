@@ -52,6 +52,10 @@ export class ConstrutoraService {
       .then(response => response.content);
   }
 
+  listarConstrutorasAtivas(): Promise<Construtora[]> {
+    return this.http.get<Construtora[]>(`${this.construtorasUrl}/status/ativo`).toPromise();
+  }
+
   excluir(id: number): Promise<void> {
     return this.http.delete(`${this.construtorasUrl}/${id}`)
       .toPromise()

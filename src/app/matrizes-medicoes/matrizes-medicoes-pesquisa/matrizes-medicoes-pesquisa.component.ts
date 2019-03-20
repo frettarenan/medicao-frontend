@@ -3,6 +3,9 @@ import { MatrizMedicaoFiltro, MatrizMedicaoService } from '../matriz-medicao.ser
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
+import { ConstrutoraService } from 'app/construtoras/construtora.service';
+import { ObraService } from 'app/obras/obra.service';
+import { ContratoService } from 'app/contratos/contrato.service';
 
 @Component({
   selector: 'app-matrizes-medicoes-pesquisa',
@@ -27,6 +30,9 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
 
   constructor(
     private matrizMedicaoService: MatrizMedicaoService,
+    private construtoraService: ConstrutoraService,
+    private obraService: ObraService,
+    private contratoService: ContratoService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
     private messageService: MessageService,
@@ -35,6 +41,21 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Matriz de Medição');
+    this.carregarConstrutoras();
+  }
+
+  carregarConstrutoras() {
+    this.construtoraService.listarConstrutorasAtivas().then(lista => {
+      this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  carregarObras() {
+    this.obraService.listarObrasAtivasPorConstrutora(this.idConstrutoraSelecionada).then(lista => {
+      this.obras = lista.map(obra => ({ label: obra.nome, value: obra.id }));
+    })
+    .catch(erro => this.errorHandler.handle(erro));
   }
 
   pesquisar(pagina = 0) {

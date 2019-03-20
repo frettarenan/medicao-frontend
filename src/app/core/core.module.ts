@@ -13,6 +13,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 import { ConstrutoraService } from './../construtoras/construtora.service';
 import { UsuarioService } from './../usuarios/usuario.service';
+import { ObraService } from './../obras/obra.service';
+import { ContratoService } from './../contratos/contrato.service';
 import { MatrizMedicaoService } from './../matrizes-medicoes/matriz-medicao.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
@@ -53,6 +55,8 @@ registerLocaleData(localePt);
     UsuarioService,
     LancamentoService,
     PessoaService,
+    ObraService,
+    ContratoService,
     MatrizMedicaoService,
     CategoriaService,
     DashboardService,

@@ -9,6 +9,7 @@
           <label>Construtora</label>
           <p-dropdown placeholder="Selecione..."
             [filter]="true" [options]="construtoras"
+            (onChange)="carregarObras()"
             [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"
             #ddConstrutora="ngModel" required></p-dropdown>
 
