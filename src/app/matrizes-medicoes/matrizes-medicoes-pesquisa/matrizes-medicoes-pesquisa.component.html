@@ -49,69 +49,13 @@
             #ddMedicao="ngModel" required [disabled]="!idContratoSelecionado"></p-dropdown>
 
           <app-message [control]="ddMedicao" error="required"
-            text="Informe a medi;áo"></app-message>
+            text="Informe a medição"></app-message>
         </div>
 
         <div class="ui-g-12">
-          <button pButton icon="fa fa-folder-open" type="submit" label="Abrir" [disabled]="f.invalid"></button>
+          <button pButton icon="fa fa-folder-open" type="submit" label="Abrir" [disabled]="f.invalid" [routerLink]="['/matrizes-medicoes', idMedicaoSelecionada]"></button>
           <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
         </div>
     </div>
   </form>
-<!--
-  <div class="ui-g">
-    <div class="ui-g-12">
-      <p-table [value]="construtoras" [responsive]="true"
-        [paginator]="true" [rows]="filtro.itensPorPagina"
-        [lazy]="true" [totalRecords]="totalRegistros"
-        (onLazyLoad)="aoMudarPagina($event)"
-        #tabela>
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Razão Social</th>
-            <th class="width170px">CNPJ</th>
-            <th class="width100px">Situação</th>
-            <th class="col-acoes-header">Ações</th>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="body" let-construtora>
-          <tr>
-            <td>{{ construtora.razaoSocial }}</td>
-            <td>{{ construtora.cnpj }}</td>
-            <td>
-              <a href="javascript:;"
-                [pTooltip]="construtora.ativo ? 'Desativar' : 'Ativar'"
-                tooltipPosition="top"
-                (click)="alternarStatus(construtora)">
-                {{ construtora.ativo ? 'Ativo' : 'Inativo' }}
-              </a>
-            </td>
-            <td class="col-acoes">
-              <a pButton icon="fa fa-pencil" class="width25px"
-                pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/construtoras', construtora.id]"></a>
-
-              <button pButton icon="fa fa-trash" class="width25px"
-                pTooltip="Excluir" tooltipPosition="top"
-                (click)="confirmarExclusao(construtora)"></button>
-            </td>
-          </tr>
-        </ng-template>
-
-        <ng-template pTemplate="emptymessage">
-          <tr>
-            <td colspan="4">
-              Nenhum registro encontrado
-            </td>
-          </tr>
-        </ng-template>
-      </p-table>
-    </div>
-
-    <div class="ui-g-12">
-      <button pButton icon="fa fa-file" label="Novo" routerLink="/construtoras/novo"></button>
-    </div>
-  </div>
--->
 </div>
