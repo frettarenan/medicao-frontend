@@ -15,7 +15,10 @@ import { ConstrutoraService } from './../construtoras/construtora.service';
 import { UsuarioService } from './../usuarios/usuario.service';
 import { ObraService } from './../obras/obra.service';
 import { ContratoService } from './../contratos/contrato.service';
+import { GrupoService } from './../grupos/grupo.service';
+import { ServicoService } from './../servicos/servico.service';
 import { MedicaoService } from './../medicoes/medicao.service';
+import { LancamentoService } from './../lancamentos/lancamento.service';
 import { MatrizMedicaoService } from './../matrizes-medicoes/matriz-medicao.service';
 import { PessoaService } from './../pessoas/pessoa.service';
 import { DashboardService } from './../dashboard/dashboard.service';
@@ -56,6 +59,9 @@ registerLocaleData(localePt);
     ObraService,
     ContratoService,
     MedicaoService,
+    GrupoService,
+    ServicoService,
+    LancamentoService,
     MatrizMedicaoService,
     DashboardService,
     RelatoriosService,

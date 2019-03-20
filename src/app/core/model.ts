@@ -50,11 +50,30 @@ export class Obra {
   ativo = true;
 }
 
+export class Grupo {
+  id: number;
+  nome: string;
+  obra : Obra;
+  grupoPai : Grupo;
+}
+
+export class GrupoHierarquia {
+  id: number;
+  nome: string;
+  children : Array<GrupoHierarquia>;
+}
+
 export class Contrato {
   id: number;
   numero: string;
   descricao: string;
   obra : Obra;
+}
+
+export class Servico {
+  id: number;
+  nome: string;
+  contrato : Contrato;
 }
 
 export class Medicao {

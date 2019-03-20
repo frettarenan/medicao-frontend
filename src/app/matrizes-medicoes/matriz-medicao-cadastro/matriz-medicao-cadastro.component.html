@@ -1,35 +1,51 @@
-<div class="table-responsive-xl">
+<div class="container" *ngIf="processando">
+  <div style="text-align: center;"><p-progressSpinner></p-progressSpinner></div>
+  <div style="text-align: center;">Processando, aguarde...</div>
+</div>
+<div class="table-responsive-xl" *ngIf="!processando">
   <table class="table table-bordered table-striped table-sm">
     <thead>
       <tr>
         <th scope="col" rowspan="2" class="text-center align-middle" style="width: 350px">SERVIÇOS</th>
-        <ng-container *ngFor="let grupo of grupos; let i = index">
-          <th *ngIf="grupo.codGrupo == -1" scope="col" colspan="2" class="text-center align-middle">{{grupo.nomeGrupo}}</th>
-          <th *ngIf="grupo.codGrupo != -1" scope="col" colspan="3" class="text-center align-middle">{{grupo.nomeGrupo}}</th>
+
+        <ng-container *ngFor="let hierarquiaGrupo of hierarquiaGrupos">
+          <th *ngIf="hierarquiaGrupo.idGrupo == -1" scope="col" colspan="2" class="text-center align-middle">{{hierarquiaGrupo.nome}}</th>
+          <th *ngIf="hierarquiaGrupo.idGrupo != -1" scope="col" colspan="3" class="text-center align-middle">{{hierarquiaGrupo.nome}}</th>
         </ng-container>
+
+        <!--
+        <ng-container *ngFor="let grupo of grupos; let i = index">
+          <th *ngIf="grupo.idGrupo == -1" scope="col" colspan="2" class="text-center align-middle">{{grupo.nome}}</th>
+          <th *ngIf="grupo.idGrupo != -1" scope="col" colspan="3" class="text-center align-middle">{{grupo.nome}}</th>
+        </ng-container>
+        -->
       </tr>
+      <!--
       <tr>
         <ng-container *ngFor="let grupo of grupos; let i = index">
           <th scope="col" class="text-center align-middle">QTDE.</th>
           <th scope="col" class="text-center align-middle">CUB</th>
-          <th *ngIf="grupo.codGrupo != -1" scope="col" class="text-center align-middle">%</th>
+          <th *ngIf="grupo.idGrupo != -1" scope="col" class="text-center align-middle">%</th>
         </ng-container>
       </tr>
+      -->
     </thead>
     <tbody>
       <ng-container *ngFor="let servico of servicos; let i = index">
         <tr>
-          <td>{{servico.nomeServico}}</td>
+          <td>{{servico.nome}}</td>
+          <!--
           <ng-container *ngFor="let grupo of grupos; let i = index">
             <!--
-            matriz['codServico' + servico.codServico + 'codGrupo' + grupo.codGrupo].quantidade
-            matriz['codServico' + servico.codServico + 'codGrupo' + grupo.codGrupo].cub
-            matriz['codServico' + servico.codServico + 'codGrupo' + grupo.codGrupo].porcentagem
-            -->
-            <td><input type="text" class="input-matriz" value="{{matriz['codServico' + servico.codServico + 'codGrupo' + grupo.codGrupo].quantidade}}"></td>
-            <td><input type="text" class="input-matriz" value="{{matriz['codServico' + servico.codServico + 'codGrupo' + grupo.codGrupo].cub}}"></td>
-            <td *ngIf="grupo.codGrupo != -1"><input type="text" class="input-matriz" value="{{ matriz['codServico' + servico.codServico + 'codGrupo' + grupo.codGrupo].porcentagem}}"></td>
+            matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].quantidade
+            matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].cub
+            matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].porcentagem
+            ->
+            <td><input type="text" class="input-matriz" value="{{matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].quantidade}}"></td>
+            <td><input type="text" class="input-matriz" value="{{matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].cub}}"></td>
+            <td *ngIf="grupo.idGrupo != -1"><input type="text" class="input-matriz" value="{{ matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].porcentagem}}"></td>
           </ng-container>
+          -->
         </tr>
       </ng-container>
     </tbody>

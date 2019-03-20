@@ -10,6 +10,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import {ProgressSpinnerModule} from 'primeng/progressspinner';
 
 import { SharedModule } from './../shared/shared.module';
 import { MatrizesMedicoesRoutingModule } from './matrizes-medicoes-routing.module';
@@ -29,6 +30,7 @@ import { MatrizesMedicoesPesquisaComponent } from './matrizes-medicoes-pesquisa/
     PanelModule,
     DialogModule,
     DropdownModule,
+    ProgressSpinnerModule,
 
     SharedModule,
     MatrizesMedicoesRoutingModule
