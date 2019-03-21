@@ -3,49 +3,37 @@
   <div style="text-align: center;">Processando, aguarde...</div>
 </div>
 <div class="table-responsive-xl" *ngIf="!processando">
-  <table class="table table-bordered table-striped table-sm">
+  <table class="table table-striped table-bordered table-sm">
     <thead>
       <tr>
         <th scope="col" rowspan="2" class="text-center align-middle" style="width: 350px">SERVIÇOS</th>
-
-        <ng-container *ngFor="let hierarquiaGrupo of hierarquiaGrupos">
-          <th *ngIf="hierarquiaGrupo.idGrupo == -1" scope="col" colspan="2" class="text-center align-middle">{{hierarquiaGrupo.nome}}</th>
-          <th *ngIf="hierarquiaGrupo.idGrupo != -1" scope="col" colspan="3" class="text-center align-middle">{{hierarquiaGrupo.nome}}</th>
+        <ng-container *ngFor="let grupo of grupos">
+          <th *ngIf="grupo.id == -1" scope="col" colspan="2" class="text-center align-middle">{{grupo.nome}}</th>
+          <th *ngIf="grupo.id != -1" scope="col" colspan="3" class="text-center align-middle">{{grupo.nome}}</th>
         </ng-container>
-
-        <!--
-        <ng-container *ngFor="let grupo of grupos; let i = index">
-          <th *ngIf="grupo.idGrupo == -1" scope="col" colspan="2" class="text-center align-middle">{{grupo.nome}}</th>
-          <th *ngIf="grupo.idGrupo != -1" scope="col" colspan="3" class="text-center align-middle">{{grupo.nome}}</th>
-        </ng-container>
-        -->
       </tr>
-      <!--
       <tr>
-        <ng-container *ngFor="let grupo of grupos; let i = index">
+        <ng-container *ngFor="let grupo of grupos">
           <th scope="col" class="text-center align-middle">QTDE.</th>
           <th scope="col" class="text-center align-middle">CUB</th>
-          <th *ngIf="grupo.idGrupo != -1" scope="col" class="text-center align-middle">%</th>
+          <th *ngIf="grupo.id != -1" scope="col" class="text-center align-middle">%</th>
         </ng-container>
       </tr>
-      -->
     </thead>
     <tbody>
-      <ng-container *ngFor="let servico of servicos; let i = index">
+      <ng-container *ngFor="let servico of servicos">
         <tr>
           <td>{{servico.nome}}</td>
-          <!--
-          <ng-container *ngFor="let grupo of grupos; let i = index">
+          <ng-container *ngFor="let grupo of grupos">
+            <td><input type="text" class="input-matriz" [disabled]="grupo.id == -1 || grupo.id == -2" value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade}}"></td>
+            <td><input type="text" class="input-matriz" [disabled]="grupo.id > 0 || grupo.id == -2" value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub}}"></td>
+            <td *ngIf="grupo.id != -1"><input type="text" class="input-matriz" [disabled]="grupo.id == -2" value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].porcentagem}}"></td>
             <!--
-            matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].quantidade
-            matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].cub
-            matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].porcentagem
-            ->
-            <td><input type="text" class="input-matriz" value="{{matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].quantidade}}"></td>
-            <td><input type="text" class="input-matriz" value="{{matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].cub}}"></td>
-            <td *ngIf="grupo.idGrupo != -1"><input type="text" class="input-matriz" value="{{ matriz['idServico' + servico.idServico + 'idGrupo' + grupo.idGrupo].porcentagem}}"></td>
+            matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade
+            matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub
+            matriz['idServico' + servico.id + 'idGrupo' + grupo.id].porcentagem
+            -->
           </ng-container>
-          -->
         </tr>
       </ng-container>
     </tbody>
@@ -53,3 +41,60 @@
 </div>
 
 <button (click)="calcularTotais()">Calcular totais</button>
+<!--
+<table class="table table-bordered table-striped table-sm">
+  <thead>
+    <tr>
+      <th scope="col" rowspan="2" class="text-center align-middle" style="width: 350px">SERVIÇOS</th>
+      <th scope="col" rowspan="2" colspan="2" class="text-center align-middle">TOTAL DO CONTRATO</th>
+      <th scope="col" rowspan="2" colspan="3" class="text-center align-middle">Subsolo</th>
+      <th scope="col" rowspan="2" colspan="3" class="text-center align-middle">Térreo</th>
+      <th scope="col" colspan="6" class="text-center align-middle">Torre A</th>
+      <th scope="col" colspan="6" class="text-center align-middle">Torre B</th>
+      <th scope="col" colspan="3" class="text-center align-middle">SUBTOTAL</th>
+    </tr>
+    <tr>
+      <th scope="col" colspan="3" class="text-center align-middle">PVTO 1</th>
+      <th scope="col" colspan="3" class="text-center align-middle">PVTO 2</th>
+      <th scope="col" colspan="3" class="text-center align-middle">PVTO 1</th>
+      <th scope="col" colspan="3" class="text-center align-middle">PVTO 2</th>
+      
+      <th scope="col" colspan="3" class="text-center align-middle">SUBTOTAL</th>
+    </tr>
+    <tr>
+      <th scope="col" class="text-center align-middle">SERVIÇO 01</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+
+      <th scope="col" class="text-center align-middle">QTDE.</th>
+      <th scope="col" class="text-center align-middle">CUB</th>
+      <th scope="col" class="text-center align-middle">%</th>
+    </tr>
+  </thead>
+</table>
+-->

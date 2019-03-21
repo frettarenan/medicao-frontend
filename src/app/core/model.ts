@@ -82,6 +82,22 @@ export class Medicao {
   contrato : Contrato;
 }
 
+export class Lancamento {
+  id : LancamentoId;
+  obraGrupo: Grupo;
+  contratoServico: Servico;
+  contratoMedicao: Medicao;
+  valorQuantidade: number;
+  valorUnidadeMedida: number;
+  valorPercentual: number;
+}
+
+export class LancamentoId {
+  idObraGrupo : number;
+  idContratoServico : number;
+  idContratoMedicao : number;
+}
+
 export class Usuario {
   id: number;
   nome: string;
@@ -105,7 +121,7 @@ export class Categoria {
   id: number;
 }
 
-export class Lancamento {
+/*export class Lancamento {
   id: number;
   tipo = 'RECEITA';
   descricao: string;
@@ -117,4 +133,4 @@ export class Lancamento {
   categoria = new Categoria();
   anexo: string;
   urlAnexo: string;
-}
+}*/

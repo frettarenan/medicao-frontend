@@ -6,7 +6,7 @@ import { MessageService } from 'primeng/api';
 import { LancamentoService } from 'app/lancamentos/lancamento.service';
 import { ServicoService } from 'app/servicos/servico.service';
 import { GrupoService } from 'app/grupos/grupo.service';
-import { Servico, Grupo, GrupoHierarquia } from 'app/core/model';
+import { Servico, Grupo, GrupoHierarquia, Lancamento } from 'app/core/model';
 
 @Component({
   selector: 'app-matriz-medicao-cadastro',
@@ -23,7 +23,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   matriz = null;
 
-  hierarquiaGrupos = null;
+  //hierarquiaGrupos = null;
 
   constructor(
     private servicoService: ServicoService,
@@ -78,10 +78,10 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   processaAposFinalizacaoDasRequisicoes() {
     if (this.servicos && this.grupos && this.lancamentos) {
       this.populaGruposFicticios();
-      this.hierarquiaGrupos = this.getHierarquiaGruposRecursivo(null);
+      // this.hierarquiaGrupos = this.getHierarquiaGruposRecursivo(null);
       // console.log(this.hierarquiaGrupos);
       this.populaMatriz();
-      
+      // console.log(this.matriz);
       this.processando = false;
     }
   }
@@ -108,7 +108,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     grupo = new Grupo();
     grupo.id = -1;
     grupo.nome = "TOTAL DO CONTRATO";
-    this.grupos.push(grupo);
+    this.grupos.unshift(grupo);
 
     grupo = new Grupo();      
     grupo.id = -2;
@@ -118,31 +118,48 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   populaMatriz() {
     this.matriz = {};
+    console.log(this.lancamentos);
     this.grupos.forEach(grupo => {
       if (grupo.id > 0 && !this.grupoPossuiFilhos(grupo)) {
         this.servicos.forEach(servico => {  
           if (servico.id > 0) {
-            let adicionouGruposDeControle = false;
-            if (!adicionouGruposDeControle) {
+            //let adicionouGruposDeControle = false;
+            //if (!adicionouGruposDeControle) {
               this.matriz["idServico" + servico.id + "idGrupo-1"] = {quantidade: null, cub: null};
               this.matriz["idServico" + servico.id + "idGrupo-2"] = {quantidade: null, cub: null, porcentagem: null};
-              adicionouGruposDeControle = true;
-            }
-            this.matriz["idServico" + servico.id + "idGrupo" + grupo.id] = {quantidade:null, cub: null, porcentagem: 0};
+              //adicionouGruposDeControle = true;
+            //}
+            let lancamento:Lancamento = this.getLancamento(servico, grupo);
+            //debugger;
+            this.matriz["idServico" + servico.id + "idGrupo" + grupo.id] = {quantidade: lancamento.valorQuantidade, cub: lancamento.valorUnidadeMedida, porcentagem: lancamento.valorPercentual};
           }
         });
       }
     });
-    // console.log(this.matriz);
+    console.log(this.matriz);
+  }
+
+  getLancamento(servico:Servico, grupo:Grupo):any {
+    for (let i = 0; i < this.lancamentos.length; i++) {
+      const lancamentoI = this.lancamentos[i];
+      if (lancamentoI.id.idObraGrupo == grupo.id && lancamentoI.id.idContratoServico == servico.id) {
+        return lancamentoI;
+      }
+    }
+    let lancamento:Lancamento = new Lancamento();
+    lancamento.valorQuantidade = null;
+    lancamento.valorUnidadeMedida = null;
+    lancamento.valorPercentual = 0;
+    return lancamento;
   }
 
   grupoPossuiFilhos(grupo) {
-    for (let i = 0; i < this.grupos.length; i++) {
+    /* for (let i = 0; i < this.grupos.length; i++) {
       const grupoI = this.grupos[i];
       if (grupoI.id > 0 && grupoI.obraGrupoPai != null && grupo.id == grupoI.obraGrupoPai.id) {
         return true;
       }
-    }
+    }*/
     return false;
   }
 
@@ -187,11 +204,11 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.servicos.forEach(servico => {
       quantidadeBase = 0;
       this.grupos.forEach(grupo => {
-        if (grupo.idGrupo > 0) {
-          quantidadeBase += this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].quantidade;
+        if (grupo.id > 0) {
+          quantidadeBase += this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
         }
       });
-      this.matriz["idServico" + servico.idServico + "idGrupo-1"].quantidade=quantidadeBase;
+      this.matriz["idServico" + servico.id + "idGrupo-1"].quantidade=quantidadeBase;
     });
   }
 
@@ -199,11 +216,11 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     let cubGrupo:number = 0;
     this.servicos.forEach(servico => {
       this.grupos.forEach(grupo => {
-        if (grupo.idGrupo > 0) {
-          //alert(this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].quantidade + "/" + this.matriz["idServico" + servico.idServico + "idGrupo-1"].quantidade + "*" + this.matriz["idServico" + servico.idServico + "idGrupo-1"].cub);
-          cubGrupo = this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].quantidade / this.matriz["idServico" + servico.idServico + "idGrupo-1"].quantidade * this.matriz["idServico" + servico.idServico + "idGrupo-1"].cub;
+        if (grupo.id > 0) {
+          //alert(this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade + "/" + this.matriz["idServico" + servico.id + "idGrupo-1"].quantidade + "*" + this.matriz["idServico" + servico.id + "idGrupo-1"].cub);
+          cubGrupo = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade / this.matriz["idServico" + servico.id + "idGrupo-1"].quantidade * this.matriz["idServico" + servico.id + "idGrupo-1"].cub;
           // quantidade subsolo / quantidade geral * cub geral
-          this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].cub = cubGrupo.toFixed(2);
+          this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].cub = cubGrupo.toFixed(2);
         }
       });
     });
@@ -214,12 +231,12 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.servicos.forEach(servico => {
       quantidadeTotalizador = 0;
       this.grupos.forEach(grupo => {
-        if (grupo.idGrupo > 0) {
-          quantidadeTotalizador += (this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].porcentagem / 100) * this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].quantidade;
+        if (grupo.id > 0) {
+          quantidadeTotalizador += (this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].porcentagem / 100) * this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
           // += percentual grupo / 100 * quantidade grupo
         }
       });
-      this.matriz["idServico" + servico.idServico + "idGrupo-2"].quantidade = quantidadeTotalizador.toFixed(2);
+      this.matriz["idServico" + servico.id + "idGrupo-2"].quantidade = quantidadeTotalizador.toFixed(2);
     });
   }
 
@@ -228,12 +245,12 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.servicos.forEach(servico => {
       cubTotalizador = 0;
       this.grupos.forEach(grupo => {
-        if (grupo.idGrupo > 0) {
-          cubTotalizador += (this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].porcentagem / 100) * this.matriz["idServico" + servico.idServico + "idGrupo" + grupo.idGrupo].cub;
+        if (grupo.id > 0) {
+          cubTotalizador += (this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].porcentagem / 100) * this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].cub;
           // += percentual grupo / 100 * cub grupo
         }
       });
-      this.matriz["idServico" + servico.idServico + "idGrupo-2"].cub = cubTotalizador.toFixed(2);
+      this.matriz["idServico" + servico.id + "idGrupo-2"].cub = cubTotalizador.toFixed(2);
     });
   }
 
@@ -241,9 +258,9 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     let porcentualTotalizador:number = 0;
     this.servicos.forEach(servico => {
       porcentualTotalizador = 0;
-      porcentualTotalizador += (this.matriz["idServico" + servico.idServico + "idGrupo-2"].quantidade / this.matriz["idServico" + servico.idServico + "idGrupo-1"].quantidade) * 100;
+      porcentualTotalizador += (this.matriz["idServico" + servico.id + "idGrupo-2"].quantidade / this.matriz["idServico" + servico.id + "idGrupo-1"].quantidade) * 100;
       // quantidade totalizador / quantidade valor base
-      this.matriz["idServico" + servico.idServico + "idGrupo-2"].porcentagem = porcentualTotalizador.toFixed(2);
+      this.matriz["idServico" + servico.id + "idGrupo-2"].porcentagem = porcentualTotalizador.toFixed(2);
     });
   }
 
