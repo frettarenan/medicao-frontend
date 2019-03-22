@@ -6,16 +6,16 @@
   <table mdbTable mdbTableScroll scrollX="true" scrollY="true" maxWidth="1200" maxHeight="600" bordered="true" striped="true">
     <thead>
       <tr>
-        <th scope="col" rowspan="2" class="text-center align-middle">SERVIÇOS</th>
+        <th scope="col" rowspan="2" class="text-center align-middle width300px">SERVIÇOS</th>
         <ng-container *ngFor="let grupo of grupos">
-          <th *ngIf="grupo.id == -1" scope="col" colspan="2" class="text-center align-middle">{{grupo.nome}}</th>
-          <th *ngIf="grupo.id != -1" scope="col" colspan="3" class="text-center align-middle">{{grupo.nome}}</th>
+          <th *ngIf="grupo.id == -1" scope="col" colspan="2" class="text-center align-middle width250px">{{grupo.nome}}</th>
+          <th *ngIf="grupo.id != -1" scope="col" colspan="3" class="text-center align-middle width360px">{{grupo.nome}}</th>
         </ng-container>
       </tr>
       <tr mdbTableCol>
         <ng-container *ngFor="let grupo of grupos">
-          <th scope="col" class="text-center align-middle">QTDE.</th>
-          <th scope="col" class="text-center align-middle">CUB</th>
+          <th scope="col" class="text-center align-middle width100px">QTDE.</th>
+          <th scope="col" class="text-center align-middle width100px">CUB</th>
           <th *ngIf="grupo.id != -1" scope="col" class="text-center align-middle">%</th>
         </ng-container>
       </tr>
@@ -23,11 +23,11 @@
     <tbody>
       <ng-container *ngFor="let servico of servicos">
         <tr>
-          <td>{{servico.nome}}</td>
+          <td class="align-middle">{{servico.nome}}</td>
           <ng-container *ngFor="let grupo of grupos">
-            <td><input type="text" class="form-control input-matriz-valor-quantidade" [disabled]="grupo.id == -1 || grupo.id == -2" value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade}}"></td>
-            <td><input type="text" class="form-control input-matriz-valor-unidade-medida" [disabled]="grupo.id > 0 || grupo.id == -2" value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub}}"></td>
-            <td *ngIf="grupo.id != -1"><input type="text" class="form-control input-matriz-valor-percentual" [disabled]="grupo.id == -2" value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].porcentagem}}"></td>
+            <td><input type="text" class="form-control width100px" [disabled]="grupo.id == -1 || grupo.id == -2" value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade}}"></td>
+            <td><input type="text" class="form-control width100px" [disabled]="grupo.id > 0 || grupo.id == -2" value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub}}"></td>
+            <td *ngIf="grupo.id != -1"><input type="text" class="form-control width70px" [disabled]="grupo.id == -2" value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].porcentagem}}"></td>
             <!--
             matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade
             matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub
@@ -38,5 +38,6 @@
       </ng-container>
     </tbody>
   </table>
-  <button (click)="calcularTotais()">Calcular totais</button>
+  <button mdbBtn color="info" (click)="calcularTotais()">Calcular totais</button>
+  <button mdbBtn color="info" (click)="salvar()">Salvar</button>
 </div>

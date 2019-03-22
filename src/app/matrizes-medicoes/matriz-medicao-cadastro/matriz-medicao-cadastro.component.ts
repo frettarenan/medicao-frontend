@@ -112,7 +112,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       
     grupo = new Grupo();
     grupo.id = -1;
-    grupo.nome = "TOTAL DO CONTRATO";
+    grupo.nome = "TOTAL";
     this.grupos.unshift(grupo);
 
     grupo = new Grupo();      
@@ -239,6 +239,9 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       // quantidade totalizador / quantidade valor base
       this.matriz["idServico" + servico.id + "idGrupo-2"].porcentagem = porcentualTotalizador.toFixed(2);
     });
+  }
+
+  salvar() {
   }
 
 }
