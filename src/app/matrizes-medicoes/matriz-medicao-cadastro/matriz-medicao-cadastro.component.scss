@@ -1,10 +1,17 @@
 table {
     table-layout: fixed;
-    font-size: 12px;
 }
 table th, table td {
     overflow: hidden;
 }
 .table .thead-light th {
     background-color: cornsilk;
+    font-size: 12px;
+}
+.table th, table td {
+    font-weight: bold;
+    color: #495057;
+}
+.table td {
+    font-size: 10px;
 }
