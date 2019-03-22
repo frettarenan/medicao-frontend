@@ -12,7 +12,7 @@ import { Construtora } from './../../core/model';
 @Component({
   selector: 'app-construtora-cadastro',
   templateUrl: './construtora-cadastro.component.html',
-  styleUrls: ['./construtora-cadastro.component.css']
+  styleUrls: ['./construtora-cadastro.component.scss']
 })
 export class ConstrutoraCadastroComponent implements OnInit {
 

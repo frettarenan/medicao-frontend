@@ -6,7 +6,7 @@ import { Contato } from '../../core/model';
 @Component({
   selector: 'app-pessoa-cadastro-contato',
   templateUrl: './pessoa-cadastro-contato.component.html',
-  styleUrls: ['./pessoa-cadastro-contato.component.css']
+  styleUrls: ['./pessoa-cadastro-contato.component.scss']
 })
 export class PessoaCadastroContatoComponent implements OnInit {
 

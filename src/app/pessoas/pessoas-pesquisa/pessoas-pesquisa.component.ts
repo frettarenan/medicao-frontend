@@ -10,7 +10,7 @@ import { PessoaFiltro, PessoaService } from './../pessoa.service';
 @Component({
   selector: 'app-pessoas-pesquisa',
   templateUrl: './pessoas-pesquisa.component.html',
-  styleUrls: ['./pessoas-pesquisa.component.css']
+  styleUrls: ['./pessoas-pesquisa.component.scss']
 })
 export class PessoasPesquisaComponent implements OnInit {
 

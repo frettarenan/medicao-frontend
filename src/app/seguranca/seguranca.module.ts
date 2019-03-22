@@ -14,6 +14,7 @@ import { MoneyHttp } from './money-http';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
 import { environment } from '../../environments/environment';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -23,6 +24,7 @@ export function tokenGetter() {
   imports: [
     CommonModule,
     FormsModule,
+    MDBBootstrapModule,
 
     JwtModule.forRoot({
       config: {

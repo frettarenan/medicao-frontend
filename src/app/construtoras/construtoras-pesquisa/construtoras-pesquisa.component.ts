@@ -10,7 +10,7 @@ import { ConstrutoraFiltro, ConstrutoraService } from './../construtora.service'
 @Component({
   selector: 'app-construtoras-pesquisa',
   templateUrl: './construtoras-pesquisa.component.html',
-  styleUrls: ['./construtoras-pesquisa.component.css']
+  styleUrls: ['./construtoras-pesquisa.component.scss']
 })
 export class ConstrutorasPesquisaComponent implements OnInit {
 

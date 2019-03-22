@@ -8,10 +8,12 @@ import { ServicoService } from 'app/servicos/servico.service';
 import { GrupoService } from 'app/grupos/grupo.service';
 import { Servico, Grupo, GrupoHierarquia, Lancamento } from 'app/core/model';
 
+import * as $ from 'jquery';
+
 @Component({
   selector: 'app-matriz-medicao-cadastro',
   templateUrl: './matriz-medicao-cadastro.component.html',
-  styleUrls: ['./matriz-medicao-cadastro.component.css']
+  styleUrls: ['./matriz-medicao-cadastro.component.scss']
 })
 export class MatrizMedicaoCadastroComponent implements OnInit {
 
@@ -46,6 +48,9 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       this.carregarGrupos(idMedicao);
       this.carregarLancamentos(idMedicao);
     }
+
+    /*$(document).ready(function() {
+    });*/
   }
 
   carregarServicos(idMedicao: number) {
@@ -162,34 +167,6 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     }*/
     return false;
   }
-
-  /*servicos = [
-    {idServico: 1, nomeServico: 'MO Cortina de contenção'},
-    {idServico: 2, nomeServico: 'MO Blocos de fundação e vigas baldrame'},
-    {idServico: 3, nomeServico: 'MO Recuperação de cubetas'}
-  ];
-  grupos = [
-    {idGrupo: -1, nomeGrupo: 'TOTAL DO CONTRATO'},
-    {idGrupo: 1, nomeGrupo: 'SUBSOLO'},
-    {idGrupo: 2, nomeGrupo: 'TÉRREO'},
-    {idGrupo: -2, nomeGrupo: 'SUBTOTAL'}
-  ];
-  matriz = {
-    "idServico1idGrupo-1": {quantidade: null, cub: 71.55},
-    "idServico1idGrupo1": {quantidade:447.31, cub: null, porcentagem: 100},
-    "idServico1idGrupo2": {quantidade:111.83, cub: null, porcentagem: 75},
-    "idServico1idGrupo-2": {quantidade: null, cub: null, porcentagem: null},
-
-    "idServico2idGrupo-1": {quantidade: null, cub: 162.50},
-    "idServico2idGrupo1": {quantidade: 1201.17, cub: null, porcentagem: 100},
-    "idServico2idGrupo2": {quantidade: 133.46, cub: null, porcentagem: 60},
-    "idServico2idGrupo-2": {quantidade: null, cub: null, porcentagem: null},
-
-    "idServico3idGrupo-1": {quantidade: null, cub: 15.71},
-    "idServico3idGrupo1": {quantidade:938.75, cub: null, porcentagem: 100},
-    "idServico3idGrupo2": {quantidade:150, cub: null, porcentagem: 0},
-    "idServico3idGrupo-2": {quantidade: null, cub: null, porcentagem: null}
-  };*/
 
   calcularTotais() {
     this.somarQuantidades();

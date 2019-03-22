@@ -5,7 +5,7 @@ import { RelatoriosService } from './../relatorios.service';
 @Component({
   selector: 'app-relatorio-lancamentos',
   templateUrl: './relatorio-lancamentos.component.html',
-  styleUrls: ['./relatorio-lancamentos.component.css']
+  styleUrls: ['./relatorio-lancamentos.component.scss']
 })
 export class RelatorioLancamentosComponent implements OnInit {
 

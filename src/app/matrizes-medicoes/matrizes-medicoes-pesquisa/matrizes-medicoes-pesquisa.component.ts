@@ -11,7 +11,7 @@ import { MedicaoService } from 'app/medicoes/medicao.service';
 @Component({
   selector: 'app-matrizes-medicoes-pesquisa',
   templateUrl: './matrizes-medicoes-pesquisa.component.html',
-  styleUrls: ['./matrizes-medicoes-pesquisa.component.css']
+  styleUrls: ['./matrizes-medicoes-pesquisa.component.scss']
 })
 export class MatrizesMedicoesPesquisaComponent implements OnInit {
 
