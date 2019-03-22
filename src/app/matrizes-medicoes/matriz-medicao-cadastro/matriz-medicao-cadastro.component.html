@@ -23,7 +23,7 @@
     <tbody>
       <ng-container *ngFor="let servico of servicos">
         <tr>
-          <td class="align-middle">{{servico.nome}}</td>
+          <td class="align-middle">{{servico.nome}} ({{servico.unidadeMedida.sigla}})</td>
           <ng-container *ngFor="let grupo of grupos">
             <td>
               <input type="text" [textMask]="{mask: decimalMask}"
@@ -39,8 +39,10 @@
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')">
             </td>
-            <td *ngIf="grupo.tipoGrupo.id != 1">
-              <input type="text" [textMask]="{mask: decimalMask}"
+            <td *ngIf="grupo.tipoGrupo.id != 1" [ngStyle]="setPercentualStyles('idServico' + servico.id + 'idGrupo' + grupo.id)">
+              <input #inputPercentual
+                     type="text"
+                     [textMask]="{mask: decimalMask}"
                      class="form-control width70px"
                      [disabled]="grupo.tipoGrupo.id == 2"
                      value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].percentual | number }}"

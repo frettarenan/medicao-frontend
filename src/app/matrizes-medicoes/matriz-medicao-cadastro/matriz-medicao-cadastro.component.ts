@@ -244,9 +244,25 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   });
 
   inputMatrizChange(event, obj, propriedadeObj) {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     obj[propriedadeObj] = (event.target.value).replace('.', '').replace(',', '.');
-    console.log(this.matriz);
+    // console.log(this.matriz);
+  }
+
+  setPercentualStyles(indexMatriz) {
+    let styles = {
+      'background-color': this.hsl_col_perc(this.matriz[indexMatriz].percentual, 0, 120)
+    };
+    return styles;
+  }
+
+  hsl_col_perc(percent, start, end) {
+    // const red = 0, yellow = 60, green = 120, turquoise = 180, blue = 240, pink = 300;
+    var a = percent / 100, 
+        b = (end - start) * a,
+        c = b + start;
+    // Return a CSS HSL string
+    return 'hsl('+c+', 100%, 50%)';
   }
 
   salvar() {
