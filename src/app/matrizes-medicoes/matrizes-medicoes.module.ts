@@ -16,6 +16,7 @@ import { SharedModule } from './../shared/shared.module';
 import { MatrizesMedicoesRoutingModule } from './matrizes-medicoes-routing.module';
 import { MatrizMedicaoCadastroComponent } from './matriz-medicao-cadastro/matriz-medicao-cadastro.component';
 import { MatrizesMedicoesPesquisaComponent } from './matrizes-medicoes-pesquisa/matrizes-medicoes-pesquisa.component';
+import { TextMaskModule } from 'angular2-text-mask';
 
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
@@ -25,6 +26,7 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     FormsModule,
 
     MDBBootstrapModule,
+    TextMaskModule,
     InputTextModule,
     ButtonModule,
     TableModule,

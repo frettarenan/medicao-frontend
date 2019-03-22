@@ -7,6 +7,7 @@ import { LancamentoService } from 'app/lancamentos/lancamento.service';
 import { ServicoService } from 'app/servicos/servico.service';
 import { GrupoService } from 'app/grupos/grupo.service';
 import { Servico, Grupo, Lancamento } from 'app/core/model';
+import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 import * as $ from 'jquery';
 
@@ -228,9 +229,23 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     });
   }
 
+  private decimalMask = createNumberMask({
+    prefix: '',
+    suffix: '',
+    includeThousandsSeparator: true,
+    thousandsSeparatorSymbol: '.',
+    allowDecimal: true,
+    decimalSymbol: ',',
+    decimalLimit: 2,
+    integerLimit: null,
+    requireDecimal: false,
+    allowNegative: false,
+    allowLeadingZeroes: false
+  });
+
   inputMatrizChange(event, obj, propriedadeObj) {
     console.log(event.target.value);
-    obj[propriedadeObj] = event.target.value;
+    obj[propriedadeObj] = (event.target.value).replace('.', '').replace(',', '.');
     console.log(this.matriz);
   }
 

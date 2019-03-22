@@ -25,6 +25,7 @@
     "@fortawesome/fontawesome-free": "^5.8.1",
     "@types/chart.js": "^2.7.49",
     "angular-bootstrap-md": "^7.4.3",
+    "angular2-text-mask": "^9.0.0",
     "bootstrap": "^4.3.1",
     "chart.js": "^2.5.0",
     "core-js": "^2.6.5",
@@ -38,6 +39,7 @@
     "primeicons": "^1.0.0",
     "primeng": "^7.1.0",
     "rxjs": "^6.4.0",
+    "text-mask-addons": "^3.8.0",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
