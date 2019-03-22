@@ -85,17 +85,17 @@ export class Medicao {
 export class Lancamento {
   id : LancamentoId;
   obraGrupo: Grupo;
-  contratoServico: Servico;
-  contratoMedicao: Medicao;
-  valorQuantidade: number;
-  valorUnidadeMedida: number;
-  valorPercentual: number;
+  servico: Servico;
+  medicao: Medicao;
+  quantidade: number;
+  cub: number;
+  percentual: number;
 }
 
 export class LancamentoId {
-  idObraGrupo : number;
-  idContratoServico : number;
-  idContratoMedicao : number;
+  idGrupo : number;
+  idServico : number;
+  idMedicao : number;
 }
 
 export class Usuario {
