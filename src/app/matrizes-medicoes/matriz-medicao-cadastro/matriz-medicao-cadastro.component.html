@@ -2,8 +2,8 @@
   <div style="text-align: center;"><p-progressSpinner></p-progressSpinner></div>
   <div style="text-align: center;">Processando, aguarde...</div>
 </div>
-<div class="container" *ngIf="!processando">
-  <table mdbTable mdbTableScroll scrollX="true" scrollY="true" maxWidth="1200" maxHeight="600" bordered="true" striped="true">
+<div *ngIf="!processando">
+  <table mdbTable mdbTableScroll scrollX="true" scrollY="true" maxWidth="100%" maxHeight="100%" bordered="true" striped="true">
     <thead class="thead-light">
       <tr>
         <th scope="col" rowspan="2" class="text-center align-middle width300px">SERVIÇOS</th>
