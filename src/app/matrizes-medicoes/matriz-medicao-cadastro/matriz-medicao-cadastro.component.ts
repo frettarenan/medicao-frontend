@@ -228,6 +228,12 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     });
   }
 
+  inputMatrizChange(event, obj, propriedadeObj) {
+    console.log(event.target.value);
+    obj[propriedadeObj] = event.target.value;
+    console.log(this.matriz);
+  }
+
   salvar() {
   }
 
