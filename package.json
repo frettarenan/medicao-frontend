@@ -43,7 +43,8 @@
     "text-mask-addons": "^3.8.0",
     "zone.js": "^0.8.29",
     "@angular/cli": "7.3.5",
-    "@angular/compiler-cli": "7.2.9"
+    "@angular/compiler-cli": "7.2.9",
+    "typescript": "3.2.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.5",
@@ -61,8 +62,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "^5.4.2",
     "ts-node": "~8.0.3",
-    "tslint": "~5.14.0",
-    "typescript": "3.2.4"
+    "tslint": "~5.14.0"
   },
   "engines": {
     "node": "11.6.0",
