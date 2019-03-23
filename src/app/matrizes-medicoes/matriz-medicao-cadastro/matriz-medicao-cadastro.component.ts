@@ -284,7 +284,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.lancamentoService.salvar(lancamentos)
       .then(lancamentosAdicionados => {
         this.messageService.add({ severity: 'success', detail: 'Lançamentos salvos com sucesso!!' });
-        // this.router.navigate(['/construtoras', lancamentosAdicionados.id]);
+        // this.router.navigate(['/matrizes-medicoes', this.idMedicao]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
