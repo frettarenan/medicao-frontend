@@ -41,12 +41,12 @@
     "primeng": "^7.1.0",
     "rxjs": "^6.4.0",
     "text-mask-addons": "^3.8.0",
-    "zone.js": "^0.8.29"
+    "zone.js": "^0.8.29",
+    "@angular/cli": "7.3.5",
+    "@angular/compiler-cli": "7.2.9"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.5",
-    "@angular/cli": "7.3.5",
-    "@angular/compiler-cli": "7.2.9",
     "@angular/language-service": "7.2.9",
     "@types/jasmine": "~2.8.3",
     "@types/jasminewd2": "~2.0.2",
