@@ -54,7 +54,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.title.setTitle('Edição da Matriz de Medição');
 
     if (this.idMedicao) {
-      this.usuarioLogadoContemRoleAdministrarMatrizMedicao = Util.arrayContains(this.auth.jwtPayload.authorities, "ROLE_ADMINISTRAR_MATRIZ_MEDICAO");
+      this.usuarioLogadoContemRoleAdministrarMatrizMedicao = this.auth.temPermissao('ROLE_ADMINISTRAR_MATRIZ_MEDICAO');
       this.carregarServicos(this.idMedicao);
       this.carregarGrupos(this.idMedicao);
       this.carregarLancamentos(this.idMedicao);
