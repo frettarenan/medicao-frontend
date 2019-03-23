@@ -11,6 +11,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 import * as $ from 'jquery';
 import { AuthService } from 'app/seguranca/auth.service';
+import { Util } from 'app/core/util';
 
 @Component({
   selector: 'app-matriz-medicao-cadastro',
@@ -51,7 +52,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.title.setTitle('Edição da Matriz de Medição');
 
     if (idMedicao) {
-      this.usuarioLogadoContemRoleAdministrarMatrizMedicao = this.arrayContains(this.auth.jwtPayload.authorities, "ROLE_ADMINISTRAR_MATRIZ_MEDICAO");
+      this.usuarioLogadoContemRoleAdministrarMatrizMedicao = Util.arrayContains(this.auth.jwtPayload.authorities, "ROLE_ADMINISTRAR_MATRIZ_MEDICAO");
       this.carregarServicos(idMedicao);
       this.carregarGrupos(idMedicao);
       this.carregarLancamentos(idMedicao);
@@ -59,15 +60,6 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
     /*$(document).ready(function() {
     });*/
-  }
-
-  arrayContains(array, obj) {
-    for (var i = 0; i < array.length; i++) {
-        if (array[i] == obj) {
-            return true;
-        }
-    }
-    return false;
   }
 
   carregarServicos(idMedicao: number) {
@@ -264,126 +256,11 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.calcularTotais();
   }
 
-  arrayCoresEscalaVermelhoAmareloVerde = [
-    "#F8696B",
-    "#F86A6B",
-    "#F86D6B",
-    "#F86E6C",
-    "#F86F6C",
-    "#F8716C",
-    "#F8726C",
-    "#F8736D",
-    "#F8756D",
-    "#F8766D",
-    "#F8786D",
-    "#F8796E",
-    "#F87A6E",
-    "#F97C6E",
-    "#F97D6E",
-    "#F97E6F",
-    "#F9806F",
-    "#F9816F",
-    "#F98370",
-    "#F98470",
-    "#F98570",
-    "#F98770",
-    "#F98871",
-    "#F98971",
-    "#F98B71",
-    "#F98C71",
-    "#F98D72",
-    "#FA8F72",
-    "#FA9072",
-    "#FA9272",
-    "#FA9373",
-    "#FA9473",
-    "#FA9673",
-    "#FA9773",
-    "#FA9874",
-    "#FA9A74",
-    "#FA9B74",
-    "#FA9D75",
-    "#FA9E75",
-    "#FA9F75",
-    "#FBA175",
-    "#FBA276",
-    "#FBA376",
-    "#FBA576",
-    "#FBA676",
-    "#FBA777",
-    "#FBA977",
-    "#FBAA77",
-    "#FBAC77",
-    "#FBAD78",
-    "#FBAE78",
-    "#FBB078",
-    "#FBB178",
-    "#FBB279",
-    "#FCB479",
-    "#FCB579",
-    "#FCB77A",
-    "#FCB87A",
-    "#FCB97A",
-    "#FCBB7A",
-    "#FCBC7B",
-    "#FCBD7B",
-    "#FCBF7B",
-    "#FCC07B",
-    "#FCC17C",
-    "#FCC37C",
-    "#FCC47C",
-    "#FDC67C",
-    "#FDC77D",
-    "#FDC87D",
-    "#FDCA7D",
-    "#FDCB7D",
-    "#FDCC7E",
-    "#FDCE7E",
-    "#FDCF7E",
-    "#FDD17F",
-    "#FDD27F",
-    "#FDD37F",
-    "#FDD57F",
-    "#FDD680",
-    "#FDD780",
-    "#FED980",
-    "#FEDA80",
-    "#FEDB81",
-    "#FEDD81",
-    "#FEDE81",
-    "#FEE081",
-    "#FEE182",
-    "#FEE282",
-    "#FEE482",
-    "#FEE582",
-    "#FEE683",
-    "#FEE883",
-    "#FEE983",
-    "#FFEB84",
-    "#E0E383",
-    "#C1DA81",
-    "#A2D07F",
-    "#83C77D",
-    "#63BE7B"
-  ];
-
   setPercentualStyles(indexMatriz) {
     let styles = {
-      'background-color': this.getCor(this.matriz[indexMatriz].percentual)
+      'background-color': Util.getCorEscalaVermelhoAmareloVerdeByPercentual(this.matriz[indexMatriz].percentual)
     };
     return styles;
-  }
-
-  getCor(percentual) {
-    if (percentual) {
-      if (percentual > 100)
-        return this.arrayCoresEscalaVermelhoAmareloVerde[99];
-      else if (percentual > 0)
-        return this.arrayCoresEscalaVermelhoAmareloVerde[Math.trunc(percentual)-1];
-      else
-        return this.arrayCoresEscalaVermelhoAmareloVerde[0];
-    }
-    return null;
   }
 
   salvar() {
