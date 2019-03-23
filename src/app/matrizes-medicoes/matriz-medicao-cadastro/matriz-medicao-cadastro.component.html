@@ -28,14 +28,14 @@
             <td>
               <input type="text" [textMask]="{mask: decimalMask}"
                      class="form-control width100px"
-                     [disabled]="grupo.tipoGrupo.id == 1 || grupo.tipoGrupo.id == 2"
+                     [disabled]="grupo.tipoGrupo.id == 1 || grupo.tipoGrupo.id == 2 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')">
             </td>
             <td>
               <input type="text" [textMask]="{mask: decimalMask}"
                      class="form-control width100px"
-                     [disabled]="grupo.tipoGrupo.id != 1"
+                     [disabled]="grupo.tipoGrupo.id != 1 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')">
             </td>

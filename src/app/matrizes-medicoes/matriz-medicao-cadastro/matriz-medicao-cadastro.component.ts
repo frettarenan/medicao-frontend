@@ -10,6 +10,7 @@ import { Servico, Grupo, Lancamento } from 'app/core/model';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 import * as $ from 'jquery';
+import { AuthService } from 'app/seguranca/auth.service';
 
 @Component({
   selector: 'app-matriz-medicao-cadastro',
@@ -29,9 +30,10 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   matriz = null;
 
-  //hierarquiaGrupos = null;
+  usuarioLogadoContemRoleAdministrarMatrizMedicao = false;
 
   constructor(
+    public auth: AuthService,
     private servicoService: ServicoService,
     private grupoService: GrupoService,
     private lancamentoService: LancamentoService,
@@ -43,11 +45,13 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log(this.auth.jwtPayload);
     const idMedicao = this.route.snapshot.params['id'];
 
     this.title.setTitle('Edição da Matriz de Medição');
 
     if (idMedicao) {
+      this.usuarioLogadoContemRoleAdministrarMatrizMedicao = this.arrayContains(this.auth.jwtPayload.authorities, "ROLE_ADMINISTRAR_MATRIZ_MEDICAO");
       this.carregarServicos(idMedicao);
       this.carregarGrupos(idMedicao);
       this.carregarLancamentos(idMedicao);
@@ -55,6 +59,15 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
     /*$(document).ready(function() {
     });*/
+  }
+
+  arrayContains(array, obj) {
+    for (var i = 0; i < array.length; i++) {
+        if (array[i] == obj) {
+            return true;
+        }
+    }
+    return false;
   }
 
   carregarServicos(idMedicao: number) {
