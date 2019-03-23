@@ -24,7 +24,7 @@ export class ConstrutorasPesquisaComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
     private messageService: MessageService,
-    private title: Title
+    public title: Title
   ) { }
 
   ngOnInit() {

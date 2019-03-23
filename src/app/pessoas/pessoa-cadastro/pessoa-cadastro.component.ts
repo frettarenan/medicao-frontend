@@ -27,7 +27,7 @@ export class PessoaCadastroComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
     private router: Router,
-    private title: Title
+    public title: Title
   ) { }
 
   ngOnInit() {
