@@ -84,7 +84,7 @@ export class Medicao {
 
 export class Lancamento {
   id : LancamentoId;
-  obraGrupo: Grupo;
+  grupo: Grupo;
   servico: Servico;
   medicao: Medicao;
   quantidade: number;

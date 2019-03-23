@@ -24,4 +24,8 @@ export class LancamentoService {
       })
   }
 
+  salvar(lancamentos: any): Promise<any> {
+    return this.http.post<any>(this.lancamentosUrl, lancamentos).toPromise();
+  }
+
 }

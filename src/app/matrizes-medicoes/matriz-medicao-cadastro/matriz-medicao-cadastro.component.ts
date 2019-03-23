@@ -6,7 +6,7 @@ import { MessageService } from 'primeng/api';
 import { LancamentoService } from 'app/lancamentos/lancamento.service';
 import { ServicoService } from 'app/servicos/servico.service';
 import { GrupoService } from 'app/grupos/grupo.service';
-import { Servico, Grupo, Lancamento } from 'app/core/model';
+import { Servico, Grupo, Lancamento, LancamentoId } from 'app/core/model';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 import * as $ from 'jquery';
@@ -21,6 +21,8 @@ import { Util } from 'app/core/util';
 export class MatrizMedicaoCadastroComponent implements OnInit {
 
   processando = true;
+
+  idMedicao;
 
   idGrupoComTipoGrupo1 = null;
   idGrupoComTipoGrupo2 = null;
@@ -47,15 +49,15 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.auth.jwtPayload);
-    const idMedicao = this.route.snapshot.params['id'];
+    this.idMedicao = this.route.snapshot.params['id'];
 
     this.title.setTitle('Edição da Matriz de Medição');
 
-    if (idMedicao) {
+    if (this.idMedicao) {
       this.usuarioLogadoContemRoleAdministrarMatrizMedicao = Util.arrayContains(this.auth.jwtPayload.authorities, "ROLE_ADMINISTRAR_MATRIZ_MEDICAO");
-      this.carregarServicos(idMedicao);
-      this.carregarGrupos(idMedicao);
-      this.carregarLancamentos(idMedicao);
+      this.carregarServicos(this.idMedicao);
+      this.carregarGrupos(this.idMedicao);
+      this.carregarLancamentos(this.idMedicao);
     }
 
     /*$(document).ready(function() {
@@ -264,6 +266,27 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   }
 
   salvar() {
+    let lancamentos = new Array();
+    let lancamento:Lancamento;
+    this.grupos.forEach(grupo => {
+      this.servicos.forEach(servico => {
+        lancamento = new Lancamento();
+        lancamento.id = new LancamentoId();
+        lancamento.id.idGrupo = grupo.id;
+        lancamento.id.idServico = servico.id;
+        lancamento.id.idMedicao = this.idMedicao;
+        lancamento.quantidade = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
+        lancamento.cub = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].cub;
+        lancamento.percentual = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].percentual;
+        lancamentos.push(lancamento);
+      });
+    });
+    this.lancamentoService.salvar(lancamentos)
+      .then(lancamentosAdicionados => {
+        this.messageService.add({ severity: 'success', detail: 'Lançamentos salvos com sucesso!!' });
+        // this.router.navigate(['/construtoras', lancamentosAdicionados.id]);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }
