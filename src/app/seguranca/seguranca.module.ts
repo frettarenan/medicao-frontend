@@ -1,20 +1,15 @@
-import { Http, RequestOptions } from '@angular/http';
-import { FormsModule } from '@angular/forms';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { JwtModule } from '@auth0/angular-jwt';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
-
 import { AuthGuard } from './auth.guard';
-import { LogoutService } from './logout.service';
-import { AuthService } from './auth.service';
-import { MoneyHttp } from './money-http';
-import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { environment } from '../../environments/environment';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { LogoutService } from './logout.service';
+import { SegurancaRoutingModule } from './seguranca-routing.module';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -24,18 +19,16 @@ export function tokenGetter() {
   imports: [
     CommonModule,
     FormsModule,
+    HttpClientModule,
     MDBBootstrapModule,
 
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: environment.tokenWhitelistedDomains,
-        blacklistedRoutes: environment.tokenBlacklistedRoutes
+        tokenGetter: tokenGetter
       }
     }),
     InputTextModule,
     ButtonModule,
-
 
     SegurancaRoutingModule
   ],
