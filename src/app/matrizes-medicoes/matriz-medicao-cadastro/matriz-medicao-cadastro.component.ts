@@ -9,7 +9,7 @@ import { GrupoService } from 'app/grupos/grupo.service';
 import { Servico, Grupo, Lancamento, LancamentoId } from 'app/core/model';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
-import * as $ from 'jquery';
+// import * as $ from 'jquery';
 import { AuthService } from 'app/seguranca/auth.service';
 import { Util } from 'app/core/util';
 
@@ -61,8 +61,27 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       this.carregarLancamentos(this.idMedicao);
     }
 
-    /*$(document).ready(function() {
-    });*/
+    /*
+    $(document).ready(function() {
+      // Disable scroll when focused on a number input.
+      $('body').on('focus', 'input[type=number]', function(e) {
+        $(this).on('wheel', function(e) {
+            e.preventDefault();
+        });
+      });
+
+      // Restore scroll on number inputs.
+      $('body').on('blur', 'input[type=number]', function(e) {
+          $(this).off('wheel');
+      });
+
+      // Disable up and down keys.
+      $('body').on('keydown', 'input[type=number]', function(e) {
+          if ( e.which == 38 || e.which == 40 )
+              e.preventDefault();
+      });
+    });
+    */
   }
 
   carregarServicos(idMedicao: number) {

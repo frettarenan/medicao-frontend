@@ -26,22 +26,26 @@
           <td class="align-middle">{{servico.nome}} ({{servico.unidadeMedida.sigla}})</td>
           <ng-container *ngFor="let grupo of grupos">
             <td>
-              <input type="text" [textMask]="{mask: decimalMask}"
+              <input type="text"
+                     inputmode="numeric"
+                     [textMask]="{mask: decimalMask}"
                      class="form-control width100px"
                      [disabled]="grupo.tipoGrupo.id == 1 || grupo.tipoGrupo.id == 2 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')">
             </td>
             <td>
-              <input type="text" [textMask]="{mask: decimalMask}"
+              <input type="text"
+                     inputmode="numeric"
+                     [textMask]="{mask: decimalMask}"
                      class="form-control width100px"
                      [disabled]="grupo.tipoGrupo.id != 1 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')">
             </td>
             <td *ngIf="grupo.tipoGrupo.id != 1" [ngStyle]="setPercentualStyles('idServico' + servico.id + 'idGrupo' + grupo.id)">
-              <input #inputPercentual
-                     type="text"
+              <input type="text"
+                     inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width70px"
                      [disabled]="grupo.tipoGrupo.id == 2"
