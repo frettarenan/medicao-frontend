@@ -48,7 +48,8 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.auth.jwtPayload);
+    // console.log(this.auth.jwtPayload);
+    
     this.idMedicao = this.route.snapshot.params['id'];
 
     this.title.setTitle('Edição da Matriz de Medição');
