@@ -51,21 +51,29 @@
             <td>{{ usuario.email }}</td>
             <td>{{ (usuario.construtora == null) ? '' : usuario.construtora.razaoSocial }}</td>
             <td>
-              <a href="javascript:;"
-                [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
-                tooltipPosition="top"
-                (click)="alternarStatus(usuario)">
-                {{ usuario.ativo ? 'Ativo' : 'Inativo' }}
-              </a>
+              <span *ngIf="usuario.administrador">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</span>
+              <a *ngIf="!usuario.administrador"
+                 href="javascript:;"
+                 [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
+                 tooltipPosition="top"
+                 (click)="alternarStatus(usuario)">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</a>
             </td>
             <td class="col-acoes">
-              <a pButton icon="fa fa-pencil-alt" class="width25px"
-                pTooltip="Editar" tooltipPosition="top"
-                [routerLink]="['/usuarios', usuario.id]"></a>
+              <button pButton
+                      icon="fa fa-pencil-alt"
+                      [disabled]="usuario.administrador"
+                      class="width25px"
+                      pTooltip="Editar"
+                      tooltipPosition="top"
+                      [routerLink]="['/usuarios', usuario.id]"></button>
 
-              <button pButton icon="fa fa-trash" class="width25px"
-                pTooltip="Excluir" tooltipPosition="top"
-                (click)="confirmarExclusao(usuario)"></button>
+              <button pButton
+                      icon="fa fa-trash"
+                      [disabled]="usuario.administrador"
+                      class="width25px"
+                      pTooltip="Excluir"
+                      tooltipPosition="top"
+                      (click)="confirmarExclusao(usuario)"></button>
             </td>
           </tr>
         </ng-template>
