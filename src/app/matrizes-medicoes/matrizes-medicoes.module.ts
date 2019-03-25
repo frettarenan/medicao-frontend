@@ -17,15 +17,14 @@ import { MatrizesMedicoesRoutingModule } from './matrizes-medicoes-routing.modul
 import { MatrizMedicaoCadastroComponent } from './matriz-medicao-cadastro/matriz-medicao-cadastro.component';
 import { MatrizesMedicoesPesquisaComponent } from './matrizes-medicoes-pesquisa/matrizes-medicoes-pesquisa.component';
 import { TextMaskModule } from 'angular2-text-mask';
-
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    MDBBootstrapModule.forRoot(),
 
-    MDBBootstrapModule,
     TextMaskModule,
     InputTextModule,
     ButtonModule,

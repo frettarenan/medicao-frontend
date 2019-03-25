@@ -30,6 +30,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { MoneyHttp } from '../seguranca/money-http';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 registerLocaleData(localePt);
 
@@ -38,7 +39,7 @@ registerLocaleData(localePt);
     CommonModule,
     HttpClientModule,
     RouterModule,
-
+    MDBBootstrapModule.forRoot(),
     GrowlModule,
     ConfirmDialogModule,
   ],

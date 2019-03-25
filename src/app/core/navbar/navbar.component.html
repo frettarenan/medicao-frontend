@@ -1,30 +1,32 @@
-<nav class="navbar">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
 
-  <div class="container">
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <a href="javascript:;" class="navbar-toggle" (click)="exibindoMenu = !exibindoMenu"><i class="fa fa-bars"></i></a>
-      </div>
-    </div>
-  </div>
+  <mdb-navbar-brand><a class="navbar-brand" href="#">Projeto Medição</a></mdb-navbar-brand>
 
-  <ul class="navbar-menu" [hidden]="!exibindoMenu">
-    <li class="navbar-usuario">{{ auth.jwtPayload?.nome }}</li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_CONSTRUTORA')"><a routerLink="/construtoras">Construtoras</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')"><a routerLink="/usuarios">Usuários</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_MATRIZ_MEDICAO')"><a routerLink="/matrizes-medicoes">Matriz de Medição</a></li>
-    <!--<li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/dashboard">Dashboard</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/lancamentos">Lançamentos</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_PESSOA')"><a routerLink="/pessoas">Pessoas</a></li>
-    <li class="navbar-menuitem" routerLinkActive="ativo"
-      *ngIf="auth.temPermissao('ROLE_PESQUISAR_LANCAMENTO')"><a routerLink="/relatorios/lancamentos">Relatório</a></li>-->
-    <li class="navbar-menuitem"><a href="javascript:;" (click)="logout()">Logout</a></li>
-  </ul>
+  <links>
 
-</nav>
+    <ul class="navbar-nav ml-auto">
+
+      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_CONSTRUTORA')">
+        <a mdbWavesEffect class="nav-link waves-light" routerLink="/construtoras">Construtoras<span class="sr-only">(current)</span></a>
+      </li>
+
+      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')">
+          <a mdbWavesEffect class="nav-link waves-light" routerLink="/usuarios">Usuários</a>
+        </li>
+
+      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_MATRIZ_MEDICAO')">
+        <a mdbWavesEffect class="nav-link waves-light" routerLink="/matrizes-medicoes">Matriz de Medição</a>
+      </li>
+
+      <li class="nav-item dropdown" dropdown>
+        <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">
+          <mdb-icon fas icon="user"></mdb-icon> {{ auth.jwtPayload?.nome }}<span class="caret"></span></a>
+        <div *dropdownMenu class="dropdown-menu dropdown-menu-right dropdown dropdown-primary" role="menu">
+          <a mdbWavesEffect class="dropdown-item waves-light" href="javascript:;">Meu cadastro</a>
+          <a mdbWavesEffect class="dropdown-item waves-light" (click)="logout()">Logout</a>
+        </div>
+      </li>
+
+    </ul>
+  </links>
+</mdb-navbar>
