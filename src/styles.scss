@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-body {
+/*body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #404C51;
@@ -12,10 +12,6 @@ a {
 
 a:hover, a:focus {
   text-decoration: underline;
-}
-
-a, button {
-  margin-right: .25em
 }
 
 label {
@@ -50,31 +46,37 @@ label {
 .col-data-header {
   width: 120px;
 }
+*/
 
-.col-acoes {
+.col-acoes, .col-acoes-header {
   width: 90px;
   text-align: center;
 }
 
-.col-acoes-header {
-  width: 90px;
+a, button {
+  margin-right: 5px
 }
 
 .width25px {
   width: 25px;
 }
+
 .width100px {
   width: 100px;
 }
+
 .width170px {
   width: 170px;
 }
+
 .width250px {
   width: 250px;
 }
+
 .width300px {
   width: 300px;
 }
+
 .width360px {
   width: 360px;
 }
