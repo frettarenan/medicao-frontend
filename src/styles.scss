@@ -14,10 +14,6 @@ a:hover, a:focus {
   text-decoration: underline;
 }
 
-label {
-  font-weight: bold;
-}
-
 .ui-dropdown-filter-container {
   width: 100%;
 }
@@ -47,6 +43,10 @@ label {
   width: 120px;
 }
 */
+
+label {
+  font-weight: bold;
+}
 
 .col-acoes, .col-acoes-header {
   width: 90px;
