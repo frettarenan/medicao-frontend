@@ -5,17 +5,16 @@
           <h1>{{title.getTitle()}}</h1>
         </div>
         <div class="ui-g-12 ui-fluid">
-          <label>Nome</label>
-          <input pInputText type="text" name="nome" [(ngModel)]="filtro.nome">
+          <label for="nome">Nome</label>
+          <input pInputText type="text" id="nome" name="nome" [(ngModel)]="filtro.nome">
         </div>
         <div class="ui-g-12 ui-fluid">
-          <label>E-mail</label>
-          <input pInputText type="text" name="email" [(ngModel)]="filtro.email">
+          <label for="email">E-mail</label>
+          <input pInputText type="text" id="email" name="email" [(ngModel)]="filtro.email">
         </div>
         <div class="ui-g-12 ui-fluid">
-          <label>Construtora</label>
-  
-          <p-dropdown placeholder="Selecione..."
+          <label for="idConstrutoraSelecionada">Construtora</label>
+          <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
             [filter]="true" [options]="construtoras"
             [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"></p-dropdown>
         </div>

@@ -7,8 +7,8 @@
       </div>
 
       <div class="ui-g-12 ui-fluid">
-        <label>Razão social</label>
-        <input pInputText type="text" name="razaoSocial"
+        <label for="razaoSocial">Razão social</label>
+        <input pInputText type="text" id="razaoSocial" name="razaoSocial"
           [(ngModel)]="construtora.razaoSocial"
           #razaoSocial="ngModel" required minlength="1">
 
@@ -19,8 +19,8 @@
       </div>
 
       <div class="ui-g-12 ui-md-2 ui-fluid">
-        <label>CNPJ</label>
-          <p-inputMask name="cnpj" mask="99.999.999/9999-99"
+        <label for="cnpj">CNPJ</label>
+          <p-inputMask inputId="cnpj" name="cnpj" mask="99.999.999/9999-99"
           [(ngModel)]="construtora.cnpj"></p-inputMask>
       </div>
       <div class="ui-g-12">

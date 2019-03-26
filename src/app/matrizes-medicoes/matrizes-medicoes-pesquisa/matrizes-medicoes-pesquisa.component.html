@@ -6,8 +6,8 @@
         </div>
 
         <div class="ui-g-12 ui-fluid">
-          <label>Construtora</label>
-          <p-dropdown placeholder="Selecione..."
+          <label for="idConstrutoraSelecionada">Construtora</label>
+          <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
             [filter]="true" [options]="construtoras"
             (onChange)="carregarObras()"
             [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"
@@ -18,8 +18,8 @@
         </div>
 
         <div class="ui-g-12 ui-fluid">
-          <label>Obra</label>
-          <p-dropdown placeholder="Selecione..."
+          <label for="idObraSelecionada">Obra</label>
+          <p-dropdown inputId="idObraSelecionada" placeholder="Selecione..."
             [filter]="true" [options]="obras"
             (onChange)="carregarContratos()"
             [(ngModel)]="idObraSelecionada" name="idObraSelecionada"
@@ -30,8 +30,8 @@
         </div>
 
         <div class="ui-g-12 ui-fluid">
-          <label>Contrato</label>
-          <p-dropdown placeholder="Selecione..."
+          <label for="idContratoSelecionado">Contrato</label>
+          <p-dropdown inputId="idContratoSelecionado" placeholder="Selecione..."
             [filter]="true" [options]="contratos"
             (onChange)="carregarMedicoes()"
             [(ngModel)]="idContratoSelecionado" name="idContratoSelecionado"
@@ -42,8 +42,8 @@
         </div>
 
         <div class="ui-g-12 ui-fluid">
-          <label>Medição</label>
-          <p-dropdown placeholder="Selecione..."
+          <label for="idMedicaoSelecionada">Medição</label>
+          <p-dropdown inputId="idMedicaoSelecionada" placeholder="Selecione..."
             [filter]="true" [options]="medicoes"
             [(ngModel)]="idMedicaoSelecionada" name="idMedicaoSelecionada"
             #ddMedicao="ngModel" required [disabled]="!idContratoSelecionado"></p-dropdown>
