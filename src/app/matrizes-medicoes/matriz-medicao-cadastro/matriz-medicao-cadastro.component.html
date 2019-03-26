@@ -1,4 +1,4 @@
-<div class="container" *ngIf="processando">
+<div class="container-full" *ngIf="processando">
   <div style="text-align: center;"><p-progressSpinner></p-progressSpinner></div>
   <div style="text-align: center;">Processando, aguarde...</div>
 </div>
@@ -86,7 +86,7 @@
     </tbody>
   </table>
   <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')">
-    <!--<button mdbBtn color="info" (click)="calcularTotais()">Calcular totais</button>-->
-    <button mdbBtn color="info" (click)="salvar()">Salvar</button>
+    <!--<button pButton label="Calcular totais" (click)="calcularTotais()"></button>-->
+    <button pButton icon="fa fa-save" label="Salvar" (click)="salvar()"></button>
   </div>
 </div>

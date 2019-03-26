@@ -93,3 +93,18 @@ input[type=number] {
     -moz-appearance:textfield;
 }
 */
+
+.container-full {
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 100%;
+}
+
+/* Forçando estilos novamente, pois o tema omega do primeng está retirando as bordas do componente de abas */
+body .ui-tabview .ui-tabview-panels {
+  background-color: #ffffff;
+  padding: 0.571em 1em;
+  border: 1px solid #c8c8c8;
+  color: #333333;
+}
