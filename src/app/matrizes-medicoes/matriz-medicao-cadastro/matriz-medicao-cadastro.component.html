@@ -32,7 +32,7 @@
                      class="form-control width100px"
                      [disabled]="grupo.tipoGrupo.id == 1 || grupo.tipoGrupo.id == 2 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade | number }}"
-                     (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')">
+                     (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')"/>
             </td>
             <td>
               <input type="text"
@@ -41,7 +41,7 @@
                      class="form-control width100px"
                      [disabled]="grupo.tipoGrupo.id != 1 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub | number }}"
-                     (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')">
+                     (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')"/>
             </td>
             <td *ngIf="grupo.tipoGrupo.id != 1" [ngStyle]="setPercentualStyles('idServico' + servico.id + 'idGrupo' + grupo.id)">
               <input type="text"
@@ -50,11 +50,39 @@
                      class="form-control width70px"
                      [disabled]="grupo.tipoGrupo.id == 2"
                      value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].percentual | number }}"
-                     (input)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'percentual')">
+                     (input)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'percentual')"/>
             </td>
           </ng-container>
         </tr>
       </ng-container>
+      <tr>
+        <td class="align-middle">Total</td>
+        <ng-container *ngFor="let grupo of grupos">
+          <td></td>
+          <td>
+            <input *ngIf="grupo.tipoGrupo.id == 1"
+                   type="text"
+                   inputmode="numeric"
+                   class="form-control width100px"
+                   disabled="true"
+                   value="{{cubTotalGeral | number : '1.2-2' }}"/>
+            <input *ngIf="grupo.tipoGrupo.id == 2"
+                   type="text"
+                   inputmode="numeric"
+                   class="form-control width100px"
+                   disabled="true"
+                   value="{{cubSubTotalGeral | number : '1.2-2' }}"/>
+          </td>
+          <td *ngIf="grupo.tipoGrupo.id != 1">
+            <input *ngIf="grupo.tipoGrupo.id == 2"
+                   type="text"
+                   inputmode="numeric"
+                   class="form-control width100px"
+                   disabled="true"
+                   value="{{percentualSubTotalGeral | number : '1.2-2' }}"/>
+          </td>
+        </ng-container>
+      </tr>
     </tbody>
   </table>
   <!--<button mdbBtn color="info" (click)="calcularTotais()">Calcular totais</button>-->

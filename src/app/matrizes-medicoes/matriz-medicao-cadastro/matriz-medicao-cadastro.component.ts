@@ -35,6 +35,10 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   usuarioLogadoContemRoleAdministrarMatrizMedicao = false;
 
+  cubTotalGeral = 0;
+  cubSubTotalGeral = 0;
+  percentualSubTotalGeral = 0;
+
   constructor(
     public auth: AuthService,
     private servicoService: ServicoService,
@@ -158,6 +162,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.calcularQuantidadeTotalizador();
     this.calcularCubTotalizador();
     this.calcularPorcentualTotalizador();
+    this.calcularTotalizadorGeral();
   }
 
   somarQuantidades() {
@@ -255,6 +260,16 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       // quantidade totalizador / quantidade valor base
       this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].percentual = porcentualTotalizador.toFixed(2);
     });
+  }
+
+  calcularTotalizadorGeral() {
+    this.cubTotalGeral = 0;
+    this.cubSubTotalGeral = 0;
+    this.servicos.forEach(servico => {
+      this.cubTotalGeral += parseFloat(this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].cub);
+      this.cubSubTotalGeral += parseFloat(this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].cub);
+    });
+    this.percentualSubTotalGeral = (this.cubSubTotalGeral * 100) / this.cubTotalGeral;
   }
 
   private decimalMask = createNumberMask({
