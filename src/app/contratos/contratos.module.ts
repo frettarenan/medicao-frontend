@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ContratoCadastroComponent } from './contrato-cadastro/contrato-cadastro.component';
 import { ContratosPesquisaComponent } from './contratos-pesquisa/contratos-pesquisa.component';
 import { SharedModule } from 'app/shared/shared.module';
-import { DropdownModule } from 'angular-bootstrap-md';
 import { DialogModule } from 'primeng/dialog';
 import { PanelModule } from 'primeng/panel';
 import { InputMaskModule } from 'primeng/inputmask';
@@ -13,6 +12,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ContratosRoutingModule } from './contratos-routing.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   imports: [

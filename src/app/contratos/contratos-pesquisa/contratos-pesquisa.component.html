@@ -1,3 +1,105 @@
-<p>
-  contratos-pesquisa works!
-</p>
+<div class="container">
+  <form #form autocomplete="off" (ngSubmit)="pesquisar()">
+    <div class="ui-g">
+        <div class="ui-g-12">
+          <h1>{{title.getTitle()}}</h1>
+        </div>
+        <div class="ui-g-12 ui-fluid">
+          <label for="numero">Número</label>
+          <input pInputText type="text" id="numero" name="numero" [(ngModel)]="filtro.numero">
+        </div>
+        <div class="ui-g-12 ui-fluid">
+          <label for="descricao">Descrição</label>
+          <input pInputText type="text" id="descricao" name="descricao" [(ngModel)]="filtro.descricao">
+        </div>
+        <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+          <label for="idConstrutoraSelecionada">Construtora</label>
+          <p-dropdown inputId="idConstrutoraSelecionada"
+                      placeholder="Selecione..."
+                      (onChange)="carregarObras()"
+                      [filter]="true"
+                      [options]="construtoras"
+                      [(ngModel)]="idConstrutoraSelecionada"
+                      name="idConstrutoraSelecionada"></p-dropdown>
+        </div>
+        <div class="ui-g-12 ui-fluid">
+          <label for="idObraSelecionada">Obra</label>
+          <p-dropdown inputId="idObraSelecionada"
+                      placeholder="Selecione..."
+                      [disabled]="!idConstrutoraSelecionada"
+                      [filter]="true"
+                      [options]="obras"
+                      [(ngModel)]="idObraSelecionada"
+                      name="idObraSelecionada"></p-dropdown>
+        </div>
+
+        <div class="ui-g-12">
+          <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
+          <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
+        </div>
+    </div>
+  </form>
+
+  <div class="ui-g">
+    <div class="ui-g-12">
+
+      <p-table [value]="contratos" [responsive]="true"
+        [paginator]="true" [rows]="filtro.itensPorPagina"
+        [lazy]="true" [totalRecords]="totalRegistros"
+        (onLazyLoad)="aoMudarPagina($event)"
+        #tabela>
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Número</th>
+            <th>Descrição</th>
+            <th>Obra</th>
+            <th class="width100px">Situação</th>
+            <th class="col-acoes-header">Ações</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-contrato>
+          <tr>
+            <td>{{ contrato.numero }}</td>
+            <td>{{ contrato.descricao }}</td>
+            <td>{{ contrato.obra.nome }}</td>
+            <td>
+              <a href="javascript:;"
+                 [pTooltip]="contrato.ativo ? 'Desativar' : 'Ativar'"
+                 tooltipPosition="top"
+                 (click)="alternarStatus(contrato)">{{ contrato.ativo ? 'Ativo' : 'Inativo' }}</a>
+            </td>
+            <td class="col-acoes">
+              <button pButton
+                      icon="fa fa-pencil-alt"
+                      class="width25px"
+                      pTooltip="Editar"
+                      tooltipPosition="top"
+                      [routerLink]="['/contratos', contrato.id]"></button>
+
+              <button pButton
+                      icon="fa fa-trash"
+                      class="width25px"
+                      pTooltip="Excluir"
+                      tooltipPosition="top"
+                      (click)="confirmarExclusao(contrato)"></button>
+            </td>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="emptymessage">
+          <tr>
+            <td colspan="5">
+              Nenhum registro encontrado
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_CONTRATO')">
+      <button pButton icon="fa fa-file" label="Novo" routerLink="/contratos/novo"></button>
+    </div>
+  </div>
+
+</div>

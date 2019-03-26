@@ -20,6 +20,15 @@ export class ObraService {
     this.obrasUrl = `${environment.apiUrl}/obras`;
   }
 
+  listarTodasPorConstrutora(idConstrutora): Promise<Obra[]> {
+    const params = new HttpParams()
+      .append('idConstrutora', idConstrutora);
+
+    return this.http.get<Obra[]>(`${this.obrasUrl}/status/ativo`, {
+      params
+    }).toPromise();
+  }
+
   listarObrasAtivasPorConstrutora(idConstrutora): Promise<Obra[]> {
     const params = new HttpParams()
       .append('idConstrutora', idConstrutora);
