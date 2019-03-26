@@ -6,6 +6,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { ConstrutoraFiltro, ConstrutoraService } from './../construtora.service';
+import { AuthService } from 'app/seguranca/auth.service';
 
 @Component({
   selector: 'app-construtoras-pesquisa',
@@ -20,6 +21,7 @@ export class ConstrutorasPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(
+    public auth: AuthService,
     private construtoraService: ConstrutoraService,
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,

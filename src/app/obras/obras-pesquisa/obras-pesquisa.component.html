@@ -79,7 +79,7 @@
       </p-table>
     </div>
 
-    <div class="ui-g-12">
+    <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_OBRA')">
       <button pButton icon="fa fa-file" label="Novo" routerLink="/obras/novo"></button>
     </div>
   </div>
