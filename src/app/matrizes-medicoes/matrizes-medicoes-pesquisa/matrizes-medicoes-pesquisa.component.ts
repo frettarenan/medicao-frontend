@@ -7,6 +7,7 @@ import { ConstrutoraService } from 'app/construtoras/construtora.service';
 import { ObraService } from 'app/obras/obra.service';
 import { ContratoService } from 'app/contratos/contrato.service';
 import { MedicaoService } from 'app/medicoes/medicao.service';
+import { AuthService } from 'app/seguranca/auth.service';
 
 @Component({
   selector: 'app-matrizes-medicoes-pesquisa',
@@ -30,6 +31,7 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   idMedicaoSelecionada: number;
 
   constructor(
+    public auth: AuthService,
     private matrizMedicaoService: MatrizMedicaoService,
     private construtoraService: ConstrutoraService,
     private obraService: ObraService,
@@ -47,13 +49,20 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   }
 
   carregarConstrutoras() {
-    this.construtoraService.listarConstrutorasAtivas().then(lista => {
-      this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    if (this.auth.jwtPayload.usuario.administrador) {
+      this.construtoraService.listarConstrutorasAtivas().then(lista => {
+        this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    } else {
+      this.carregarObras();
+    }
   }
 
   carregarObras() {
+    if (!this.auth.jwtPayload.usuario.administrador) {
+      this.idConstrutoraSelecionada = this.auth.jwtPayload.usuario.construtora.id;
+    }
     this.obraService.listarObrasAtivasPorConstrutora(this.idConstrutoraSelecionada).then(lista => {
       this.obras = lista.map(obra => ({ label: obra.nome, value: obra.id }));
     })

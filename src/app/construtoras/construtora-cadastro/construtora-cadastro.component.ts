@@ -61,7 +61,7 @@ export class ConstrutoraCadastroComponent implements OnInit {
   adicionarConstrutora(form: FormControl) {
     this.construtoraService.adicionar(this.construtora)
       .then(construtoraAdicionada => {
-        this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!!' });
+        this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
         this.router.navigate(['/construtoras', construtoraAdicionada.id]);
       })
       .catch(erro => this.errorHandler.handle(erro));

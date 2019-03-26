@@ -85,6 +85,8 @@
       </tr>
     </tbody>
   </table>
-  <!--<button mdbBtn color="info" (click)="calcularTotais()">Calcular totais</button>-->
-  <button mdbBtn color="info" (click)="salvar()">Salvar</button>
+  <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')">
+    <!--<button mdbBtn color="info" (click)="calcularTotais()">Calcular totais</button>-->
+    <button mdbBtn color="info" (click)="salvar()">Salvar</button>
+  </div>
 </div>
