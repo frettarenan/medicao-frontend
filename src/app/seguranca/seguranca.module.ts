@@ -6,7 +6,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { AuthGuard } from './auth.guard';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginComponent } from './login/login.component';
 import { LogoutService } from './logout.service';
 import { SegurancaRoutingModule } from './seguranca-routing.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
@@ -32,7 +32,7 @@ export function tokenGetter() {
 
     SegurancaRoutingModule
   ],
-  declarations: [LoginFormComponent],
+  declarations: [LoginComponent],
   providers: [
     AuthGuard,
     LogoutService

@@ -20,9 +20,7 @@ import { ServicoService } from './../servicos/servico.service';
 import { MedicaoService } from './../medicoes/medicao.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
 import { MatrizMedicaoService } from './../matrizes-medicoes/matriz-medicao.service';
-import { PessoaService } from './../pessoas/pessoa.service';
-import { DashboardService } from './../dashboard/dashboard.service';
-import { RelatoriosService } from './../relatorios/relatorios.service';
+import { PaginaInicialService } from './../pagina-inicial/pagina-inicial.service';
 
 import { AuthService } from './../seguranca/auth.service';
 import { ErrorHandlerService } from './error-handler.service';
@@ -56,7 +54,6 @@ registerLocaleData(localePt);
   providers: [
     ConstrutoraService,
     UsuarioService,
-    PessoaService,
     ObraService,
     ContratoService,
     MedicaoService,
@@ -64,8 +61,7 @@ registerLocaleData(localePt);
     ServicoService,
     LancamentoService,
     MatrizMedicaoService,
-    DashboardService,
-    RelatoriosService,
+    PaginaInicialService,
     ErrorHandlerService,
     AuthService,
     MoneyHttp,

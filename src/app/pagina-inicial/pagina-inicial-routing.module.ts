@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './../seguranca/auth.guard';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { PaginaInicialComponent } from './pagina-inicial/pagina-inicial.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DashboardComponent,
-    canActivate: [ AuthGuard ],
-    data: { roles: ['ROLE_PESQUISAR_LANCAMENTO'] }
+    component: PaginaInicialComponent,
+    canActivate: [ AuthGuard ]
   }
 ];
 
@@ -16,4 +15,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DashboardRoutingModule { }
+export class PaginaInicialRoutingModule { }

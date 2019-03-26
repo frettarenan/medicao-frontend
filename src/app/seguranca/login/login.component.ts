@@ -1,15 +1,15 @@
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from './../auth.service';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
-export class LoginFormComponent {
+export class LoginComponent {
 
   constructor(
     private auth: AuthService,
@@ -20,7 +20,7 @@ export class LoginFormComponent {
   login(usuario: string, senha: string) {
     this.auth.login(usuario, senha)
       .then(() => {
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/pagina-inicial']);
       })
       .catch(erro => {
         this.errorHandler.handle(erro);
