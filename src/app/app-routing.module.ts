@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'construtoras', loadChildren: 'app/construtoras/construtoras.module#ConstrutorasModule' },
   { path: 'usuarios', loadChildren: 'app/usuarios/usuarios.module#UsuariosModule' },
   { path: 'obras', loadChildren: 'app/obras/obras.module#ObrasModule' },
+  { path: 'contratos', loadChildren: 'app/contratos/contratos.module#ContratosModule' },
   { path: 'matrizes-medicoes', loadChildren: 'app/matrizes-medicoes/matrizes-medicoes.module#MatrizesMedicoesModule' },
   
   { path: '', redirectTo: 'pagina-inicial', pathMatch: 'full' },

@@ -1,23 +1,22 @@
 <mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
-
-  <mdb-navbar-brand><a class="navbar-brand" href="javascript:;">Projeto Medição</a></mdb-navbar-brand>
-
+  <mdb-navbar-brand><a class="navbar-brand" routerLink="/pagina-inicial">Projeto Medição</a></mdb-navbar-brand>
   <links>
-
     <ul class="navbar-nav ml-auto">
-
       <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_CONSTRUTORA')">
         <a mdbWavesEffect class="nav-link waves-light" routerLink="/construtoras">Construtoras<span class="sr-only">(current)</span></a>
       </li>
-
       <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_USUARIO')">
-          <a mdbWavesEffect class="nav-link waves-light" routerLink="/usuarios">Usuários</a>
-        </li>
-
+        <a mdbWavesEffect class="nav-link waves-light" routerLink="/usuarios">Usuários</a>
+      </li>
+      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_OBRA')">
+        <a mdbWavesEffect class="nav-link waves-light" routerLink="/obras">Obras</a>
+      </li>
+      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_CONTRATO')">
+        <a mdbWavesEffect class="nav-link waves-light" routerLink="/contratos">Contratos</a>
+      </li>
       <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_MATRIZ_MEDICAO')">
         <a mdbWavesEffect class="nav-link waves-light" routerLink="/matrizes-medicoes">Matriz de Medição</a>
       </li>
-
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">
           <mdb-icon fas icon="user"></mdb-icon> {{ auth.jwtPayload?.nome }}<span class="caret"></span></a>
@@ -26,7 +25,6 @@
           <a mdbWavesEffect class="dropdown-item waves-light" (click)="logout()">Sair</a>
         </div>
       </li>
-
     </ul>
   </links>
 </mdb-navbar>
