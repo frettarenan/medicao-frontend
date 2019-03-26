@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpHeaders } from '@angular/common/http';
 import { Obra } from 'app/core/model';
 import { MoneyHttp } from 'app/seguranca/money-http';
 import { environment } from './../../environments/environment';
+
+export class ObraFiltro {
+  nome: string;
+  idConstrutora : number;
+  pagina = 0;
+  itensPorPagina = 5;
+}
 
 @Injectable()
 export class ObraService {
@@ -20,6 +27,51 @@ export class ObraService {
     return this.http.get<Obra[]>(`${this.obrasUrl}/status/ativo`, {
       params
     }).toPromise();
+  }
+
+  pesquisar(filtro: ObraFiltro): Promise<any> {
+    let params = new HttpParams({
+      fromObject: {
+        page: filtro.pagina.toString(),
+        size: filtro.itensPorPagina.toString()
+      }
+    });
+
+    if (filtro.nome) {
+      params = params.append('nome', filtro.nome);
+    }
+
+    if (filtro.idConstrutora) {
+      params = params.append('idConstrutora', filtro.idConstrutora.toString());
+    }
+
+    return this.http.get<any>(`${this.obrasUrl}`, { params })
+      .toPromise()
+      .then(response => {
+        const obras = response.content;
+
+        const resultado = {
+          obras,
+          total: response.totalElements
+        };
+
+        return resultado;
+      })
+  }
+
+  excluir(id: number): Promise<void> {
+    return this.http.delete(`${this.obrasUrl}/${id}`)
+      .toPromise()
+      .then(() => null);
+  }
+
+  mudarStatus(id: number, ativo: boolean): Promise<void> {
+    const headers = new HttpHeaders()
+        .append('Content-Type', 'application/json');
+
+    return this.http.put(`${this.obrasUrl}/${id}/ativo`, ativo, { headers })
+      .toPromise()
+      .then(() => null);
   }
 
 }
