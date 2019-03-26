@@ -4,6 +4,7 @@ import { ConfirmationService, MessageService, LazyLoadEvent } from 'primeng/api'
 import { ConstrutoraService } from 'app/construtoras/construtora.service';
 import { ObraService, ObraFiltro } from '../obra.service';
 import { Title } from '@angular/platform-browser';
+import { AuthService } from 'app/seguranca/auth.service';
 
 @Component({
   selector: 'app-obras-pesquisa',
@@ -20,6 +21,7 @@ export class ObrasPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(
+    public auth: AuthService,
     private obraService: ObraService,
     private construtoraService: ConstrutoraService,
     private errorHandler: ErrorHandlerService,
@@ -34,14 +36,20 @@ export class ObrasPesquisaComponent implements OnInit {
   }
 
   carregarConstrutoras() {
-    this.construtoraService.listarTodas().then(lista => {
-      this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    if (this.auth.jwtPayload.usuario.administrador) {
+      this.construtoraService.listarTodas().then(lista => {
+        this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    }
   }
 
   pesquisar(pagina = 0) {
-    this.filtro.idConstrutora = this.idConstrutoraSelecionada;
+    if (this.auth.jwtPayload.usuario.administrador) {
+      this.filtro.idConstrutora = this.idConstrutoraSelecionada;
+    } else {
+      this.filtro.idConstrutora = this.auth.jwtPayload.usuario.construtora.id;
+    }
     this.filtro.pagina = pagina;
 
     this.obraService.pesquisar(this.filtro)

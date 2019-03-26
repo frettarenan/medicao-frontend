@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/components/common/messageservice';
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { UsuarioFiltro, UsuarioService } from './../usuario.service';
 import { ConstrutoraService } from 'app/construtoras/construtora.service';
+import { AuthService } from 'app/seguranca/auth.service';
 
 @Component({
   selector: 'app-usuarios-pesquisa',
@@ -23,6 +24,7 @@ export class UsuariosPesquisaComponent implements OnInit {
   @ViewChild('tabela') grid;
 
   constructor(
+    public auth: AuthService,
     private usuarioService: UsuarioService,
     private construtoraService: ConstrutoraService,
     private errorHandler: ErrorHandlerService,
@@ -37,14 +39,20 @@ export class UsuariosPesquisaComponent implements OnInit {
   }
 
   carregarConstrutoras() {
-    this.construtoraService.listarTodas().then(lista => {
-      this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
-    })
-    .catch(erro => this.errorHandler.handle(erro));
+    if (this.auth.jwtPayload.usuario.administrador) {
+      this.construtoraService.listarTodas().then(lista => {
+        this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+    }
   }
 
   pesquisar(pagina = 0) {
-    this.filtro.idConstrutora = this.idConstrutoraSelecionada;
+    if (this.auth.jwtPayload.usuario.administrador) {
+      this.filtro.idConstrutora = this.idConstrutoraSelecionada;
+    } else {
+      this.filtro.idConstrutora = this.auth.jwtPayload.usuario.construtora.id;
+    }
     this.filtro.pagina = pagina;
 
     this.usuarioService.pesquisar(this.filtro)

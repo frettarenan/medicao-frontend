@@ -8,7 +8,7 @@
           <label for="nome">Nome</label>
           <input pInputText type="text" id="nome" name="nome" [(ngModel)]="filtro.nome">
         </div>
-        <div class="ui-g-12 ui-fluid">
+        <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
           <label for="idConstrutoraSelecionada">Construtora</label>
           <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
             [filter]="true" [options]="construtoras"
@@ -33,8 +33,8 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Nome</th>
-            <th>Construtora</th>
-            <th>Responsável</th>
+            <th *ngIf="auth.jwtPayload.usuario.administrador">Construtora</th>
+            <th>Usuário responsável</th>
             <th class="width100px">Situação</th>
             <th class="col-acoes-header">Ações</th>
           </tr>
@@ -43,10 +43,9 @@
         <ng-template pTemplate="body" let-obra>
           <tr>
             <td>{{ obra.nome }}</td>
-            <td>{{ (obra.construtora == null) ? '' : obra.construtora.razaoSocial }}</td>
+            <td *ngIf="auth.jwtPayload.usuario.administrador">{{ (obra.construtora == null) ? '' : obra.construtora.razaoSocial }}</td>
             <td>{{ obra.usuarioResponsavel.nome }}</td>
             <td>
-              <span *ngIf="obra.administrador">{{ obra.ativo ? 'Ativo' : 'Inativo' }}</span>
               <a href="javascript:;"
                  [pTooltip]="obra.ativo ? 'Desativar' : 'Ativar'"
                  tooltipPosition="top"
@@ -72,7 +71,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="5">
+            <td [colSpan]="auth.jwtPayload.usuario.administrador ? 5 : 4">
               Nenhum registro encontrado
             </td>
           </tr>

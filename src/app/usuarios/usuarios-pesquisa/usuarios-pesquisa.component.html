@@ -12,7 +12,7 @@
           <label for="email">E-mail</label>
           <input pInputText type="text" id="email" name="email" [(ngModel)]="filtro.email">
         </div>
-        <div class="ui-g-12 ui-fluid">
+        <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
           <label for="idConstrutoraSelecionada">Construtora</label>
           <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
             [filter]="true" [options]="construtoras"
@@ -38,7 +38,7 @@
           <tr>
             <th>Nome</th>
             <th>E-mail</th>
-            <th>Construtora</th>
+            <th *ngIf="auth.jwtPayload.usuario.administrador">Construtora</th>
             <th class="width100px">Situação</th>
             <th class="col-acoes-header">Ações</th>
           </tr>
@@ -48,10 +48,10 @@
           <tr>
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.email }}</td>
-            <td>{{ (usuario.construtora == null) ? '' : usuario.construtora.razaoSocial }}</td>
+            <td *ngIf="auth.jwtPayload.usuario.administrador">{{ (usuario.construtora == null) ? '' : usuario.construtora.razaoSocial }}</td>
             <td>
-              <span *ngIf="usuario.administrador">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</span>
-              <a *ngIf="!usuario.administrador"
+              <span *ngIf="usuario.administrador || usuario.id == auth.jwtPayload.usuario.id">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</span>
+              <a *ngIf="!usuario.administrador && usuario.id != auth.jwtPayload.usuario.id"
                  href="javascript:;"
                  [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
                  tooltipPosition="top"
@@ -68,7 +68,7 @@
 
               <button pButton
                       icon="fa fa-trash"
-                      [disabled]="usuario.administrador"
+                      [disabled]="usuario.administrador || usuario.id == auth.jwtPayload.usuario.id"
                       class="width25px"
                       pTooltip="Excluir"
                       tooltipPosition="top"
@@ -79,7 +79,7 @@
 
         <ng-template pTemplate="emptymessage">
           <tr>
-            <td colspan="5">
+            <td [colSpan]="auth.jwtPayload.usuario.administrador ? 5 : 4">
               Nenhum registro encontrado
             </td>
           </tr>
