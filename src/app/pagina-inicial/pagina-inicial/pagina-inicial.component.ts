@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-pagina-inicial',
@@ -7,6 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaInicialComponent implements OnInit {
 
-  ngOnInit() { }
+  constructor(
+    public title: Title
+  ) { }
+
+  ngOnInit() {
+    this.title.setTitle('Página Inicial');
+  }
 
 }

@@ -1,3 +1,19 @@
+html, body {
+  height: 100%;
+}
+
+.navbar {
+  /* padding: 0.5rem 1rem; */
+  padding: 0.1rem 1rem;
+  padding-left: 10px;
+}
+.navbar-brand {
+  margin-right: 10px;
+}
+.navbar-brand-logo {
+  width: 50px;
+}
+
 label {
   font-weight: 400;
   font-size: 0.9rem;

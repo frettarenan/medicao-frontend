@@ -1,21 +1,27 @@
 import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { ErrorHandlerService } from './../../core/error-handler.service';
 import { AuthService } from './../auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
     private errorHandler: ErrorHandlerService,
-    private router: Router
+    private router: Router,
+    public title: Title
   ) { }
+
+  ngOnInit() {
+    this.title.setTitle('Login');
+  }
 
   login(usuario: string, senha: string) {
     this.auth.login(usuario, senha)
