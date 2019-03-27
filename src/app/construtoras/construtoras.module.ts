@@ -10,6 +10,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import {FieldsetModule} from 'primeng/fieldset';
 
 import { SharedModule } from './../shared/shared.module';
 import { ConstrutorasRoutingModule } from './construtoras-routing.module';
@@ -29,6 +30,7 @@ import { ConstrutoraCadastroComponent } from './construtora-cadastro/construtora
     PanelModule,
     DialogModule,
     DropdownModule,
+    FieldsetModule,
 
     SharedModule,
     ConstrutorasRoutingModule

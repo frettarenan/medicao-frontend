@@ -44,7 +44,7 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Matriz de Medição');
+    this.title.setTitle('Pesquisa de Matriz de Medição');
     this.carregarConstrutoras();
   }
 

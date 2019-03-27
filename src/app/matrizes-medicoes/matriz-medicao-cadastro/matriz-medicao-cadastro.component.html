@@ -1,3 +1,6 @@
+<div class="content-section introduction">
+  <span class="feature-title">{{title.getTitle()}}</span>
+</div>
 <div class="container-full" *ngIf="processando">
   <div style="text-align: center;"><p-progressSpinner></p-progressSpinner></div>
   <div style="text-align: center;">Processando, aguarde...</div>
@@ -85,8 +88,12 @@
       </tr>
     </tbody>
   </table>
-  <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')">
+  <div class="ui-g-12">
     <!--<button pButton label="Calcular totais" (click)="calcularTotais()"></button>-->
-    <button pButton icon="fa fa-save" label="Salvar" (click)="salvar()"></button>
+    <button pButton
+            *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')"
+            icon="fa fa-save"
+            label="Salvar"
+            (click)="salvar()"></button>
   </div>
 </div>

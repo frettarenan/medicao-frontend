@@ -1,61 +1,72 @@
+<div class="content-section introduction">
+  <span class="feature-title">{{title.getTitle()}}</span>
+</div>
+  
 <div class="container-full">
-  <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
-    <div class="ui-g">
-      <div class="ui-g-12">
-        <h1>{{title.getTitle()}}</h1>
-      </div>
 
-      <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
-        <label for="idConstrutoraSelecionada">Construtora</label>
-        <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
-          [filter]="true" [options]="construtoras"
-          (onChange)="carregarObras()"
-          [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"
-          #ddConstrutora="ngModel" required></p-dropdown>
+  <div class="div-padding-bottom">
+    <p-panel header="Filtros da Pesquisa" [toggleable]="false" [collapsed]="false">
+      <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
+        <div class="ui-g">
+          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+            <label for="idConstrutoraSelecionada">Construtora</label>
+            <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
+              [filter]="true" [options]="construtoras"
+              (onChange)="carregarObras()"
+              [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"
+              #ddConstrutora="ngModel" required></p-dropdown>
 
-        <app-message [control]="ddConstrutora" error="required"
-          text="Informe a construtora"></app-message>
-      </div>
+            <app-message [control]="ddConstrutora" error="required"
+              text="Informe a construtora"></app-message>
+          </div>
 
-      <div class="ui-g-12 ui-fluid">
-        <label for="idObraSelecionada">Obra</label>
-        <p-dropdown inputId="idObraSelecionada" placeholder="Selecione..."
-          [filter]="true" [options]="obras"
-          (onChange)="carregarContratos()"
-          [(ngModel)]="idObraSelecionada" name="idObraSelecionada"
-          #ddObra="ngModel" required [disabled]="!idConstrutoraSelecionada"></p-dropdown>
+          <div class="ui-g-12 ui-fluid">
+            <label for="idObraSelecionada">Obra</label>
+            <p-dropdown inputId="idObraSelecionada" placeholder="Selecione..."
+              [filter]="true" [options]="obras"
+              (onChange)="carregarContratos()"
+              [(ngModel)]="idObraSelecionada" name="idObraSelecionada"
+              #ddObra="ngModel" required [disabled]="!idConstrutoraSelecionada"></p-dropdown>
 
-          <app-message [control]="ddObra" error="required"
-          text="Informe a obra"></app-message>
-      </div>
+              <app-message [control]="ddObra" error="required"
+              text="Informe a obra"></app-message>
+          </div>
 
-      <div class="ui-g-12 ui-fluid">
-        <label for="idContratoSelecionado">Contrato</label>
-        <p-dropdown inputId="idContratoSelecionado" placeholder="Selecione..."
-          [filter]="true" [options]="contratos"
-          (onChange)="carregarMedicoes()"
-          [(ngModel)]="idContratoSelecionado" name="idContratoSelecionado"
-          #ddContrato="ngModel" required [disabled]="!idObraSelecionada"></p-dropdown>
+          <div class="ui-g-12 ui-fluid">
+            <label for="idContratoSelecionado">Contrato</label>
+            <p-dropdown inputId="idContratoSelecionado" placeholder="Selecione..."
+              [filter]="true" [options]="contratos"
+              (onChange)="carregarMedicoes()"
+              [(ngModel)]="idContratoSelecionado" name="idContratoSelecionado"
+              #ddContrato="ngModel" required [disabled]="!idObraSelecionada"></p-dropdown>
 
-        <app-message [control]="ddContrato" error="required"
-          text="Informe o contrato"></app-message>
-      </div>
+            <app-message [control]="ddContrato" error="required"
+              text="Informe o contrato"></app-message>
+          </div>
 
-      <div class="ui-g-12 ui-fluid">
-        <label for="idMedicaoSelecionada">Medição</label>
-        <p-dropdown inputId="idMedicaoSelecionada" placeholder="Selecione..."
-          [filter]="true" [options]="medicoes"
-          [(ngModel)]="idMedicaoSelecionada" name="idMedicaoSelecionada"
-          #ddMedicao="ngModel" required [disabled]="!idContratoSelecionado"></p-dropdown>
+          <div class="ui-g-12 ui-fluid">
+            <label for="idMedicaoSelecionada">Medição</label>
+            <p-dropdown inputId="idMedicaoSelecionada" placeholder="Selecione..."
+              [filter]="true" [options]="medicoes"
+              [(ngModel)]="idMedicaoSelecionada" name="idMedicaoSelecionada"
+              #ddMedicao="ngModel" required [disabled]="!idContratoSelecionado"></p-dropdown>
 
-        <app-message [control]="ddMedicao" error="required"
-          text="Informe a medição"></app-message>
-      </div>
+            <app-message [control]="ddMedicao" error="required"
+              text="Informe a medição"></app-message>
+          </div>
 
-      <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')">
-        <button pButton icon="fa fa-folder-open" type="submit" label="Abrir" [disabled]="f.invalid" [routerLink]="['/matrizes-medicoes', idMedicaoSelecionada]"></button>
-        <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
-      </div>
-    </div>
-  </form>
+          <div class="ui-g-12">
+            <button pButton
+                    *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')"
+                    icon="fa fa-folder-open"
+                    type="submit"
+                    label="Abrir"
+                    [disabled]="f.invalid"
+                    [routerLink]="['/matrizes-medicoes', idMedicaoSelecionada]"></button>
+            <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
+          </div>
+        </div>
+      </form>
+    </p-panel>
+  </div>
 </div>

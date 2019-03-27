@@ -54,7 +54,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   ngOnInit() {    
     this.idMedicao = this.route.snapshot.params['id'];
 
-    this.title.setTitle('Edição da Matriz de Medição');
+    this.title.setTitle('Edição de Matriz de Medição');
 
     if (this.idMedicao) {
       this.usuarioLogadoContemRoleAdministrarMatrizMedicao = this.auth.temPermissao('ROLE_ADMINISTRAR_MATRIZ_MEDICAO');

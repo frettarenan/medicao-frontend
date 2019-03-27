@@ -1,30 +1,34 @@
+<div class="content-section introduction">
+  <span class="feature-title">{{title.getTitle()}}</span>
+</div>
+  
 <div class="container-full">
-  <form #form autocomplete="off" (ngSubmit)="pesquisar()">
-    <div class="ui-g">
-        <div class="ui-g-12">
-          <h1>{{title.getTitle()}}</h1>
+  
+  <div class="div-padding-bottom">
+    <p-panel header="Filtros da Pesquisa" [toggleable]="true" [collapsed]="true">
+      <form #form autocomplete="off" (ngSubmit)="pesquisar()">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-fluid">
+            <label for="nome">Nome</label>
+            <input pInputText type="text" id="nome" name="nome" [(ngModel)]="filtro.nome">
+          </div>
+          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+            <label for="idConstrutoraSelecionada">Construtora</label>
+            <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
+              [filter]="true" [options]="construtoras"
+              [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"></p-dropdown>
+          </div>
+          <div class="ui-g-12">
+            <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
+            <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
+          </div>
         </div>
-        <div class="ui-g-12 ui-fluid">
-          <label for="nome">Nome</label>
-          <input pInputText type="text" id="nome" name="nome" [(ngModel)]="filtro.nome">
-        </div>
-        <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
-          <label for="idConstrutoraSelecionada">Construtora</label>
-          <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
-            [filter]="true" [options]="construtoras"
-            [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"></p-dropdown>
-        </div>
+      </form>
+    </p-panel>
+  </div>
 
-        <div class="ui-g-12">
-          <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
-          <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
-        </div>
-    </div>
-  </form>
-
-  <div class="ui-g">
-    <div class="ui-g-12">
-
+  <div class="div-padding-bottom">
+    <p-panel header="Resultados da Pesquisa">
       <p-table [value]="obras" [responsive]="true"
         [paginator]="true" [rows]="filtro.itensPorPagina"
         [lazy]="true" [totalRecords]="totalRegistros"
@@ -47,9 +51,9 @@
             <td>{{ obra.usuarioResponsavel.nome }}</td>
             <td>
               <a href="javascript:;"
-                 [pTooltip]="obra.ativo ? 'Desativar' : 'Ativar'"
-                 tooltipPosition="top"
-                 (click)="alternarStatus(obra)">{{ obra.ativo ? 'Ativo' : 'Inativo' }}</a>
+                [pTooltip]="obra.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(obra)">{{ obra.ativo ? 'Ativo' : 'Inativo' }}</a>
             </td>
             <td class="col-acoes">
               <button pButton
@@ -77,11 +81,13 @@
           </tr>
         </ng-template>
       </p-table>
-    </div>
-
-    <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_OBRA')">
-      <button pButton icon="fa fa-file" label="Novo" routerLink="/obras/novo"></button>
-    </div>
+    </p-panel>
   </div>
-
+  
+  <button pButton
+          *ngIf="auth.temPermissao('ROLE_CADASTRAR_OBRA')"
+          icon="fa fa-file"
+          label="Novo"
+          routerLink="/obras/novo"></button>
+            
 </div>

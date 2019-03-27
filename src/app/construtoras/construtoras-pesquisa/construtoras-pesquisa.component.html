@@ -1,24 +1,28 @@
+<div class="content-section introduction">
+  <span class="feature-title">{{title.getTitle()}}</span>
+</div>
+
 <div class="container-full">
-  <form #form autocomplete="off" (ngSubmit)="pesquisar()">
-    <div class="ui-g">
-        <div class="ui-g-12">
-          <h1>{{title.getTitle()}}</h1>
-        </div>
 
-        <div class="ui-g-12 ui-fluid">
-          <label for="razaoSocial">Razão social</label>
-          <input pInputText type="text" id="razaoSocial" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">
+  <div class="div-padding-bottom">
+    <p-panel header="Filtros da Pesquisa" [toggleable]="true" [collapsed]="true">
+      <form #form autocomplete="off" (ngSubmit)="pesquisar()">
+        <div class="ui-g">
+          <div class="ui-g-12 ui-fluid">
+            <label for="razaoSocial">Razão social</label>
+            <input pInputText type="text" id="razaoSocial" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">
+          </div>
+          <div class="ui-g-12">
+            <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
+            <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
+          </div>
         </div>
+      </form>
+    </p-panel>
+  </div>
 
-        <div class="ui-g-12">
-          <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
-          <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
-        </div>
-    </div>
-  </form>
-
-  <div class="ui-g">
-    <div class="ui-g-12">
+  <div class="div-padding-bottom">
+    <p-panel header="Resultados da Pesquisa">
       <p-table [value]="construtoras" [responsive]="true"
         [paginator]="true" [rows]="filtro.itensPorPagina"
         [lazy]="true" [totalRecords]="totalRegistros"
@@ -39,10 +43,10 @@
             <td>{{ construtora.cnpj }}</td>
             <td>
               <a href="javascript:;"
-                 [pTooltip]="construtora.ativo ? 'Desativar' : 'Ativar'"
-                 tooltipPosition="top"
-                 (click)="alternarStatus(construtora)">
-                 {{ construtora.ativo ? 'Ativo' : 'Inativo' }}
+                [pTooltip]="construtora.ativo ? 'Desativar' : 'Ativar'"
+                tooltipPosition="top"
+                (click)="alternarStatus(construtora)">
+                {{ construtora.ativo ? 'Ativo' : 'Inativo' }}
               </a>
             </td>
             <td class="col-acoes">
@@ -73,11 +77,13 @@
           </tr>
         </ng-template>
       </p-table>
-    </div>
-
-    <div class="ui-g-12" *ngIf="auth.temPermissao('ROLE_CADASTRAR_CONSTRUTORA')">
-      <button pButton icon="fa fa-file" label="Novo" routerLink="/construtoras/novo"></button>
-    </div>
+    </p-panel>
   </div>
 
+  <button pButton
+          *ngIf="auth.temPermissao('ROLE_CADASTRAR_CONSTRUTORA')"
+          icon="fa fa-file"
+          label="Novo"
+          routerLink="/construtoras/novo"></button>
+          
 </div>

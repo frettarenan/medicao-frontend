@@ -45,8 +45,34 @@ a:hover, a:focus {
 */
 
 label {
-  font-weight: bold;
+  font-weight: 400;
+  font-size: 0.9rem;
+  margin-bottom: -12px;
 }
+
+/* Início - Título da página */
+.content-section.introduction {
+  background-image: linear-gradient(to left,#2bc0ec,#1b81d7);
+  color: #fff;
+}
+.content-section {
+  display: block;
+  /* padding: 30px; */
+  padding: 10px;
+  overflow: hidden;
+  background-color: #f5f7f8;
+}
+
+.content-section:first-of-type > div > span {
+  line-height: 1.5em;
+}
+.feature-title {
+  /* font-size: 30px; */
+  font-size: 20px;
+  /* margin-bottom: 20px; */
+  display: block;
+}
+/* Fim - Título da página */
 
 .col-acoes, .col-acoes-header {
   width: 90px;
@@ -96,10 +122,20 @@ input[type=number] {
 
 .container-full {
   padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
   width: 100%;
 }
+
+.div-padding-bottom {
+  padding-bottom: 10px;
+}
+
+.ui-panel-content {
+  padding: 0 !important;
+}
+
+/* Início - Customizações para primeng */
 
 /* Forçando estilos novamente, pois o tema omega do primeng está retirando as bordas do componente de abas */
 body .ui-tabview .ui-tabview-panels {
@@ -107,4 +143,19 @@ body .ui-tabview .ui-tabview-panels {
   padding: 0.571em 1em;
   border: 1px solid #c8c8c8;
   color: #333333;
+}
+
+/* Customização dos espaçamentos dos panels */
+.ui-panel .ui-panel-titlebar {
+  padding: .4em .20em;
+}
+
+/* Fim - Customizações para primeng */
+
+.nav-background-color {
+  /*background-color: #7f5a83;
+  background-image: linear-gradient(315deg, #7f5a83 0%, #0d324d 74%);*/
+  background: #141E30;
+  background: -webkit-linear-gradient(to right, #243B55, #141E30);
+  background: linear-gradient(to right, #243B55, #141E30);
 }
