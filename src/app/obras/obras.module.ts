@@ -13,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ObrasRoutingModule } from './obras-routing.module';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { ObrasRoutingModule } from './obras-routing.module';
     PanelModule,
     DialogModule,
     DropdownModule,
+    TabViewModule,
 
     SharedModule,
     ObrasRoutingModule
