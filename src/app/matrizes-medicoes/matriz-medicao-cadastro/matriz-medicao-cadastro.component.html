@@ -33,7 +33,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
-                     [disabled]="grupo.tipoGrupo.id == 1 || grupo.tipoGrupo.id == 2 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
+                     [readonly]="grupo.tipoGrupo.id == 1 || grupo.tipoGrupo.id == 2 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')"/>
             </td>
@@ -42,7 +42,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
-                     [disabled]="grupo.tipoGrupo.id != 1 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
+                     [readonly]="grupo.tipoGrupo.id != 1 || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')"/>
             </td>
@@ -51,7 +51,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao input-transparent"
-                     [disabled]="grupo.tipoGrupo.id == 2"
+                     [readonly]="grupo.tipoGrupo.id == 2"
                      value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].percentual | number }}"
                      (input)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'percentual')"/>
             </td>
@@ -67,13 +67,13 @@
                    type="text"
                    inputmode="numeric"
                    class="form-control width100px input-matriz-medicao"
-                   disabled="true"
+                   readonly="true"
                    value="{{cubTotalGeral | number : '1.2-2' }}"/>
             <input *ngIf="grupo.tipoGrupo.id == 2"
                    type="text"
                    inputmode="numeric"
                    class="form-control width100px input-matriz-medicao"
-                   disabled="true"
+                   readonly="true"
                    value="{{cubSubTotalGeral | number : '1.2-2' }}"/>
           </td>
           <td *ngIf="grupo.tipoGrupo.id != 1 && grupo.tipoGrupo.id != 2"></td>
@@ -82,7 +82,7 @@
                    type="text"
                    inputmode="numeric"
                    class="form-control width100px input-matriz-medicao"
-                   disabled="true"
+                   readonly="true"
                    value="{{percentualSubTotalGeral | number : '1.2-2' }}"/>
           </td>
         </ng-container>
