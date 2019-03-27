@@ -4,11 +4,11 @@
 
 <div class="container-full">
   <p-tabView>
-    <p-tabPanel header="Cadastro Básico">
-      O cadastro  vai aqui!
+    <p-tabPanel header="Obra">
+      <app-obra-cadastro-aba-obra [obra]="obra"></app-obra-cadastro-aba-obra>
     </p-tabPanel>
-    <p-tabPanel header="Grupos" [disabled]="true">
-        O cadastro  vai aqui!
+    <p-tabPanel header="Grupos" [disabled]="!obra.id">
+      <app-obra-cadastro-aba-grupos></app-obra-cadastro-aba-grupos>
     </p-tabPanel>
   </p-tabView>
 </div>

@@ -14,6 +14,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ObrasRoutingModule } from './obras-routing.module';
 import { TabViewModule } from 'primeng/tabview';
+import { ObraCadastroAbaObraComponent } from './obra-cadastro-aba-obra/obra-cadastro-aba-obra.component';
+import { ObraCadastroAbaGruposComponent } from './obra-cadastro-aba-grupos/obra-cadastro-aba-grupos.component';
 
 @NgModule({
   imports: [
@@ -35,7 +37,9 @@ import { TabViewModule } from 'primeng/tabview';
   ],
   declarations: [
     ObrasPesquisaComponent,
-    ObraCadastroComponent
+    ObraCadastroComponent,
+    ObraCadastroAbaObraComponent,
+    ObraCadastroAbaGruposComponent
   ],
   exports: []
 })

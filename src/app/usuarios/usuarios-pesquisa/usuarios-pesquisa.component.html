@@ -18,9 +18,13 @@
           </div>
           <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
             <label for="idConstrutoraSelecionada">Construtora</label>
-            <p-dropdown inputId="idConstrutoraSelecionada" placeholder="Selecione..."
-              [filter]="true" [options]="construtoras"
-              [(ngModel)]="idConstrutoraSelecionada" name="idConstrutoraSelecionada"></p-dropdown>
+            <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
+                        inputId="idConstrutoraSelecionada"
+                        placeholder="Selecione..."
+                        [filter]="true"
+                        [options]="construtoras"
+                        [(ngModel)]="idConstrutoraSelecionada"
+                        name="idConstrutoraSelecionada"></p-dropdown>
           </div>
           <div class="ui-g-12">
             <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
@@ -84,11 +88,7 @@
         </ng-template>
 
         <ng-template pTemplate="emptymessage">
-          <tr>
-            <td [colSpan]="auth.jwtPayload.usuario.administrador ? 5 : 4">
-              Nenhum registro encontrado
-            </td>
-          </tr>
+          <div>Nenhum registro encontrado</div>
         </ng-template>
       </p-table>
     </p-panel>

@@ -102,8 +102,7 @@ a, button {
   background: transparent;
 }
 
-.input-transparent
-{
+.input-transparent {
     background: transparent;
 }
 
@@ -153,9 +152,14 @@ input[type=number] {
 /* Forçando estilos novamente, pois o tema omega do primeng está retirando as bordas do componente de abas */
 body .ui-tabview .ui-tabview-panels {
   background-color: #ffffff;
-  padding: 0.571em 1em;
+  /* padding: 0.571em 1em; */
+  padding: 0px;
   border: 1px solid #c8c8c8;
   color: #333333;
+}
+
+.ui-tabview .ui-tabview-panel {
+	padding: 0px;
 }
 
 /* Customização dos espaçamentos dos panels */

@@ -29,14 +29,14 @@ export class ConstrutoraCadastroComponent implements OnInit {
 
   ngOnInit() {
     const idConstrutora = this.route.snapshot.params['id'];
-
-    this.title.setTitle('Nova Construtora');
-
     if (idConstrutora) {
+      this.title.setTitle('Edição de Construtora');
       this.carregarConstrutora(idConstrutora);
+    } else {
+      this.title.setTitle('Nova Construtora');
     }
   }
-
+  
   get editando() {
     return Boolean(this.construtora.id);
   }
@@ -45,7 +45,6 @@ export class ConstrutoraCadastroComponent implements OnInit {
     this.construtoraService.buscarPorId(id)
       .then(construtora => {
         this.construtora = construtora;
-        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -59,6 +58,7 @@ export class ConstrutoraCadastroComponent implements OnInit {
   }
 
   adicionarConstrutora(form: FormControl) {
+    this.construtora.ativo = true;
     this.construtoraService.adicionar(this.construtora)
       .then(construtoraAdicionada => {
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
@@ -71,9 +71,7 @@ export class ConstrutoraCadastroComponent implements OnInit {
     this.construtoraService.atualizar(this.construtora)
       .then(construtora => {
         this.construtora = construtora;
-
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
-        this.atualizarTituloEdicao();
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
@@ -86,10 +84,6 @@ export class ConstrutoraCadastroComponent implements OnInit {
     }.bind(this), 1);
 
     this.router.navigate(['/construtoras/novo']);
-  }
-
-  atualizarTituloEdicao() {
-    this.title.setTitle('Edição de Construtora');
   }
 
 }

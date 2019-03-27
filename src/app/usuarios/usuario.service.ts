@@ -92,4 +92,13 @@ export class UsuarioService {
       .toPromise();
   }
 
+  listarUsuariosAtivosPorConstrutora(idConstrutora): Promise<Usuario[]> {
+    const params = new HttpParams()
+      .append('idConstrutora', idConstrutora);
+
+    return this.http.get<Usuario[]>(`${this.usuariosUrl}/status/ativo`, {
+      params
+    }).toPromise();
+  }
+
 }

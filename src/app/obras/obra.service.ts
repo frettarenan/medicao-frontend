@@ -83,4 +83,19 @@ export class ObraService {
       .then(() => null);
   }
 
+  adicionar(obra: Obra): Promise<Obra> {
+    return this.http.post<Obra>(this.obrasUrl, obra)
+      .toPromise();
+  }
+
+  atualizar(obra: Obra): Promise<Obra> {
+    return this.http.put<Obra>(`${this.obrasUrl}/${obra.id}`, obra)
+      .toPromise();
+  }
+
+  buscarPorId(id: number): Promise<Obra> {
+    return this.http.get<Obra>(`${this.obrasUrl}/${id}`)
+      .toPromise();
+  }
+
 }

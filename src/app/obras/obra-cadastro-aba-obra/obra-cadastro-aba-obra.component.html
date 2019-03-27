@@ -1,0 +1,57 @@
+<form #f="ngForm" autocomplete="off" (ngSubmit)="salvarObra(f)">
+  <div class="ui-g">
+
+    <div class="ui-g-12 ui-fluid">
+      <label for="nome">Nome</label>
+      <input pInputText type="text" id="nome" name="nome"
+        [(ngModel)]="obra.nome"
+        #nome="ngModel" required minlength="1">
+
+      <app-message [control]="nome" error="required"
+        text="Informe o nome"></app-message>
+      <app-message [control]="nome" error="minlength"
+        text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
+    </div>
+
+    <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+      <label for="idConstrutoraSelecionada">Construtora</label>
+      <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
+                  inputId="idConstrutoraSelecionada"
+                  placeholder="Selecione..."
+                  [filter]="true"
+                  [options]="construtoras"
+                  (onChange)="carregarUsuarios()"
+                  [(ngModel)]="idConstrutoraSelecionada"
+                  name="idConstrutoraSelecionada"
+                  #ddConstrutora="ngModel"
+                  required></p-dropdown>
+
+      <app-message [control]="ddConstrutora" error="required"
+        text="Informe a construtora"></app-message>
+    </div>
+
+    <div class="ui-g-12 ui-fluid">
+      <label for="idUsuarioSelecionado">Usuário responsável</label>
+      <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
+                  inputId="idUsuarioSelecionado"
+                  placeholder="Selecione..."
+                  [filter]="true"
+                  [options]="usuarios"
+                  [(ngModel)]="idUsuarioSelecionado"
+                  name="idUsuarioSelecionado"
+                  #ddUsuario="ngModel"
+                  required
+                  [disabled]="!idConstrutoraSelecionada"></p-dropdown>
+
+      <app-message [control]="ddUsuario" error="required"
+        text="Informe o usuário"></app-message>
+    </div>
+
+    <div class="ui-g-12">
+      <button pButton icon="fa fa-save" type="submit" label="Salvar" [disabled]="f.invalid"></button>
+      <button pButton icon="fa fa-file" type="button" label="Novo" (click)="novo(f)"></button>
+      <button pButton icon="fa fa-search" label="Pesquisa" routerLink="/obras"></button>
+    </div>
+
+  </div>
+</form>

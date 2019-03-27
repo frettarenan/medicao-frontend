@@ -1,3 +1,4 @@
+/*
 export class Estado {
   id: number;
   nome: string;
@@ -34,12 +35,12 @@ export class Contato {
       this.telefone = telefone;
   }
 }
-
+*/
 export class Construtora {
   id: number;
   razaoSocial: string;
   cnpj : string;
-  ativo = true;
+  ativo = null;
 }
 
 export class Obra {
@@ -47,7 +48,7 @@ export class Obra {
   nome: string;
   construtora : Construtora;
   usuarioResponsavel : Usuario;
-  ativo = true;
+  ativo = null;
 }
 
 export class Grupo {
@@ -56,13 +57,13 @@ export class Grupo {
   obra : Obra;
   grupoPai : Grupo;
 }
-
+/*
 export class GrupoHierarquia {
   id: number;
   nome: string;
   children : Array<GrupoHierarquia>;
 }
-
+*/
 export class Contrato {
   id: number;
   numero: string;
@@ -105,15 +106,15 @@ export class Usuario {
   telefone : string;
   email : string;
   senha : string;
-  ativo = true;
+  ativo = null;
   administrador = false;
 }
-
+/*
 export class Pessoa {
   id: number;
   nome: string;
   endereco = new Endereco();
-  ativo = true;
+  ativo = null;
   contatos = new Array<Contato>();
 }
 
@@ -121,7 +122,7 @@ export class Categoria {
   id: number;
 }
 
-/*export class Lancamento {
+export class Lancamento {
   id: number;
   tipo = 'RECEITA';
   descricao: string;
