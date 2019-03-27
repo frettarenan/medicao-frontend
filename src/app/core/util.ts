@@ -111,7 +111,8 @@ export class Util {
             else
             return Util.arrayCoresEscalaVermelhoAmareloVerde[0];
         }
-        return null;
+        // return null;
+        return Util.arrayCoresEscalaVermelhoAmareloVerde[0];
     }
 
  }

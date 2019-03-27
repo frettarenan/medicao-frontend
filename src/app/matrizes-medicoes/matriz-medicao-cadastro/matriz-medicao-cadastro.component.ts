@@ -291,9 +291,16 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.calcularTotais();
   }
 
-  setPercentualStyles(indexMatriz) {
+  setPercentualStylesByIndex(indexMatriz) {
     let styles = {
       'background-color': Util.getCorEscalaVermelhoAmareloVerdeByPercentual(this.matriz[indexMatriz].percentual)
+    };
+    return styles;
+  }
+
+  setPercentualStylesByValue(value) {
+    let styles = {
+      'background-color': Util.getCorEscalaVermelhoAmareloVerdeByPercentual(value)
     };
     return styles;
   }
