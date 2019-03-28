@@ -2,19 +2,17 @@
   <div class="ui-g-12 ui-fluid">
     <div class="div-padding-bottom">
       <p-panel header="Cadastro Rápido" [toggleable]="true" [collapsed]="true">
-        <form #form autocomplete="off"><!--(ngSubmit)="pesquisar()"-->
+        <form #f autocomplete="off" (ngSubmit)="salvarGrupos(nomes)">
           <div class="ui-g">
             <div class="ui-g-12 ui-fluid">
               <div class="vertical-align-middle-ext-box">
                 <label for="nomes" class="vertical-align-middle-int-box">Nomes dos grupos</label>
                 <span class="pi pi-info-circle icon-info vertical-align-middle-int-box" pTooltip="Tecle enter, dentro da caixa de texto, sempre que quiser incluir um novo registro"></span>
               </div>
-              <textarea id="nomes" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>
-              <!--<input pInputText type="text" id="razaoSocial" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">-->
+              <textarea #nomes id="nomes" name="nomes" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>              
             </div>
             <div class="ui-g-12">
-              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix"></button>
-              <!--<button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>-->
+              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="nomes.value.trim().length == 0"></button>
             </div>
           </div>
         </form>

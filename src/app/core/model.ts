@@ -51,11 +51,16 @@ export class Obra {
   ativo = null;
 }
 
+export class TipoGrupo {
+  id: number;
+  nome: string;
+}
+
 export class Grupo {
   id: number;
   nome: string;
+  tipoGrupo: TipoGrupo;
   obra : Obra;
-  grupoPai : Grupo;
 }
 /*
 export class GrupoHierarquia {

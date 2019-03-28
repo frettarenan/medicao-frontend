@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Obra } from 'app/core/model';
+import { Obra, Grupo } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { GrupoService } from 'app/grupos/grupo.service';
+import { FormControl } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-obra-cadastro-aba-grupos',
@@ -12,12 +14,15 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
 
   _obra : Obra;
 
+  nomes = { nome : ""};
+
   totalRegistros = 0;
   grupos: any[];
 
   constructor(
     private grupoService: GrupoService,
-    private errorHandler: ErrorHandlerService
+    private errorHandler: ErrorHandlerService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit() {
@@ -41,6 +46,34 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
         })
         .catch(erro => this.errorHandler.handle(erro));
     }
+  }
+  
+  salvarGrupos(nomes: FormControl) {
+    let gruposCadastro: Array<Grupo> = new Array<Grupo>();
+    
+    let linhas = nomes.value.split('\n');
+    let linha: string;
+    
+    for(var i = 0;i < linhas.length;i++){
+      linha = linhas[i].trim();
+      if (linha.length > 0) {
+        let grupo: Grupo = new Grupo();
+        grupo.nome = linha;
+        grupo.obra = this._obra;
+        grupo.tipoGrupo = null;
+        gruposCadastro.push(grupo);
+      }
+    }
+    this.adicionarGrupos(gruposCadastro);
+  }
+
+  adicionarGrupos(grupos: Array<Grupo>) {
+    this.grupoService.adicionarGrupos(grupos)
+      .then(gruposAdicionados => {
+        this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
+        this.listarGruposPorObra();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }

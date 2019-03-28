@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MoneyHttp } from 'app/seguranca/money-http';
 import { environment } from 'environments/environment';
+import { Grupo } from 'app/core/model';
 
 @Injectable()
 export class GrupoService {
@@ -25,6 +26,10 @@ export class GrupoService {
       .then(response => {
         return response;
       })
+  }
+
+  adicionarGrupos(grupos: Array<Grupo>): Promise<any> {
+    return this.http.post<any>(`${this.gruposUrl}/cadastro-rapido`, grupos).toPromise();
   }
 
 }
