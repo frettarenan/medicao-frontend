@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MoneyHttp } from 'app/seguranca/money-http';
 import { environment } from 'environments/environment';
-import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class GrupoService {
@@ -13,10 +12,15 @@ export class GrupoService {
   }
 
   listarGruposPorMedicao(idMedicao: number): Promise<any> {
-    let params = new HttpParams();
-    params = params.append('idMedicao', idMedicao.toString());
+    return this.http.get<any>(`${this.gruposUrl}/medicao/${idMedicao}`)
+      .toPromise()
+      .then(response => {
+        return response;
+      })
+  }
 
-    return this.http.get<any>(`${this.gruposUrl}`, { params })
+  listarTodosPorObra(idObra: number): Promise<any> {
+    return this.http.get<any>(`${this.gruposUrl}/obra/${idObra}`)
       .toPromise()
       .then(response => {
         return response;
