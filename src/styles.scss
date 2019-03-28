@@ -167,6 +167,14 @@ body .ui-tabview .ui-tabview-panels {
   padding: .4em .20em;
 }
 
+/* Correção de bug no tamanho dos botões */
+.primeNgButtonBugFix {
+  width: auto !important;
+}
+.primeNgButtonBugFix .ui-button-text {
+  margin-left: 17px !important;
+}
+
 /* Fim - Customizações para primeng */
 
 .nav-background-color {

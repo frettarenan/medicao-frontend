@@ -1,38 +1,57 @@
 <div class="ui-g">
   <div class="ui-g-12 ui-fluid">
-    <p-panel header="Grupos Cadastrados">
-      <p-table [value]="grupos" [responsive]="true"
-        [paginator]="false" #tabela>
-        <ng-template pTemplate="header">
-          <tr>
-            <th>Nome</th>
-            <th class="col-acoes-header">Ações</th>
-          </tr>
-        </ng-template>
+    <div class="div-padding-bottom">
+      <p-panel header="Cadastro Rápido" [toggleable]="true" [collapsed]="true">
+        <form #form autocomplete="off" (ngSubmit)="pesquisar()">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-fluid">
+              <label for="nomes">Nomes</label>
+              <!--<input pInputText type="text" id="razaoSocial" name="razaoSocial" [(ngModel)]="filtro.razaoSocial">-->
+            </div>
+            <div class="ui-g-12">
+              <button pButton icon="fa fa-save" type="submit" label="Salvar" class="primeNgButtonBugFix"></button>
+              <!--<button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>-->
+            </div>
+          </div>
+        </form>
+      </p-panel>
+    </div>
+    
+    <div class="div-padding-bottom">
+      <p-panel header="Grupos Cadastrados">
+        <p-table [value]="grupos" [responsive]="true"
+          [paginator]="false" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nome</th>
+              <th class="col-acoes-header">Ações</th>
+            </tr>
+          </ng-template>
 
-        <ng-template pTemplate="body" let-grupo>
-          <tr>
-            <td>{{ grupo.nome }}</td>
-            <td class="col-acoes">
-              <button pButton
-                      icon="fa fa-pencil-alt"
-                      class="width25px"
-                      pTooltip="Editar"
-                      tooltipPosition="top"></button>
-                      <!-- [routerLink]="['/obras', obra.id]" -->
-              <button pButton
-                      icon="fa fa-trash"
-                      class="width25px"
-                      pTooltip="Excluir"
-                      tooltipPosition="top"></button>
-                      <!-- (click)="confirmarExclusao(obra)" -->
-            </td>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-          <div>Nenhum registro encontrado</div>
-        </ng-template>
-      </p-table>
-    </p-panel>
+          <ng-template pTemplate="body" let-grupo>
+            <tr>
+              <td>{{ grupo.nome }}</td>
+              <td class="col-acoes">
+                <button pButton
+                        icon="fa fa-pencil-alt"
+                        class="width25px"
+                        pTooltip="Editar"
+                        tooltipPosition="top"></button>
+                        <!-- [routerLink]="['/obras', obra.id]" -->
+                <button pButton
+                        icon="fa fa-trash"
+                        class="width25px"
+                        pTooltip="Excluir"
+                        tooltipPosition="top"></button>
+                        <!-- (click)="confirmarExclusao(obra)" -->
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <div>Nenhum registro encontrado</div>
+          </ng-template>
+        </p-table>
+      </p-panel>
+    </div>
   </div>
 </div>
