@@ -12,6 +12,7 @@ import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 // import * as $ from 'jquery';
 import { AuthService } from 'app/seguranca/auth.service';
 import { Util } from 'app/core/util';
+import { TipoGrupoEnum } from 'app/core/enum';
 
 @Component({
   selector: 'app-matriz-medicao-cadastro',
@@ -19,6 +20,8 @@ import { Util } from 'app/core/util';
   styleUrls: ['./matriz-medicao-cadastro.component.scss']
 })
 export class MatrizMedicaoCadastroComponent implements OnInit {
+
+  tipoGrupoEnum = TipoGrupoEnum;
 
   processando = true;
 
@@ -154,6 +157,10 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     return lancamento;
   }
 
+  isGrupoSistema(grupo): Boolean {
+    return grupo.tipoGrupo.id == TipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == TipoGrupoEnum.SUB_TOTAL;
+  }
+
   calcularTotais() {
     this.somarQuantidades();
     this.calcularCubGrupos();
@@ -168,7 +175,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.servicos.forEach(servico => {
       quantidadeBase = 0;
       this.grupos.forEach(grupo => {
-        if (grupo.tipoGrupo.id != 1 && grupo.tipoGrupo.id != 2) {
+        if (!this.isGrupoSistema(grupo)) {
           let quantidade = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
           if (quantidade == null) {
             quantidade = 0;
@@ -184,7 +191,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     let cubGrupo:number = 0;
     this.servicos.forEach(servico => {
       this.grupos.forEach(grupo => {
-        if (grupo.tipoGrupo.id != 1 && grupo.tipoGrupo.id != 2) {
+        if (!this.isGrupoSistema(grupo)) {
           // alert(this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade + "/" + this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].quantidade + "*" + this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].cub);
           let quantidadeCelula = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
           if (quantidadeCelula == null) {
@@ -211,7 +218,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.servicos.forEach(servico => {
       quantidadeTotalizador = 0;
       this.grupos.forEach(grupo => {
-        if (grupo.tipoGrupo.id != 1 && grupo.tipoGrupo.id != 2) {
+        if (!this.isGrupoSistema(grupo)) {
           let percentualCelula = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].percentual;
           if (percentualCelula == null) {
             percentualCelula = 0;
@@ -233,7 +240,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.servicos.forEach(servico => {
       cubTotalizador = 0;
       this.grupos.forEach(grupo => {
-        if (grupo.tipoGrupo.id != 1 && grupo.tipoGrupo.id != 2) {
+        if (!this.isGrupoSistema(grupo)) {
           let percentualCelula = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].percentual;
           if (percentualCelula == null) {
             percentualCelula = 0;
