@@ -14,6 +14,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { ObrasRoutingModule } from './obras-routing.module';
 import { TabViewModule } from 'primeng/tabview';
+import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ObraCadastroAbaObraComponent } from './obra-cadastro-aba-obra/obra-cadastro-aba-obra.component';
 import { ObraCadastroAbaGruposComponent } from './obra-cadastro-aba-grupos/obra-cadastro-aba-grupos.component';
 
@@ -31,6 +32,7 @@ import { ObraCadastroAbaGruposComponent } from './obra-cadastro-aba-grupos/obra-
     DialogModule,
     DropdownModule,
     TabViewModule,
+    InputTextareaModule,
 
     SharedModule,
     ObrasRoutingModule
