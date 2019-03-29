@@ -29,6 +29,7 @@ import { NaoAutorizadoComponent } from './nao-autorizado.component';
 import { PaginaNaoEncontradaComponent } from './pagina-nao-encontrada.component';
 import { MoneyHttp } from '../seguranca/money-http';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { UnidadeMedidaService } from 'app/unidades-medidas/unidade-medida.service';
 
 registerLocaleData(localePt);
 
@@ -59,6 +60,7 @@ registerLocaleData(localePt);
     MedicaoService,
     GrupoService,
     ServicoService,
+    UnidadeMedidaService,
     LancamentoService,
     MatrizMedicaoService,
     PaginaInicialService,

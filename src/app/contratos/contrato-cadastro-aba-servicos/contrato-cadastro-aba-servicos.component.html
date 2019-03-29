@@ -4,6 +4,21 @@
       <p-panel header="Cadastro Rápido" [toggleable]="true" [collapsed]="true">
         <form #f autocomplete="off" (ngSubmit)="salvarServicos(nomes)">
           <div class="ui-g">
+            <div class="ui-g-12 ui-fluid required">
+              <label for="idUnidadeMedidaSelecionada">Unidade de Medida</label>
+              <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
+                          inputId="idUnidadeMedidaSelecionada"
+                          placeholder="Selecione..."
+                          [filter]="true"
+                          [options]="unidadesMedidas"
+                          [(ngModel)]="idUnidadeMedidaSelecionada"
+                          name="idUnidadeMedidaSelecionada"
+                          #ddUnidadeMedida="ngModel"
+                          required></p-dropdown>
+  
+              <app-message [control]="ddUnidadeMedida" error="required"
+                text="Informe a unidade de medida"></app-message>
+            </div>
             <div class="ui-g-12 ui-fluid">
               <div class="vertical-align-middle-ext-box">
                 <label for="nomes" class="vertical-align-middle-int-box required">Nomes dos serviços</label>
@@ -12,7 +27,7 @@
               <textarea #nomes id="nomes" name="nomes" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>              
             </div>
             <div class="ui-g-12">
-              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="nomes.value.trim().length == 0"></button>
+              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="!idUnidadeMedidaSelecionada || nomes.value.trim().length == 0"></button>
             </div>
           </div>
         </form>
