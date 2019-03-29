@@ -8,8 +8,8 @@
     <p-panel header="Filtros da Pesquisa" [toggleable]="false" [collapsed]="false">
       <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
         <div class="ui-g">
-          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid required">
-            <label for="idConstrutoraSelecionada">Construtora</label>
+          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+            <label for="idConstrutoraSelecionada" class="required">Construtora</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idConstrutoraSelecionada"
                         placeholder="Selecione..."
@@ -25,8 +25,8 @@
               text="Informe a construtora"></app-message>
           </div>
 
-          <div class="ui-g-12 ui-fluid required">
-            <label for="idObraSelecionada">Obra</label>
+          <div class="ui-g-12 ui-fluid">
+            <label for="idObraSelecionada" class="required">Obra</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idObraSelecionada"
                         placeholder="Selecione..."
@@ -43,8 +43,8 @@
               text="Informe a obra"></app-message>
           </div>
 
-          <div class="ui-g-12 ui-fluid required">
-            <label for="idContratoSelecionado">Contrato</label>
+          <div class="ui-g-12 ui-fluid">
+            <label for="idContratoSelecionado" class="required">Contrato</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idContratoSelecionado"
                         placeholder="Selecione..."
@@ -61,8 +61,8 @@
               text="Informe o contrato"></app-message>
           </div>
 
-          <div class="ui-g-12 ui-fluid required">
-            <label for="idMedicaoSelecionada">Medição</label>
+          <div class="ui-g-12 ui-fluid">
+            <label for="idMedicaoSelecionada" class="required">Medição</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idMedicaoSelecionada"
                         placeholder="Selecione..."

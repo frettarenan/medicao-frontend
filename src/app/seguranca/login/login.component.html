@@ -10,7 +10,7 @@
             <h4 class="card-title">{{title.getTitle()}}</h4>
             <form #f="ngForm" method="POST" class="my-login-validation" novalidate="" (ngSubmit)="login(email.value, senha.value); senha.value = '';">
               <div class="form-group">
-                <label for="email">E-mail</label>
+                <label for="email" class="required">E-mail</label>
                 <input pInputText #email ngModel required autofocus
                         class="form-control mb-4"
                         type="email"
@@ -24,7 +24,7 @@
               </div>
 
               <div class="form-group">
-                <label for="senha">Senha</label>
+                <label for="senha" class="required">Senha</label>
                 <input pInputText #senha ngModel required
                         class="form-control mb-4"
                         type="password"

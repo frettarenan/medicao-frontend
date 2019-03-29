@@ -8,8 +8,8 @@
         #numero="ngModel">
     </div>
 
-    <div class="ui-g-12 ui-fluid required">
-        <label for="descricao">Descrição</label>
+    <div class="ui-g-12 ui-fluid">
+        <label for="descricao" class="required">Descrição</label>
         <input pInputText type="text" id="descricao" name="descricao"
           [(ngModel)]="contrato.descricao"
           #descricao="ngModel" required minlength="1">
@@ -20,8 +20,8 @@
           text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
-    <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid required">
-      <label for="idConstrutoraSelecionada">Construtora</label>
+    <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+      <label for="idConstrutoraSelecionada" class="required">Construtora</label>
       <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                   inputId="idConstrutoraSelecionada"
                   placeholder="Selecione..."
@@ -37,8 +37,8 @@
         text="Informe a construtora"></app-message>
     </div>
 
-    <div class="ui-g-12 ui-fluid required">
-      <label for="idObraSelecionada">Usuário responsável</label>
+    <div class="ui-g-12 ui-fluid">
+      <label for="idObraSelecionada" class="required">Usuário responsável</label>
       <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                   inputId="idObraSelecionada"
                   placeholder="Selecione..."

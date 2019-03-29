@@ -6,8 +6,8 @@
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
     <div class="ui-g">
 
-      <div class="ui-g-12 ui-fluid required">
-        <label for="razaoSocial">Razão social</label>
+      <div class="ui-g-12 ui-fluid">
+        <label for="razaoSocial" class="required">Razão social</label>
         <input pInputText type="text" id="razaoSocial" name="razaoSocial"
           [(ngModel)]="construtora.razaoSocial"
           #razaoSocial="ngModel" required minlength="1">

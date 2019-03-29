@@ -4,8 +4,8 @@
       <p-panel header="Cadastro Rápido" [toggleable]="true" [collapsed]="true">
         <form #f autocomplete="off" (ngSubmit)="salvarServicos(nomes)">
           <div class="ui-g">
-            <div class="ui-g-12 ui-fluid required">
-              <label for="idUnidadeMedidaSelecionada">Unidade de Medida</label>
+            <div class="ui-g-12 ui-fluid">
+              <label for="idUnidadeMedidaSelecionada" class="required">Unidade de Medida</label>
               <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                           inputId="idUnidadeMedidaSelecionada"
                           placeholder="Selecione..."
