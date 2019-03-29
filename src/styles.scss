@@ -11,7 +11,14 @@ html, body {
   margin-right: 10px;
 }
 .navbar-brand-logo {
+  border-radius: 25%;
+  box-shadow: 0 4px 8px rgba(0,0,0,.05);
+  background-color: #f7f9fb;
+}
+.navbar-brand-logo img {
   width: 50px;
+  margin-left: 2px;
+  margin-right: 2px;
 }
 
 label {
