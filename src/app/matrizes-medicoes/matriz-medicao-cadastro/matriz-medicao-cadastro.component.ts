@@ -143,13 +143,15 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     // console.log(this.matriz);
   }
 
-  getLancamento(servico:Servico, grupo:Grupo):any {
+  getLancamento(servico:Servico, grupo:Grupo):Lancamento {
     for (let i = 0; i < this.lancamentos.length; i++) {
       const lancamentoI = this.lancamentos[i];
       if (lancamentoI.id.idGrupo == grupo.id && lancamentoI.id.idServico == servico.id) {
+        // console.log(lancamentoI.quantidade + " - " + lancamentoI.cub + " - " + lancamentoI.percentual + " > " + servico.nome + " - " + grupo.nome);
         return lancamentoI;
       }
     }
+    // console.log("NULL > " + servico.nome + " - " + grupo.nome);
     let lancamento:Lancamento = new Lancamento();
     lancamento.quantidade = null;
     lancamento.cub = null;
@@ -171,9 +173,12 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   }
 
   somarQuantidades() {
-    let quantidadeBase:number = 0;
+    let quantidadeBase:number;
+    // let i = 0;
+    // console.log("quantidade de serviços: " + this.servicos.length);
     this.servicos.forEach(servico => {
       quantidadeBase = 0;
+      // i++;
       this.grupos.forEach(grupo => {
         if (!this.isGrupoSistema(grupo)) {
           let quantidade = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
@@ -183,6 +188,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
           quantidadeBase += quantidade;
         }
       });
+      // console.log(i + " - quantidadeBase: " + quantidadeBase);
       this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].quantidade=quantidadeBase;
     });
   }
@@ -205,8 +211,10 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
           if (cubGrupoComTipoGrupo1 == null) {
             cubGrupoComTipoGrupo1 = 0;
           }
-          cubGrupo = quantidadeCelula / quantidadeGrupoComTipoGrupo1 * cubGrupoComTipoGrupo1;
+          // console.log("quantidadeCelula: " + quantidadeCelula + " - quantidadeGrupoComTipoGrupo1: " + quantidadeGrupoComTipoGrupo1 + " - cubGrupoComTipoGrupo1: " + cubGrupoComTipoGrupo1);
+          cubGrupo = ((quantidadeCelula / quantidadeGrupoComTipoGrupo1) || 0) * cubGrupoComTipoGrupo1;
           // quantidade subsolo / quantidade geral * cub geral
+          // console.log("cub: " + cubGrupo.toFixed(2));
           this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].cub = cubGrupo.toFixed(2);
         }
       });
@@ -227,6 +235,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
           if (quantidadeCelula == null) {
             quantidadeCelula = 0;
           }
+          // console.log("percentualCelula: " + percentualCelula + " - quantidadeCelula: " + quantidadeCelula);
           quantidadeTotalizador += (percentualCelula / 100) * quantidadeCelula;
           // += percentual grupo / 100 * quantidade grupo
         }
@@ -236,7 +245,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   }
 
   calcularCubTotalizador() {
-    let cubTotalizador:number = 0;
+    let cubTotalizador:number;
     this.servicos.forEach(servico => {
       cubTotalizador = 0;
       this.grupos.forEach(grupo => {
@@ -250,6 +259,8 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
             cubCelula = 0;
           }
           cubTotalizador += (percentualCelula / 100) * cubCelula;
+          // console.log("percentualCelula: " + percentualCelula + " - cubCelula: " + cubCelula);
+          // console.log((percentualCelula / 100) * cubCelula);
           // += percentual grupo / 100 * cub grupo
         }
       });
@@ -258,10 +269,19 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   }
 
   calcularPorcentualTotalizador() {
-    let porcentualTotalizador:number = 0;
+    let porcentualTotalizador:number;
     this.servicos.forEach(servico => {
       porcentualTotalizador = 0;
-      porcentualTotalizador += (this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].quantidade / this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].quantidade) * 100;
+      let quantidadeIdGrupoComTipoGrupo2 = this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].quantidade;
+      if (quantidadeIdGrupoComTipoGrupo2 == null) {
+        quantidadeIdGrupoComTipoGrupo2 = 0;
+      }
+      let quantidadeIdGrupoComTipoGrupo1 = this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].quantidade;
+      if (quantidadeIdGrupoComTipoGrupo1 == null) {
+        quantidadeIdGrupoComTipoGrupo1 = 0;
+      }
+      // console.log("quantidadeIdGrupoComTipoGrupo2: " + quantidadeIdGrupoComTipoGrupo2 + " - quantidadeIdGrupoComTipoGrupo1: " + quantidadeIdGrupoComTipoGrupo1);
+      porcentualTotalizador += ((quantidadeIdGrupoComTipoGrupo2 / quantidadeIdGrupoComTipoGrupo1) || 0) * 100;
       // quantidade totalizador / quantidade valor base
       this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].percentual = porcentualTotalizador.toFixed(2);
     });
@@ -271,9 +291,12 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     this.cubTotalGeral = 0;
     this.cubSubTotalGeral = 0;
     this.servicos.forEach(servico => {
-      this.cubTotalGeral += parseFloat(this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].cub);
+      // console.log(servico.nome + ": " + this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].cub);
+      this.cubTotalGeral += parseFloat((this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo1].cub || 0));
+      // console.log(servico.nome + ": " + this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].cub);
       this.cubSubTotalGeral += parseFloat(this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].cub);
     });
+    console.log("cubSubTotalGeral: " + this.cubSubTotalGeral + "- cubTotalGeral: " + this.cubTotalGeral); // arrumar
     this.percentualSubTotalGeral = (this.cubSubTotalGeral * 100) / this.cubTotalGeral;
   }
 
