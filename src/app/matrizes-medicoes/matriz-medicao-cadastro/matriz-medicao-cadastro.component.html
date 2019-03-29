@@ -33,7 +33,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
-                     [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == tipoGrupoEnum.SUB_TOTAL || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
+                     [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')"/>
             </td>
@@ -51,7 +51,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao input-transparent"
-                     [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.SUB_TOTAL"
+                     [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL"
                      value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].percentual | number }}"
                      (input)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'percentual')"/>
             </td>
@@ -69,16 +69,16 @@
                    class="form-control width100px input-matriz-medicao"
                    readonly="true"
                    value="{{cubTotalGeral | number : '1.2-2' }}"/>
-            <input *ngIf="grupo.tipoGrupo.id == tipoGrupoEnum.SUB_TOTAL"
+            <input *ngIf="grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL"
                    type="text"
                    inputmode="numeric"
                    class="form-control width100px input-matriz-medicao"
                    readonly="true"
                    value="{{cubSubTotalGeral | number : '1.2-2' }}"/>
           </td>
-          <td *ngIf="grupo.tipoGrupo.id != tipoGrupoEnum.TOTAL && grupo.tipoGrupo.id != tipoGrupoEnum.SUB_TOTAL"></td>
-          <td *ngIf="grupo.tipoGrupo.id == tipoGrupoEnum.SUB_TOTAL" [ngStyle]="setPercentualStylesByValue(percentualSubTotalGeral)">
-            <input *ngIf="grupo.tipoGrupo.id == tipoGrupoEnum.SUB_TOTAL"
+          <td *ngIf="grupo.tipoGrupo.id != tipoGrupoEnum.TOTAL && grupo.tipoGrupo.id != tipoGrupoEnum.SUBTOTAL"></td>
+          <td *ngIf="grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL" [ngStyle]="setPercentualStylesByValue(percentualSubTotalGeral)">
+            <input *ngIf="grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL"
                    type="text"
                    inputmode="numeric"
                    class="form-control width100px input-matriz-medicao"

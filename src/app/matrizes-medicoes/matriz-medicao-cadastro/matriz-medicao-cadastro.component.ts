@@ -158,7 +158,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   }
 
   isGrupoSistema(grupo): Boolean {
-    return grupo.tipoGrupo.id == TipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == TipoGrupoEnum.SUB_TOTAL;
+    return grupo.tipoGrupo.id == TipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == TipoGrupoEnum.SUBTOTAL;
   }
 
   calcularTotais() {
