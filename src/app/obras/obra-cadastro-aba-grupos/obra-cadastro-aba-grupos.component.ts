@@ -15,9 +15,6 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
 
   _obra : Obra;
 
-  nomes = { nome : ""};
-
-  totalRegistros = 0;
   grupos: any[];
 
   constructor(
@@ -40,8 +37,8 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
   }
 
   listarGruposPorObra() {
-    if (this._obra.id) {
-      this.grupoService.listarTodosPorObra(this._obra.id)
+    if (this.obra.id) {
+      this.grupoService.listarTodosPorObra(this.obra.id)
         .then(resultado => {
           this.grupos = resultado;
         })
@@ -60,7 +57,7 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
       if (linha.length > 0) {
         let grupo: Grupo = new Grupo();
         grupo.nome = linha;
-        grupo.obra = this._obra;
+        grupo.obra = this.obra;
         grupo.tipoGrupo = null;
         gruposCadastro.push(grupo);
       }

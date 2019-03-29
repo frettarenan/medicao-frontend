@@ -1,3 +1,61 @@
-<p>
-  contrato-cadastro-aba-servicos works!
-</p>
+<div class="ui-g">
+  <div class="ui-g-12 ui-fluid">
+    <div class="div-padding-bottom">
+      <p-panel header="Cadastro Rápido" [toggleable]="true" [collapsed]="true">
+        <form #f autocomplete="off" (ngSubmit)="salvarServicos(nomes)">
+          <div class="ui-g">
+            <div class="ui-g-12 ui-fluid">
+              <div class="vertical-align-middle-ext-box">
+                <label for="nomes" class="vertical-align-middle-int-box required">Nomes dos serviços</label>
+                <span class="pi pi-info-circle icon-info vertical-align-middle-int-box" pTooltip="Tecle enter, dentro da caixa de texto, sempre que quiser incluir um novo registro"></span>
+              </div>
+              <textarea #nomes id="nomes" name="nomes" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>              
+            </div>
+            <div class="ui-g-12">
+              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="nomes.value.trim().length == 0"></button>
+            </div>
+          </div>
+        </form>
+      </p-panel>
+    </div>
+    
+    <div class="div-padding-bottom">
+      <p-panel header="Servicos Cadastrados">
+        <p-table [value]="servicos" [responsive]="true"
+          [paginator]="false" #tabela>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Nome</th>
+              <th class="width170px">Unidade de Medida</th>
+              <th class="col-acoes-header">Ações</th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-servico>
+            <tr>
+              <td>{{ servico.nome }}</td>
+              <td>{{ servico.unidadeMedida.nome }}</td>
+              <td class="col-acoes">
+                <button pButton
+                        icon="fa fa-pencil-alt"
+                        class="width25px"
+                        pTooltip="Editar"
+                        tooltipPosition="top"></button>
+                        <!-- [routerLink]="['/obras', obra.id]" -->
+                <button pButton
+                        icon="fa fa-trash"
+                        class="width25px"
+                        pTooltip="Excluir"
+                        tooltipPosition="top"></button>
+                        <!-- (click)="confirmarExclusao(obra)" -->
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+            <div>Nenhum registro encontrado</div>
+          </ng-template>
+        </p-table>
+      </p-panel>
+    </div>
+  </div>
+</div>

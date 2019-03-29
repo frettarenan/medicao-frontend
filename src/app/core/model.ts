@@ -81,6 +81,13 @@ export class Servico {
   id: number;
   nome: string;
   contrato : Contrato;
+  unidadeMedida : UnidadeMedida;
+}
+
+export class UnidadeMedida {
+  id: number;
+  nome: string;
+  sigla : string;
 }
 
 export class Medicao {

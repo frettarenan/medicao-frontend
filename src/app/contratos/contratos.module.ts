@@ -16,6 +16,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import {TabViewModule} from 'primeng/tabview';
 import { ContratoCadastroAbaContratoComponent } from './contrato-cadastro-aba-contrato/contrato-cadastro-aba-contrato.component';
 import { ContratoCadastroAbaServicosComponent } from './contrato-cadastro-aba-servicos/contrato-cadastro-aba-servicos.component';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { ContratoCadastroAbaServicosComponent } from './contrato-cadastro-aba-se
     DialogModule,
     DropdownModule,
     TabViewModule,
+    InputTextareaModule,
 
     SharedModule,
     ContratosRoutingModule
