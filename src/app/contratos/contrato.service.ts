@@ -83,5 +83,10 @@ export class ContratoService {
       .toPromise()
       .then(() => null);
   }
+
+  buscarPorId(id: number): Promise<Contrato> {
+    return this.http.get<Contrato>(`${this.contratosUrl}/${id}`)
+      .toPromise();
+  }
   
 }

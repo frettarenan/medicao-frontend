@@ -4,11 +4,11 @@
 
 <div class="container-full">
   <p-tabView>
-    <p-tabPanel header="Cadastro Básico">
-      O cadastro  vai aqui!
+    <p-tabPanel header="Contrato">
+      <app-contrato-cadastro-aba-contrato [contrato]="contrato"></app-contrato-cadastro-aba-contrato>
     </p-tabPanel>
-    <p-tabPanel header="Serviços" [disabled]="true">
-        O cadastro  vai aqui!
+    <p-tabPanel header="Serviços" [disabled]="!contrato.id">
+      <app-contrato-cadastro-aba-servicos [contrato]="contrato"></app-contrato-cadastro-aba-servicos>
     </p-tabPanel>
   </p-tabView>
 </div>

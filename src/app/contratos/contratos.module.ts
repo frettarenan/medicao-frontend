@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import { ContratosRoutingModule } from './contratos-routing.module';
 import { DropdownModule } from 'primeng/dropdown';
 import {TabViewModule} from 'primeng/tabview';
+import { ContratoCadastroAbaContratoComponent } from './contrato-cadastro-aba-contrato/contrato-cadastro-aba-contrato.component';
+import { ContratoCadastroAbaServicosComponent } from './contrato-cadastro-aba-servicos/contrato-cadastro-aba-servicos.component';
 
 @NgModule({
   imports: [
@@ -35,7 +37,9 @@ import {TabViewModule} from 'primeng/tabview';
   ],
   declarations: [
     ContratoCadastroComponent,
-    ContratosPesquisaComponent
+    ContratosPesquisaComponent,
+    ContratoCadastroAbaContratoComponent,
+    ContratoCadastroAbaServicosComponent
   ],
   exports: []
 })
