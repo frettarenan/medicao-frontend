@@ -1,99 +1,78 @@
-<!--<div class="container-full" style="max-width: 400px; margin: auto">
-  <form class="text-center border border-light p-5">
-    <p class="h4 mb-4">Login</p>
-    <input class="form-control mb-4" pInputText type="email" name="usuario" placeholder="E-mail"
-      ngModel required #usuario>
-    <input class="form-control mb-4" pInputText type="password" name="senha" placeholder="Senha"
-      ngModel required #senha>
-    <div class="d-flex justify-content-around">
-      <div>
-        <a href="">Esqueci minha senha</a>
-      </div>
-    </div>
-    <button mdbBtn color="info" block="true" class="my-4" type="submit"
-      (click)="login(usuario.value, senha.value); senha.value = '';">Login</button>
-  </form>
-</div>-->
-<!-- This snippet uses Font Awesome 5 Free as a dependency. You can download it at fontawesome.io! -->
-
 <div class="my-login-page">
-  <section class="h-100">
-    <div class="container h-100">
-      <div class="row justify-content-md-center h-100">
-        <div class="card-wrapper">
-          <div class="brand">
-            <img src="/assets/images/logo.png" alt="Logo"/>
-          </div>
-          <div class="card fat">
-            <div class="card-body">
-              <h4 class="card-title">{{title.getTitle()}}</h4>
-              <form #f="ngForm" method="POST" class="my-login-validation" novalidate="">
-                <div class="form-group">
-                  <label for="email">E-mail</label>
-                  <input pInputText #email ngModel required autofocus
-                         class="form-control mb-4"
-                         type="email"
-                         id="email"
-                         name="email"/>
-                  <!--
-                  <div class="invalid-feedback">
-                    Email is invalid
-                  </div>
-                -->
-                </div>
-
-                <div class="form-group">
-                  <label for="senha">Senha</label>
-                  <input pInputText #senha ngModel required
-                         class="form-control mb-4"
-                         type="password"
-                         id="senha"
-                         name="senha"/>
-<!--                    <div class="invalid-feedback">
-                      Password is required
-                    </div>-->
-                </div>
-<!--
-                <div class="form-group">
-                  <div class="custom-checkbox custom-control">
-                    <input type="checkbox" name="remember" id="remember" class="custom-control-input">
-                    <label for="remember" class="custom-control-label">Remeber Me</label>
-                  </div>
-                </div>
--->
-                <div class="form-group m-0">
-                  <!--<button type="submit" class="btn btn-primary btn-block">
-                    Login
-                  </button>-->
-                  <button mdbBtn
-                          [disabled]="f.invalid"
-                          color="info"
-                          block="true"
-                          class="my-4"
-                          type="submit"
-                          (click)="login(email.value, senha.value); senha.value = '';">Login</button>
-                </div>
-                <!--
-                <div class="mt-4 text-center">
-                  Don't have an account? <a href="register.html">Create One</a>
-                </div>
-                -->
-                <div class="mt-4 text-center">
-                  <a href="javascript:alert('Este recurso ainda não foi implementado!')">
-                    Esqueci minha senha
-                  </a>
-                </div>
-                <div class="mt-4 text-center footer">
-                  Copyright &copy; 2019 <br/> Projeto Medição
-                </div>
-              </form>
-            </div>
-          </div>
-          <!--<div class="footer">
-            Copyright &copy; 2019 <br/> Projeto Medição
-          </div>-->
+  <div class="container h-100">
+    <div class="row justify-content-md-center h-100">
+      <div class="card-wrapper">
+        <div class="brand">
+          <img src="/assets/images/logo.png" alt="Logo"/>
         </div>
+        <div class="card fat">
+          <div class="card-body">
+            <h4 class="card-title">{{title.getTitle()}}</h4>
+            <form #f="ngForm" method="POST" class="my-login-validation" novalidate="" (ngSubmit)="login(email.value, senha.value); senha.value = '';">
+              <div class="form-group">
+                <label for="email">E-mail</label>
+                <input pInputText #email ngModel required autofocus
+                        class="form-control mb-4"
+                        type="email"
+                        id="email"
+                        name="email"/>
+                <!--
+                <div class="invalid-feedback">
+                  Email is invalid
+                </div>
+              -->
+              </div>
+
+              <div class="form-group">
+                <label for="senha">Senha</label>
+                <input pInputText #senha ngModel required
+                        class="form-control mb-4"
+                        type="password"
+                        id="senha"
+                        name="senha"/>
+<!--                    <div class="invalid-feedback">
+                    Password is required
+                  </div>-->
+              </div>
+<!--
+              <div class="form-group">
+                <div class="custom-checkbox custom-control">
+                  <input type="checkbox" name="remember" id="remember" class="custom-control-input">
+                  <label for="remember" class="custom-control-label">Remeber Me</label>
+                </div>
+              </div>
+-->
+              <div class="form-group m-0">
+                <!--<button type="submit" class="btn btn-primary btn-block">
+                  Login
+                </button>-->
+                <button mdbBtn
+                        [disabled]="f.invalid"
+                        color="info"
+                        block="true"
+                        class="my-4"
+                        type="submit">Login</button>
+              </div>
+              <!--
+              <div class="mt-4 text-center">
+                Don't have an account? <a href="register.html">Create One</a>
+              </div>
+              -->
+              <div class="mt-4 text-center">
+                <a href="javascript:alert('Este recurso ainda não foi implementado!')">
+                  Esqueci minha senha
+                </a>
+              </div>
+              <div class="mt-4 text-center footer">
+                Copyright &copy; 2019 <br/> Projeto Medição
+              </div>
+            </form>
+          </div>
+        </div>
+        <!--<div class="footer">
+          Copyright &copy; 2019 <br/> Projeto Medição
+        </div>-->
       </div>
     </div>
-  </section>
+  </div>
 </div>
