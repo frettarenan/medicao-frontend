@@ -7,7 +7,7 @@
     <p-tabPanel header="Obra">
       <app-obra-cadastro-aba-obra [obra]="obra"></app-obra-cadastro-aba-obra>
     </p-tabPanel>
-    <p-tabPanel header="Grupos" [disabled]="!obra.id">
+    <p-tabPanel header="Grupos" [disabled]="isCadastro">
       <app-obra-cadastro-aba-grupos [obra]="obra"></app-obra-cadastro-aba-grupos>
     </p-tabPanel>
   </p-tabView>

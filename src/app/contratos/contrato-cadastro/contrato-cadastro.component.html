@@ -7,7 +7,7 @@
     <p-tabPanel header="Contrato">
       <app-contrato-cadastro-aba-contrato [contrato]="contrato"></app-contrato-cadastro-aba-contrato>
     </p-tabPanel>
-    <p-tabPanel header="Serviços" [disabled]="!contrato.id">
+    <p-tabPanel header="Serviços" [disabled]="isCadastro">
       <app-contrato-cadastro-aba-servicos [contrato]="contrato"></app-contrato-cadastro-aba-servicos>
     </p-tabPanel>
   </p-tabView>

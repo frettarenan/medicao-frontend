@@ -37,7 +37,11 @@ export class ConstrutoraCadastroComponent implements OnInit {
     }
   }
   
-  get editando() {
+  get isCadastro(): Boolean {
+    return !this.isEdicao;
+  }
+
+  get isEdicao(): Boolean {
     return Boolean(this.construtora.id);
   }
 
@@ -50,14 +54,14 @@ export class ConstrutoraCadastroComponent implements OnInit {
   }
 
   salvar(form: FormControl) {
-    if (this.editando) {
+    if (this.isEdicao) {
       this.atualizarConstrutora(form);
     } else {
       this.adicionarConstrutora(form);
     }
   }
 
-  adicionarConstrutora(form: FormControl) {
+  private adicionarConstrutora(form: FormControl) {
     this.construtora.ativo = true;
     this.construtoraService.adicionar(this.construtora)
       .then(construtoraAdicionada => {
@@ -67,7 +71,7 @@ export class ConstrutoraCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarConstrutora(form: FormControl) {
+  private atualizarConstrutora(form: FormControl) {
     this.construtoraService.atualizar(this.construtora)
       .then(construtora => {
         this.construtora = construtora;

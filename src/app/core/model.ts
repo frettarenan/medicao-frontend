@@ -74,6 +74,7 @@ export class Contrato {
   numero: string;
   descricao: string;
   obra : Obra;
+  ativo = null;
 }
 
 export class Servico {

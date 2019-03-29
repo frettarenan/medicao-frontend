@@ -45,4 +45,12 @@ export class ObraCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
+  get isCadastro(): Boolean {
+    return !this.isEdicao;
+  }
+
+  get isEdicao(): Boolean {
+    return Boolean(this.obra.id);
+  }
+
 }

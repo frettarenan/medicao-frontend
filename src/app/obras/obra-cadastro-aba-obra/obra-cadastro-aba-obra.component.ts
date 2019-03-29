@@ -45,12 +45,12 @@ export class ObraCadastroAbaObraComponent implements OnInit {
   
   @Input()
   set obra(obra: Obra) {
-    // console.log('prev value: ', this._obra.nome);
+    // console.log('prev value: ', this.obra.nome);
     // console.log('got name: ', obra.nome);
     this._obra = obra;
-    if (this._obra.id) {
-      this.idConstrutoraSelecionada = this._obra.construtora.id;
-      this.idUsuarioSelecionado = this._obra.usuarioResponsavel.id;
+    if (this.isEdicao) {
+      this.idConstrutoraSelecionada = this.obra.construtora.id;
+      this.idUsuarioSelecionado = this.obra.usuarioResponsavel.id;
       this.carregarUsuarios();
     }
   }
@@ -61,7 +61,7 @@ export class ObraCadastroAbaObraComponent implements OnInit {
         this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
       })
       .catch(erro => this.errorHandler.handle(erro));
-    } else {
+    } else if (this.isCadastro) {
       this.carregarUsuarios();
     }
   }
@@ -86,28 +86,32 @@ export class ObraCadastroAbaObraComponent implements OnInit {
     this.router.navigate(['/obras/novo']);
   }
 
-  get editando() {
+  get isCadastro(): Boolean {
+    return !this.isEdicao;
+  }
+
+  get isEdicao(): Boolean {
     return Boolean(this.obra.id);
   }
 
   salvarObra(form: FormControl) {
     let construtora = new Construtora();
     construtora.id = this.idConstrutoraSelecionada;
-    this._obra.construtora = construtora;
+    this.obra.construtora = construtora;
 
     let usuario = new Usuario();
     usuario.id = this.idUsuarioSelecionado;
-    this._obra.usuarioResponsavel = usuario;
+    this.obra.usuarioResponsavel = usuario;
     
-    if (this.editando) {
+    if (this.isEdicao) {
       this.atualizarObra(form);
     } else {
       this.adicionarObra(form);
     }
   }
 
-  adicionarObra(form: FormControl) {
-    this._obra.ativo = true;
+  private adicionarObra(form: FormControl) {
+    this.obra.ativo = true;
     this.obraService.adicionar(this.obra)
       .then(obraAdicionada => {
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
@@ -116,7 +120,7 @@ export class ObraCadastroAbaObraComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  atualizarObra(form: FormControl) {
+  private atualizarObra(form: FormControl) {
     this.obraService.atualizar(this.obra)
       .then(obra => {
         this.obra = obra;

@@ -88,5 +88,15 @@ export class ContratoService {
     return this.http.get<Contrato>(`${this.contratosUrl}/${id}`)
       .toPromise();
   }
+
+  adicionar(contrato: Contrato): Promise<Contrato> {
+    return this.http.post<Contrato>(this.contratosUrl, contrato)
+      .toPromise();
+  }
+
+  atualizar(contrato: Contrato): Promise<Contrato> {
+    return this.http.put<Contrato>(`${this.contratosUrl}/${contrato.id}`, contrato)
+      .toPromise();
+  }
   
 }
