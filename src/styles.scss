@@ -100,6 +100,11 @@ a, button {
   width: 350px;
 }
 
+.required:before {
+  content:"* ";
+  color: red;
+}
+
 .input-matriz-medicao {
   margin-top: -3px;
   margin-bottom: -3px;

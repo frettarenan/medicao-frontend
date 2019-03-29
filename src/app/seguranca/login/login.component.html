@@ -27,7 +27,7 @@
           <div class="card fat">
             <div class="card-body">
               <h4 class="card-title">{{title.getTitle()}}</h4>
-              <form method="POST" class="my-login-validation" novalidate="">
+              <form #f="ngForm" method="POST" class="my-login-validation" novalidate="">
                 <div class="form-group">
                   <label for="email">E-mail</label>
                   <input pInputText #email ngModel required autofocus
@@ -66,6 +66,7 @@
                     Login
                   </button>-->
                   <button mdbBtn
+                          [disabled]="f.invalid"
                           color="info"
                           block="true"
                           class="my-4"

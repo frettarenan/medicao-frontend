@@ -8,7 +8,7 @@
     <p-panel header="Filtros da Pesquisa" [toggleable]="false" [collapsed]="false">
       <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
         <div class="ui-g">
-          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid required">
             <label for="idConstrutoraSelecionada">Construtora</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idConstrutoraSelecionada"
@@ -25,7 +25,7 @@
               text="Informe a construtora"></app-message>
           </div>
 
-          <div class="ui-g-12 ui-fluid">
+          <div class="ui-g-12 ui-fluid required">
             <label for="idObraSelecionada">Obra</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idObraSelecionada"
@@ -43,7 +43,7 @@
               text="Informe a obra"></app-message>
           </div>
 
-          <div class="ui-g-12 ui-fluid">
+          <div class="ui-g-12 ui-fluid required">
             <label for="idContratoSelecionado">Contrato</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idContratoSelecionado"
@@ -61,7 +61,7 @@
               text="Informe o contrato"></app-message>
           </div>
 
-          <div class="ui-g-12 ui-fluid">
+          <div class="ui-g-12 ui-fluid required">
             <label for="idMedicaoSelecionada">Medição</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idMedicaoSelecionada"

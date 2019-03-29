@@ -1,7 +1,7 @@
 <form #f="ngForm" autocomplete="off" (ngSubmit)="salvarObra(f)">
   <div class="ui-g">
 
-    <div class="ui-g-12 ui-fluid">
+    <div class="ui-g-12 ui-fluid required">
       <label for="nome">Nome</label>
       <input pInputText type="text" id="nome" name="nome"
         [(ngModel)]="obra.nome"
@@ -13,7 +13,7 @@
         text="Mínimo de {{ nome.errors?.minlength?.requiredLength }} caracteres"></app-message>
     </div>
 
-    <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+    <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid required">
       <label for="idConstrutoraSelecionada">Construtora</label>
       <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                   inputId="idConstrutoraSelecionada"
@@ -30,7 +30,7 @@
         text="Informe a construtora"></app-message>
     </div>
 
-    <div class="ui-g-12 ui-fluid">
+    <div class="ui-g-12 ui-fluid required">
       <label for="idUsuarioSelecionado">Usuário responsável</label>
       <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                   inputId="idUsuarioSelecionado"

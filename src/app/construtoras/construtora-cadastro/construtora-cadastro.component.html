@@ -6,7 +6,7 @@
   <form #f="ngForm" autocomplete="off" (ngSubmit)="salvar(f)">
     <div class="ui-g">
 
-      <div class="ui-g-12 ui-fluid">
+      <div class="ui-g-12 ui-fluid required">
         <label for="razaoSocial">Razão social</label>
         <input pInputText type="text" id="razaoSocial" name="razaoSocial"
           [(ngModel)]="construtora.razaoSocial"
