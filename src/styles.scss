@@ -154,6 +154,14 @@ input[type=number] {
   padding: 0 !important;
 }
 
+.ui-table a {
+	cursor: pointer;
+	text-decoration: none;
+  color: #007bff;
+  font-weight: 400;
+	transition: all 0.2s ease-in-out;
+}
+
 /* Início - Customizações para primeng */
 
 /* Forçando estilos novamente, pois o tema omega do primeng está retirando as bordas do componente de abas */
