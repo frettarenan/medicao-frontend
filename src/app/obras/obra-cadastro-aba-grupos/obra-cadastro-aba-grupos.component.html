@@ -38,12 +38,14 @@
                         icon="fa fa-pencil-alt"
                         class="width25px"
                         pTooltip="Editar"
+                        [disabled]="isGrupoSistema(grupo)"
                         tooltipPosition="top"></button>
                         <!-- [routerLink]="['/obras', obra.id]" -->
                 <button pButton
                         icon="fa fa-trash"
                         class="width25px"
                         pTooltip="Excluir"
+                        [disabled]="isGrupoSistema(grupo)"
                         tooltipPosition="top"></button>
                         <!-- (click)="confirmarExclusao(obra)" -->
               </td>

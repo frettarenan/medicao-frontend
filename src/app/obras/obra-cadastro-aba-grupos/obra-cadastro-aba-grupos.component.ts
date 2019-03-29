@@ -4,6 +4,7 @@ import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { GrupoService } from 'app/grupos/grupo.service';
 import { FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { TipoGrupoEnum } from 'app/core/enum';
 
 @Component({
   selector: 'app-obra-cadastro-aba-grupos',
@@ -74,6 +75,10 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
         this.listarGruposPorObra();
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  isGrupoSistema(grupo): Boolean {
+    return grupo.tipoGrupo.id == TipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == TipoGrupoEnum.SUB_TOTAL;
   }
 
 }
