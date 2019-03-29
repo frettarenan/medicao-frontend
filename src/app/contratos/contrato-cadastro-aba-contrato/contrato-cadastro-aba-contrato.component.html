@@ -1,8 +1,8 @@
-<form #f="ngForm" autocomplete="off" (ngSubmit)="salvarObra(f)">
+<form #f="ngForm" autocomplete="off" (ngSubmit)="salvarContrato(f)">
   <div class="ui-g">
 
     <div class="ui-g-12 ui-fluid">
-      <label for="numero">Nome</label>
+      <label for="numero">Número</label>
       <input pInputText type="text" id="numero" name="numero"
         [(ngModel)]="contrato.numero"
         #numero="ngModel">
