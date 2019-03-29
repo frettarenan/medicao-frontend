@@ -116,9 +116,9 @@ export class ContratoCadastroAbaContratoComponent implements OnInit {
 
   private atualizarContrato(form: FormControl) {
     this.contratoService.atualizar(this.contrato)
-      .then(contrato => {
-        this.contrato = contrato;
+      .then(contratoAtualizado => {
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
+        this.router.navigate(['/contratos', contratoAtualizado.id]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { SegurancaModule } from './seguranca/seguranca.module';
 import { AppRoutingModule } from './app-routing.module';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { NgHttpLoaderModule } from 'ng-http-loader';
 import { JwtHttpInterceptor } from './seguranca/jwt-http-interceptor';
 
 @NgModule({
@@ -16,12 +17,19 @@ import { JwtHttpInterceptor } from './seguranca/jwt-http-interceptor';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-
+    
+    HttpClientModule,
+    NgHttpLoaderModule.forRoot(),
+    
     CoreModule,
     SegurancaModule,
     AppRoutingModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtHttpInterceptor, multi: true }],
-  bootstrap: [AppComponent]
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtHttpInterceptor, multi: true }
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }
