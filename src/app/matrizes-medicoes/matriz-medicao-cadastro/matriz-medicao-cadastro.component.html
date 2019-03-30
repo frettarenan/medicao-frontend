@@ -1,11 +1,8 @@
 <div class="content-section introduction">
   <span class="feature-title">{{title.getTitle()}}</span>
 </div>
-<div class="container-full" *ngIf="processando">
-  <div style="text-align: center;"><p-progressSpinner></p-progressSpinner></div>
-  <div style="text-align: center;">Processando, aguarde...</div>
-</div>
-<div *ngIf="!processando">
+
+<div class="container-full">
   <table mdbTable mdbTableScroll scrollX="true" scrollY="true" maxWidth="100%" maxHeight="100%" bordered="true" striped="true">
     <thead class="thead-light">
       <tr>

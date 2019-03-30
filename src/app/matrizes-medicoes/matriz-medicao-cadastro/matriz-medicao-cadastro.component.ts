@@ -23,8 +23,6 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   tipoGrupoEnum = TipoGrupoEnum;
 
-  processando = true;
-
   idMedicao;
 
   idGrupoComTipoGrupo1 = null;
@@ -121,7 +119,6 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       this.populaGrupoControle();
       this.populaMatriz();
       this.calcularTotais();
-      this.processando = false;
     }
   }
 
