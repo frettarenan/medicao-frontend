@@ -33,7 +33,7 @@ export class MedicaoCadastroComponent implements OnInit {
   grupos = null;
   lancamentos = null;
 
-  matriz = null;
+  matriz = new Array();
 
   usuarioLogadoContemRoleAdministrarMedicao = false;
 
@@ -328,8 +328,9 @@ export class MedicaoCadastroComponent implements OnInit {
   }
 
   setPercentualStylesByIndex(indexMatriz) {
+    let percentual = this.matriz[indexMatriz] ? this.matriz[indexMatriz].percentual : null;
     let styles = {
-      'background-color': Util.getCorEscalaVermelhoAmareloVerdeByPercentual(this.matriz[indexMatriz].percentual)
+      'background-color': Util.getCorEscalaVermelhoAmareloVerdeByPercentual(percentual)
     };
     return styles;
   }

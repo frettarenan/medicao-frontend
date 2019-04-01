@@ -44,7 +44,7 @@
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
                      [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
-                     value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].quantidade | number }}"
+                     value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id]?.quantidade | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')"/>
             </td>
             <td>
@@ -53,7 +53,7 @@
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
                      [readonly]="grupo.tipoGrupo.id != tipoGrupoEnum.TOTAL || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
-                     value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id].cub | number }}"
+                     value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id]?.cub | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')"/>
             </td>
             <td *ngIf="grupo.tipoGrupo.id != tipoGrupoEnum.TOTAL" [ngStyle]="setPercentualStylesByIndex('idServico' + servico.id + 'idGrupo' + grupo.id)">
@@ -62,7 +62,7 @@
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao input-transparent"
                      [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL"
-                     value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id].percentual | number }}"
+                     value="{{ matriz['idServico' + servico.id + 'idGrupo' + grupo.id]?.percentual | number }}"
                      (input)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'percentual')"/>
             </td>
           </ng-container>
