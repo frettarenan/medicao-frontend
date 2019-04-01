@@ -33,7 +33,7 @@ export class MedicaoCadastroComponent implements OnInit {
   grupos = null;
   lancamentos = null;
 
-  matriz = new Array();
+  matriz = {};
 
   usuarioLogadoContemRoleAdministrarMedicao = false;
 
@@ -364,6 +364,14 @@ export class MedicaoCadastroComponent implements OnInit {
         // this.router.navigate(['/medicoes', this.idMedicao]);
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  salvarComo() {
+    console.log('salvar como click');
+  }
+
+  renomear() {
+    console.log('renomear click');
   }
 
 }
