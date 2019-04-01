@@ -293,7 +293,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       // console.log(servico.nome + ": " + this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].cub);
       this.cubSubTotalGeral += parseFloat(this.matriz["idServico" + servico.id + "idGrupo" + this.idGrupoComTipoGrupo2].cub);
     });
-    console.log("cubSubTotalGeral: " + this.cubSubTotalGeral + "- cubTotalGeral: " + this.cubTotalGeral); // arrumar
+    // console.log("cubSubTotalGeral: " + this.cubSubTotalGeral + "- cubTotalGeral: " + this.cubTotalGeral); // arrumar
     this.percentualSubTotalGeral = (this.cubSubTotalGeral * 100) / this.cubTotalGeral;
   }
 
