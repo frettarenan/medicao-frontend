@@ -19,7 +19,6 @@ import { GrupoService } from './../grupos/grupo.service';
 import { ServicoService } from './../servicos/servico.service';
 import { MedicaoService } from './../medicoes/medicao.service';
 import { LancamentoService } from './../lancamentos/lancamento.service';
-import { MatrizMedicaoService } from './../matrizes-medicoes/matriz-medicao.service';
 import { PaginaInicialService } from './../pagina-inicial/pagina-inicial.service';
 
 import { AuthService } from './../seguranca/auth.service';
@@ -62,7 +61,6 @@ registerLocaleData(localePt);
     ServicoService,
     UnidadeMedidaService,
     LancamentoService,
-    MatrizMedicaoService,
     PaginaInicialService,
     ErrorHandlerService,
     AuthService,

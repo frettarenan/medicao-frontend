@@ -6,24 +6,25 @@ import { MessageService } from 'primeng/api';
 import { LancamentoService } from 'app/lancamentos/lancamento.service';
 import { ServicoService } from 'app/servicos/servico.service';
 import { GrupoService } from 'app/grupos/grupo.service';
-import { Servico, Grupo, Lancamento, LancamentoId } from 'app/core/model';
+import { Servico, Grupo, Lancamento, LancamentoId, Medicao } from 'app/core/model';
 import createNumberMask from 'text-mask-addons/dist/createNumberMask';
 
 // import * as $ from 'jquery';
 import { AuthService } from 'app/seguranca/auth.service';
 import { Util } from 'app/core/util';
 import { TipoGrupoEnum } from 'app/core/enum';
+import { MedicaoService } from 'app/medicoes/medicao.service';
 
 @Component({
-  selector: 'app-matriz-medicao-cadastro',
-  templateUrl: './matriz-medicao-cadastro.component.html',
-  styleUrls: ['./matriz-medicao-cadastro.component.scss']
+  selector: 'app-medicao-cadastro',
+  templateUrl: './medicao-cadastro.component.html',
+  styleUrls: ['./medicao-cadastro.component.scss']
 })
-export class MatrizMedicaoCadastroComponent implements OnInit {
+export class MedicaoCadastroComponent implements OnInit {
 
   tipoGrupoEnum = TipoGrupoEnum;
 
-  idMedicao;
+  medicao = new Medicao();
 
   idGrupoComTipoGrupo1 = null;
   idGrupoComTipoGrupo2 = null;
@@ -34,7 +35,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   matriz = null;
 
-  usuarioLogadoContemRoleAdministrarMatrizMedicao = false;
+  usuarioLogadoContemRoleAdministrarMedicao = false;
 
   cubTotalGeral = 0;
   cubSubTotalGeral = 0;
@@ -42,6 +43,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
+    private medicaoService: MedicaoService,
     private servicoService: ServicoService,
     private grupoService: GrupoService,
     private lancamentoService: LancamentoService,
@@ -53,15 +55,14 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
   ) { }
 
   ngOnInit() {    
-    this.idMedicao = this.route.snapshot.params['id'];
-
-    this.title.setTitle('Edição de Matriz de Medição');
-
-    if (this.idMedicao) {
-      this.usuarioLogadoContemRoleAdministrarMatrizMedicao = this.auth.temPermissao('ROLE_ADMINISTRAR_MATRIZ_MEDICAO');
-      this.carregarServicos(this.idMedicao);
-      this.carregarGrupos(this.idMedicao);
-      this.carregarLancamentos(this.idMedicao);
+    const idMedicao = this.route.snapshot.params['id'];
+    if (idMedicao) {
+      this.title.setTitle('Edição de Medição');
+      this.usuarioLogadoContemRoleAdministrarMedicao = this.auth.temPermissao('ROLE_ADMINISTRAR_MEDICAO');
+      this.carregarMedicao(idMedicao);
+      this.carregarServicos(idMedicao);
+      this.carregarGrupos(idMedicao);
+      this.carregarLancamentos(idMedicao);
     }
 
     /*
@@ -85,6 +86,14 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
       });
     });
     */
+  }
+
+  carregarMedicao(id: number) {
+    this.medicaoService.buscarPorId(id)
+      .then(medicao => {
+        this.medicao = medicao;
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   carregarServicos(idMedicao: number) {
@@ -341,7 +350,7 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
         lancamento.id = new LancamentoId();
         lancamento.id.idGrupo = grupo.id;
         lancamento.id.idServico = servico.id;
-        lancamento.id.idMedicao = this.idMedicao;
+        lancamento.id.idMedicao = this.medicao.id;
         lancamento.quantidade = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].quantidade;
         lancamento.cub = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].cub;
         lancamento.percentual = this.matriz["idServico" + servico.id + "idGrupo" + grupo.id].percentual;
@@ -350,8 +359,8 @@ export class MatrizMedicaoCadastroComponent implements OnInit {
     });
     this.lancamentoService.salvar(lancamentos)
       .then(lancamentosAdicionados => {
-        this.messageService.add({ severity: 'success', detail: 'Lançamentos salvos com sucesso!' });
-        // this.router.navigate(['/matrizes-medicoes', this.idMedicao]);
+        this.messageService.add({ severity: 'success', detail: 'Matriz salva com sucesso!' });
+        // this.router.navigate(['/medicoes', this.idMedicao]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

@@ -17,8 +17,8 @@
       <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_CONTRATO')">
         <a mdbWavesEffect class="nav-link waves-light" routerLink="/contratos">Contratos</a>
       </li>
-      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_MATRIZ_MEDICAO')">
-        <a mdbWavesEffect class="nav-link waves-light" routerLink="/matrizes-medicoes">Matriz de Medição</a>
+      <li class="nav-item" routerLinkActive="ativo" *ngIf="auth.temPermissao('ROLE_PESQUISAR_MEDICAO')">
+        <a mdbWavesEffect class="nav-link waves-light" routerLink="/medicoes">Medição</a>
       </li>
       <li class="nav-item dropdown" dropdown>
         <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light">

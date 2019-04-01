@@ -73,7 +73,7 @@ a, button {
 }
 
 .width125px {
-  width: 125px;
+  width: 125px !important;
 }
 
 .width150px {
@@ -202,6 +202,11 @@ body .ui-tabview .ui-tabview-panels {
 .primeNgButtonBugFix .ui-button-text {
   margin-left: 17px !important;
 }
+
+.ui-fluid .ui-button-text-icon-left .ui-button-text, .ui-fluid .ui-button-text-icon-right .ui-button-text {
+	padding-right: 0em;
+}
+
 /* Fim - Customizações para primeng */
 
 .icon-info {

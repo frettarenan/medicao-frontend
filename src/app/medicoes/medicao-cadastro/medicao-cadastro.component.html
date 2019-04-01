@@ -1,7 +1,19 @@
 <div class="content-section introduction">
   <span class="feature-title">{{title.getTitle()}}</span>
 </div>
-
+<div class="container-full">
+  <div class="ui-g ui-fluid">
+    <div class="ui-g-12">
+      <label class="required">Nome</label>
+      <div class="ui-inputgroup">
+          <input type="text"
+                 pInputText
+                 value="{{medicao.nome}}">
+          <button pButton type="button" icon="fa fa-save" class="width125px" label="Renomear"></button>
+      </div>
+    </div>
+  </div>
+</div>
 <!-- <div class="container-full"> -->
 <div>
   <table mdbTable mdbTableScroll scrollX="true" scrollY="true" maxWidth="100%" maxHeight="100%" bordered="true" striped="true">
@@ -90,9 +102,9 @@
   <div class="ui-g-12">
     <!--<button pButton label="Calcular totais" (click)="calcularTotais()"></button>-->
     <button pButton
-            *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')"
+            *ngIf="auth.temPermissao('ROLE_CADASTRAR_MEDICAO')"
             icon="fa fa-save"
-            label="Salvar"
+            label="Salvar Matriz"
             (click)="salvar()"></button>
   </div>
 </div>

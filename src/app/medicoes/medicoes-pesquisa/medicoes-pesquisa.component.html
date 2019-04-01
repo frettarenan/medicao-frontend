@@ -80,12 +80,12 @@
 
           <div class="ui-g-12">
             <button pButton
-                    *ngIf="auth.temPermissao('ROLE_CADASTRAR_MATRIZ_MEDICAO')"
+                    *ngIf="auth.temPermissao('ROLE_CADASTRAR_MEDICAO')"
                     icon="fa fa-folder-open"
                     type="submit"
                     label="Abrir"
                     [disabled]="f.invalid"
-                    [routerLink]="['/matrizes-medicoes', idMedicaoSelecionada]"></button>
+                    [routerLink]="['/medicoes', idMedicaoSelecionada]"></button>
             <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
           </div>
         </div>

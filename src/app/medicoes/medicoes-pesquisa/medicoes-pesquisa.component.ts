@@ -1,22 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { MatrizMedicaoFiltro, MatrizMedicaoService } from '../matriz-medicao.service';
+import { MedicaoFiltro, MedicaoService } from '../medicao.service';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { Title } from '@angular/platform-browser';
 import { ConstrutoraService } from 'app/construtoras/construtora.service';
 import { ObraService } from 'app/obras/obra.service';
 import { ContratoService } from 'app/contratos/contrato.service';
-import { MedicaoService } from 'app/medicoes/medicao.service';
 import { AuthService } from 'app/seguranca/auth.service';
 
 @Component({
-  selector: 'app-matrizes-medicoes-pesquisa',
-  templateUrl: './matrizes-medicoes-pesquisa.component.html',
-  styleUrls: ['./matrizes-medicoes-pesquisa.component.scss']
+  selector: 'app-medicoes-pesquisa',
+  templateUrl: './medicoes-pesquisa.component.html',
+  styleUrls: ['./medicoes-pesquisa.component.scss']
 })
-export class MatrizesMedicoesPesquisaComponent implements OnInit {
+export class MedicoesPesquisaComponent implements OnInit {
 
-  filtro = new MatrizMedicaoFiltro();
+  filtro = new MedicaoFiltro();
   
   construtoras: any[];
   idConstrutoraSelecionada: number;
@@ -32,7 +31,6 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private matrizMedicaoService: MatrizMedicaoService,
     private construtoraService: ConstrutoraService,
     private obraService: ObraService,
     private contratoService: ContratoService,
@@ -44,7 +42,7 @@ export class MatrizesMedicoesPesquisaComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.title.setTitle('Pesquisa de Matriz de Medição');
+    this.title.setTitle('Pesquisa de  de Medição');
     this.carregarConstrutoras();
   }
 

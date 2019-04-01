@@ -4,6 +4,10 @@ import { environment } from 'environments/environment';
 import { Medicao } from 'app/core/model';
 import { HttpParams } from '@angular/common/http';
 
+export class MedicaoFiltro {
+  idMedicao: Number;
+}
+
 @Injectable()
 export class MedicaoService {
 
@@ -20,6 +24,11 @@ export class MedicaoService {
     return this.http.get<Medicao[]>(`${this.medicoesUrl}/status/ativo`, {
       params
     }).toPromise();
+  }
+
+  buscarPorId(id: number): Promise<Medicao> {
+    return this.http.get<Medicao>(`${this.medicoesUrl}/${id}`)
+      .toPromise();
   }
 
 }
