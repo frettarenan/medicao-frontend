@@ -41,4 +41,9 @@ export class MedicaoService {
       .toPromise();
   }
 
+  adicionar(medicao: Medicao): Promise<Medicao> {
+    return this.http.post<Medicao>(this.medicoesUrl, medicao)
+      .toPromise();
+  }
+
 }

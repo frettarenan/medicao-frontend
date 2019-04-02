@@ -8,6 +8,7 @@ import { ObraService } from 'app/obras/obra.service';
 import { ContratoService } from 'app/contratos/contrato.service';
 import { AuthService } from 'app/seguranca/auth.service';
 import { Router } from '@angular/router';
+import { Medicao, Contrato } from 'app/core/model';
 
 @Component({
   selector: 'app-medicoes-pesquisa',
@@ -79,8 +80,34 @@ export class MedicoesPesquisaComponent implements OnInit {
   carregarMedicoes() {
     this.medicaoService.listarMedicoesAtivasPorContrato(this.idContratoSelecionado).then(lista => {
       this.medicoes = lista.map(medicao => ({ label: medicao.nome, value: medicao.id }));
+      this.validaSeExistemMedicoesCadastradas();
     })
     .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  validaSeExistemMedicoesCadastradas() {
+    if (this.medicoes.length == 0) {
+      this.confirmation.confirm({
+        message: 'Não existem medições para o contrato selecionado. Deseja cadastar uma nova?',
+        accept: () => {
+          this.criaPrimeiraMedicao();
+        }
+      });
+    }
+  }
+
+  criaPrimeiraMedicao() {
+    let medicao = new Medicao();
+    medicao.nome = "Primeira medição";
+    medicao.contrato = new Contrato();
+    medicao.contrato.id = this.idContratoSelecionado;
+    
+    this.medicaoService.adicionar(medicao)
+      .then(medicaoAdicionada => {
+        this.messageService.add({ severity: 'success', detail: 'Primeira medição cadastrada com sucesso!' });
+        this.router.navigate(['/medicoes', medicaoAdicionada.id]);
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
   abrirMedicao() {
