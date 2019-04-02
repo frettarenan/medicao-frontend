@@ -26,7 +26,9 @@ export class MedicaoDialogNomeMedicaoComponent implements OnInit {
   }
 
   salvar() {
-    this.ref.close(this.nome.trim());
+    if (this.nome.trim() != '') {
+      this.ref.close(this.nome.trim());
+    }
   }
 
 }
