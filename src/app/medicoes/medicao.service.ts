@@ -36,4 +36,9 @@ export class MedicaoService {
       .toPromise();
   }
 
+  salvarComo(medicao: Medicao, novoNome: string): Promise<Medicao> {
+    return this.http.post<Medicao>(`${this.medicoesUrl}/${medicao.id}`, novoNome)
+      .toPromise();
+  }
+
 }

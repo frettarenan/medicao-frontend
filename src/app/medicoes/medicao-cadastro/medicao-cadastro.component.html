@@ -2,17 +2,26 @@
   <span class="feature-title">{{title.getTitle()}}</span>
 </div>
 <div class="container-full">
-  <div class="ui-g ui-fluid">
+  <div class="ui-g">
     <div class="ui-g-12">
-      <label>Nome</label>
-      <div class="ui-inputgroup">
-          <input type="text"
-                 pInputText
-                 value="{{medicao.nome}}"
-                 readonly
-                 class="form-control">
-          <button pButton type="button" icon="fa fa-save" label="Renomear" class="primeNgButtonBugFix" (click)="renomear()"></button>
-      </div>
+      <label class="required">Nome</label>
+      <input type="text"
+              pInputText
+              value="{{medicao.nome}}"
+              readonly
+              class="form-control">
+    </div>
+    <div class="div-padding-left div-padding-bottom">
+      <button pButton
+              type="button"
+              icon="fa fa-edit"
+              label="Renomear"
+              (click)="renomear()"></button>
+      <button pButton
+              *ngIf="auth.temPermissao('ROLE_CADASTRAR_MEDICAO')"
+              icon="fa fa-clone"
+              label="Salvar cópia..."
+              (click)="salvarCopia()"></button>
     </div>
   </div>
 </div>
@@ -109,10 +118,5 @@
             icon="fa fa-save"
             label="Salvar matriz"
             (click)="salvar()"></button>
-    <button pButton
-      *ngIf="auth.temPermissao('ROLE_CADASTRAR_MEDICAO')"
-      icon="fa fa-clone"
-      label="Salvar cópia..."
-      (click)="salvarCopia()"></button>
   </div>
 </div>

@@ -57,16 +57,10 @@ export class MedicaoCadastroComponent implements OnInit {
     public title: Title
   ) { }
 
-  ngOnInit() {    
-    const idMedicao = this.route.snapshot.params['id'];
-    if (idMedicao) {
-      this.title.setTitle('Edição de Medição');
-      this.usuarioLogadoContemRoleAdministrarMedicao = this.auth.temPermissao('ROLE_ADMINISTRAR_MEDICAO');
-      this.carregarMedicao(idMedicao);
-      this.carregarServicos(idMedicao);
-      this.carregarGrupos(idMedicao);
-      this.carregarLancamentos(idMedicao);
-    }
+  ngOnInit() {
+    this.route.params.subscribe(routeParams => {
+      this.carregaDadosEdicao(routeParams.id);
+    });
 
     /*
     $(document).ready(function() {
@@ -89,6 +83,22 @@ export class MedicaoCadastroComponent implements OnInit {
       });
     });
     */
+  }
+
+  carregaDadosEdicao(idMedicao) {
+    if (idMedicao) {
+      this.title.setTitle('Edição de Medição');
+      this.usuarioLogadoContemRoleAdministrarMedicao = this.auth.temPermissao('ROLE_ADMINISTRAR_MEDICAO');
+      
+      this.servicos = null;
+      this.grupos = null;
+      this.lancamentos = null;
+
+      this.carregarMedicao(idMedicao);
+      this.carregarServicos(idMedicao);
+      this.carregarGrupos(idMedicao);
+      this.carregarLancamentos(idMedicao);
+    }
   }
 
   carregarMedicao(id: number) {
@@ -368,10 +378,6 @@ export class MedicaoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvarCopia() {
-    console.log('salvar cópia');
-  }
-
   renomear() {
     const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
       data: {
@@ -390,6 +396,28 @@ export class MedicaoCadastroComponent implements OnInit {
         .then(medicaoSalva => {
           this.medicao = medicaoSalva;
           this.messageService.add({ severity: 'success', detail: 'Medição renomeada com sucesso!' });
+        })
+        .catch(erro => this.errorHandler.handle(erro));
+      }
+    });
+  }
+
+  salvarCopia() {
+    const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
+      data: {
+          mensagem: 'Informe um novo nome para a cópia.',
+          nome: this.medicao.nome
+      },
+      header: 'Salvar Cópia da Medição',
+      width: '60%'
+    });
+
+    ref.onClose.subscribe((nome: string) => {
+      if (nome) {
+        this.medicaoService.salvarComo(this.medicao, nome)
+        .then(medicaoAdicionada => {
+          this.messageService.add({ severity: 'success', detail: 'Medição copiada com sucesso!' });
+          this.router.navigate(['/medicoes', medicaoAdicionada.id]);
         })
         .catch(erro => this.errorHandler.handle(erro));
       }
