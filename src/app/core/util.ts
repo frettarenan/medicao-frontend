@@ -116,10 +116,16 @@ export class Util {
         return Util.arrayCoresEscalaVermelhoAmareloVerde[0];
     }
 
-    public static swapElement(array, indexA, indexB) {
-        var tmp = array[indexA];
+    public static changeArrayOrder(array, indexA, indexB) {
+        var temp = array[indexA];
         array[indexA] = array[indexB];
-        array[indexB] = tmp;
+        array[indexB] = temp;
+    }
+
+    public static moveArrayIndex(array, indexA, indexB) {
+        var temp = array[indexA];
+        array.splice(indexA, 1);
+        array.splice(indexB, 0, temp);
     }
 
  }

@@ -2,17 +2,17 @@
   <div class="ui-g-12 ui-fluid">
     <div class="div-padding-bottom">
       <p-panel header="Cadastro Rápido" [toggleable]="true" [collapsed]="true">
-        <form #f autocomplete="off" (ngSubmit)="salvarGrupos(nomes)">
+        <form #f autocomplete="off" (ngSubmit)="salvarGrupos()">
           <div class="ui-g">
             <div class="ui-g-12 ui-fluid">
               <div class="vertical-align-middle-ext-box">
                 <label for="nomes" class="vertical-align-middle-int-box required">Nomes dos grupos</label>
                 <span class="pi pi-info-circle icon-info vertical-align-middle-int-box" pTooltip="Tecle enter, dentro da caixa de texto, sempre que quiser incluir um novo registro"></span>
               </div>
-              <textarea #nomes id="nomes" name="nomes" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>              
+              <textarea #nomesField id="nomes" name="nomes" [rows]="5" [cols]="30" pInputTextarea autoResize="autoResize"></textarea>              
             </div>
             <div class="ui-g-12">
-              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="nomes.value.trim().length == 0"></button>
+              <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="nomesField.value.trim().length == 0"></button>
             </div>
           </div>
         </form>
@@ -43,7 +43,7 @@
                           class="width25px"
                           pTooltip="Mover para cima"
                           tooltipPosition="top"
-                          (click)="swapElement(grupos, i, i-1)"></button>
+                          (click)="changeArrayOrder(grupos, i, i-1)"></button>
                   <button pButton
                           *ngIf="!isGrupoSistema(grupo)"
                           [disabled]="isGrupoSistema(grupo) || i == grupos.length-2"
@@ -51,7 +51,7 @@
                           class="width25px"
                           pTooltip="Mover para baixo"
                           tooltipPosition="top"
-                          (click)="swapElement(grupos, i, i+1)"></button>
+                          (click)="changeArrayOrder(grupos, i, i+1)"></button>
 
                   <button pButton
                           *ngIf="!isGrupoSistema(grupo)"
@@ -61,7 +61,7 @@
                           pTooltip="Mover para o início"
                           [disabled]="isGrupoSistema(grupo) || i == 1"
                           tooltipPosition="top"
-                          (click)="swapElement(grupos, i, 1)"></button>
+                          (click)="moveArrayIndex(grupos, i, 1)"></button>
                   <button pButton
                           *ngIf="!isGrupoSistema(grupo)"
                           [disabled]="isGrupoSistema(grupo) || i == grupos.length-2"
@@ -69,7 +69,7 @@
                           class="width25px"
                           pTooltip="Mover para o fim"
                           tooltipPosition="top"
-                          (click)="swapElement(grupos, i, grupos.length-2)"></button>
+                          (click)="moveArrayIndex(grupos, i, grupos.length-2)"></button>
                 </td>
                 <td class="col-acoes">
                   <button pButton
@@ -96,7 +96,12 @@
             </ng-template>
           </p-table>
         </div>
-        <button pButton icon="fa fa-save" type="submit" label="Salvar ordenação" class="primeNgButtonBugFix"></button>
+        <button pButton
+                icon="fa fa-save"
+                type="submit"
+                label="Salvar ordenação"
+                class="primeNgButtonBugFix"
+                (click)="salvarOrdenacao()"></button>
       </p-panel>
     </div>
   </div>

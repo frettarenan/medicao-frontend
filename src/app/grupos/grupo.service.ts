@@ -32,4 +32,8 @@ export class GrupoService {
     return this.http.post<any>(`${this.gruposUrl}/cadastro-rapido`, grupos).toPromise();
   }
 
+  salvarOrdenacao(grupos: Array<Grupo>): Promise<any> {
+    return this.http.post<any>(`${this.gruposUrl}/ordenar`, grupos).toPromise();
+  }
+
 }

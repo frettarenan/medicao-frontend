@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Obra, Grupo } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { GrupoService } from 'app/grupos/grupo.service';
@@ -14,7 +14,10 @@ import { Util } from 'app/core/util';
 })
 export class ObraCadastroAbaGruposComponent implements OnInit {
 
-  swapElement = Util.swapElement;
+  changeArrayOrder = Util.changeArrayOrder;
+  moveArrayIndex = Util.moveArrayIndex;
+
+  @ViewChild("nomesField") nomesField: ElementRef;
 
   _obra : Obra;
 
@@ -49,10 +52,10 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
     }
   }
   
-  salvarGrupos(nomes: FormControl) {
+  salvarGrupos() {
     let gruposCadastro: Array<Grupo> = new Array<Grupo>();
     
-    let linhas = nomes.value.split('\n');
+    let linhas = this.nomesField.nativeElement.value.split('\n');
     let linha: string;
     
     for(var i = 0;i < linhas.length;i++){
@@ -72,6 +75,7 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
     this.grupoService.adicionarGrupos(grupos)
       .then(gruposAdicionados => {
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
+        this.nomesField.nativeElement.value = "";
         this.listarGruposPorObra();
       })
       .catch(erro => this.errorHandler.handle(erro));
@@ -79,6 +83,15 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
 
   isGrupoSistema(grupo): Boolean {
     return grupo.tipoGrupo.id == TipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == TipoGrupoEnum.SUBTOTAL;
+  }
+
+  salvarOrdenacao() {
+    this.grupoService.salvarOrdenacao(this.grupos)
+      .then(gruposSalvos => {
+        this.messageService.add({ severity: 'success', detail: 'Ordenação salva com sucesso!' });
+        this.listarGruposPorObra();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
   }
 
 }
