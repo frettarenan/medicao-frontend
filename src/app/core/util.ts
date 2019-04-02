@@ -1,4 +1,5 @@
 export class Util {
+
     private static arrayCoresEscalaVermelhoAmareloVerde = [
         "#F8696B",
         "#F86A6B",
@@ -113,6 +114,12 @@ export class Util {
         }
         // return null;
         return Util.arrayCoresEscalaVermelhoAmareloVerde[0];
+    }
+
+    public static swapElement(array, indexA, indexB) {
+        var tmp = array[indexA];
+        array[indexA] = array[indexB];
+        array[indexB] = tmp;
     }
 
  }

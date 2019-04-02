@@ -5,6 +5,7 @@ import { GrupoService } from 'app/grupos/grupo.service';
 import { FormControl } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import { TipoGrupoEnum } from 'app/core/enum';
+import { Util } from 'app/core/util';
 
 @Component({
   selector: 'app-obra-cadastro-aba-grupos',
@@ -12,6 +13,8 @@ import { TipoGrupoEnum } from 'app/core/enum';
   styleUrls: ['./obra-cadastro-aba-grupos.component.scss']
 })
 export class ObraCadastroAbaGruposComponent implements OnInit {
+
+  swapElement = Util.swapElement;
 
   _obra : Obra;
 

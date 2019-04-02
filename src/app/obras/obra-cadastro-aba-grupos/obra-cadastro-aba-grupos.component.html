@@ -21,40 +21,82 @@
     
     <div class="div-padding-bottom">
       <p-panel header="Grupos Cadastrados">
-        <p-table [value]="grupos" [responsive]="true"
-          [paginator]="false" #tabela>
-          <ng-template pTemplate="header">
-            <tr>
-              <th>Nome</th>
-              <th class="col-acoes-header">Ações</th>
-            </tr>
-          </ng-template>
+        <div class="div-padding-bottom">
+          <p-table [value]="grupos" [responsive]="true"
+            [paginator]="false" #tabela>
+            <ng-template pTemplate="header">
+              <tr>
+                <th>Nome</th>
+                <th class="col-ordenacao-header">Ordenação</th>
+                <th class="col-acoes-header">Ações</th>
+              </tr>
+            </ng-template>
 
-          <ng-template pTemplate="body" let-grupo>
-            <tr>
-              <td>{{ grupo.nome }}</td>
-              <td class="col-acoes">
-                <button pButton
-                        icon="fa fa-pencil-alt"
-                        class="width25px"
-                        pTooltip="Editar"
-                        [disabled]="isGrupoSistema(grupo)"
-                        tooltipPosition="top"></button>
-                        <!-- [routerLink]="['/obras', obra.id]" -->
-                <button pButton
-                        icon="fa fa-trash"
-                        class="width25px"
-                        pTooltip="Excluir"
-                        [disabled]="isGrupoSistema(grupo)"
-                        tooltipPosition="top"></button>
-                        <!-- (click)="confirmarExclusao(obra)" -->
-              </td>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="emptymessage">
-            <div>Nenhum registro encontrado</div>
-          </ng-template>
-        </p-table>
+            <ng-template pTemplate="body" let-grupo let-i="rowIndex">
+              <tr>
+                <td>{{grupo.nome}}</td>
+                <td class="col-ordenacao">
+                  <button pButton
+                          *ngIf="!isGrupoSistema(grupo)"
+                          [disabled]="isGrupoSistema(grupo) || i == 1"
+                          icon="pi pi-angle-up"
+                          class="width25px"
+                          pTooltip="Mover para cima"
+                          tooltipPosition="top"
+                          (click)="swapElement(grupos, i, i-1)"></button>
+                  <button pButton
+                          *ngIf="!isGrupoSistema(grupo)"
+                          [disabled]="isGrupoSistema(grupo) || i == grupos.length-2"
+                          icon="pi pi-angle-down"
+                          class="width25px"
+                          pTooltip="Mover para baixo"
+                          tooltipPosition="top"
+                          (click)="swapElement(grupos, i, i+1)"></button>
+
+                  <button pButton
+                          *ngIf="!isGrupoSistema(grupo)"
+                          [disabled]="isGrupoSistema(grupo) || i == 1"
+                          icon="pi pi-angle-double-up"
+                          class="width25px"
+                          pTooltip="Mover para o início"
+                          [disabled]="isGrupoSistema(grupo) || i == 1"
+                          tooltipPosition="top"
+                          (click)="swapElement(grupos, i, 1)"></button>
+                  <button pButton
+                          *ngIf="!isGrupoSistema(grupo)"
+                          [disabled]="isGrupoSistema(grupo) || i == grupos.length-2"
+                          icon="pi pi-angle-double-down"
+                          class="width25px"
+                          pTooltip="Mover para o fim"
+                          tooltipPosition="top"
+                          (click)="swapElement(grupos, i, grupos.length-2)"></button>
+                </td>
+                <td class="col-acoes">
+                  <button pButton
+                          *ngIf="!isGrupoSistema(grupo)"
+                          [disabled]="isGrupoSistema(grupo)"
+                          icon="fa fa-pencil-alt"
+                          class="width25px"
+                          pTooltip="Editar"
+                          tooltipPosition="top"></button>
+                          <!-- [routerLink]="['/obras', obra.id]" -->
+                  <button pButton
+                          *ngIf="!isGrupoSistema(grupo)"
+                          [disabled]="isGrupoSistema(grupo)"
+                          icon="fa fa-trash"
+                          class="width25px"
+                          pTooltip="Excluir"
+                          tooltipPosition="top"></button>
+                          <!-- (click)="confirmarExclusao(obra)" -->
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="emptymessage">
+              <div>Nenhum registro encontrado</div>
+            </ng-template>
+          </p-table>
+        </div>
+        <button pButton icon="fa fa-save" type="submit" label="Salvar ordenação" class="primeNgButtonBugFix"></button>
       </p-panel>
     </div>
   </div>
