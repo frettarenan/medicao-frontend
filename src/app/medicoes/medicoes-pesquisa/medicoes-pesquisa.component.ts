@@ -7,6 +7,7 @@ import { ConstrutoraService } from 'app/construtoras/construtora.service';
 import { ObraService } from 'app/obras/obra.service';
 import { ContratoService } from 'app/contratos/contrato.service';
 import { AuthService } from 'app/seguranca/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-medicoes-pesquisa',
@@ -38,6 +39,7 @@ export class MedicoesPesquisaComponent implements OnInit {
     private errorHandler: ErrorHandlerService,
     private confirmation: ConfirmationService,
     private messageService: MessageService,
+    private router: Router,
     public title: Title
   ) { }
 
@@ -81,15 +83,8 @@ export class MedicoesPesquisaComponent implements OnInit {
     .catch(erro => this.errorHandler.handle(erro));
   }
 
-  pesquisar(pagina = 0) {
-    /*this.filtro.pagina = pagina;
-
-    this.construtoraService.pesquisar(this.filtro)
-      .then(resultado => {
-        this.totalRegistros = resultado.total;
-        this.construtoras = resultado.construtoras;
-      })
-      .catch(erro => this.errorHandler.handle(erro));*/
+  abrirMedicao() {
+    this.router.navigate(['/medicoes', this.idMedicaoSelecionada]);
   }
 
 }

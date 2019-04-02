@@ -6,7 +6,7 @@
 
   <div class="div-padding-bottom">
     <p-panel header="Filtros da Pesquisa" [toggleable]="false" [collapsed]="false">
-      <form #f="ngForm" autocomplete="off" (ngSubmit)="pesquisar()">
+      <form #f="ngForm" autocomplete="off" (ngSubmit)="abrirMedicao()">
         <div class="ui-g">
           <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
             <label for="idConstrutoraSelecionada" class="required">Construtora</label>
@@ -84,8 +84,7 @@
                     icon="fa fa-folder-open"
                     type="submit"
                     label="Abrir"
-                    [disabled]="f.invalid"
-                    [routerLink]="['/medicoes', idMedicaoSelecionada]"></button>
+                    [disabled]="f.invalid"></button>
             <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
           </div>
         </div>
