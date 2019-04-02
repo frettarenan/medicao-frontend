@@ -111,8 +111,8 @@
             (click)="salvar()"></button>
     <button pButton
       *ngIf="auth.temPermissao('ROLE_CADASTRAR_MEDICAO')"
-      icon="fa fa-save"
-      label="Salvar matriz como..."
-      (click)="salvarComo()"></button>
+      icon="fa fa-clone"
+      label="Salvar cópia..."
+      (click)="salvarCopia()"></button>
   </div>
 </div>

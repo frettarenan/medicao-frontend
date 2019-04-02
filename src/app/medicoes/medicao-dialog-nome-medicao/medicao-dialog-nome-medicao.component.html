@@ -1,0 +1,18 @@
+<div class="container-full">
+    {{mensagem}}
+  <div class="ui-g">
+    <div class="ui-g-12">
+      <label for="nome" class="required">Nome</label>
+      <input type="text"
+             #nomeField
+             id="nome"
+             [(ngModel)]="nome"
+             pInputText
+             required
+             class="form-control">
+    </div>
+    <div class="ui-g-12">
+      <button pButton type="button" icon="fa fa-save" label="Salvar" (click)="salvar()" [disabled]="nomeField.value.trim() == ''"></button>
+    </div>
+  </div>
+</div>

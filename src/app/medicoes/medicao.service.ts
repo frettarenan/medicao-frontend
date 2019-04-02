@@ -31,4 +31,9 @@ export class MedicaoService {
       .toPromise();
   }
 
+  atualizar(medicao: Medicao): Promise<Medicao> {
+    return this.http.put<Medicao>(`${this.medicoesUrl}/${medicao.id}`, medicao)
+      .toPromise();
+  }
+
 }

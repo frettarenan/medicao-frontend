@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, DialogService } from 'primeng/api';
 import { LancamentoService } from 'app/lancamentos/lancamento.service';
 import { ServicoService } from 'app/servicos/servico.service';
 import { GrupoService } from 'app/grupos/grupo.service';
@@ -14,11 +14,13 @@ import { AuthService } from 'app/seguranca/auth.service';
 import { Util } from 'app/core/util';
 import { TipoGrupoEnum } from 'app/core/enum';
 import { MedicaoService } from 'app/medicoes/medicao.service';
+import { MedicaoDialogNomeMedicaoComponent } from '../medicao-dialog-nome-medicao/medicao-dialog-nome-medicao.component';
 
 @Component({
   selector: 'app-medicao-cadastro',
   templateUrl: './medicao-cadastro.component.html',
-  styleUrls: ['./medicao-cadastro.component.scss']
+  styleUrls: ['./medicao-cadastro.component.scss'],
+  providers: [DialogService]
 })
 export class MedicaoCadastroComponent implements OnInit {
 
@@ -47,6 +49,7 @@ export class MedicaoCadastroComponent implements OnInit {
     private servicoService: ServicoService,
     private grupoService: GrupoService,
     private lancamentoService: LancamentoService,
+    private dialogService: DialogService,
     private messageService: MessageService,
     private errorHandler: ErrorHandlerService,
     private route: ActivatedRoute,
@@ -361,17 +364,36 @@ export class MedicaoCadastroComponent implements OnInit {
     this.lancamentoService.salvar(lancamentos)
       .then(lancamentosAdicionados => {
         this.messageService.add({ severity: 'success', detail: 'Matriz salva com sucesso!' });
-        // this.router.navigate(['/medicoes', this.idMedicao]);
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  salvarComo() {
-    console.log('salvar como click');
+  salvarCopia() {
+    console.log('salvar cópia');
   }
 
   renomear() {
-    console.log('renomear click');
+    const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
+      data: {
+          mensagem: 'Informe um novo nome para a medição.',
+          nome: this.medicao.nome
+      },
+      header: 'Renomear Medição',
+      width: '60%'
+    });
+
+    ref.onClose.subscribe((nome: string) => {
+      if (nome) {
+        var medicaoClone = Object.assign({}, this.medicao);
+        medicaoClone.nome = nome;
+        this.medicaoService.atualizar(medicaoClone)
+        .then(medicaoSalva => {
+          this.medicao = medicaoSalva;
+          this.messageService.add({ severity: 'success', detail: 'Medição renomeada com sucesso!' });
+        })
+        .catch(erro => this.errorHandler.handle(erro));
+      }
+    });
   }
 
 }

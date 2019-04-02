@@ -10,6 +10,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { PanelModule } from 'primeng/panel';
 import { DialogModule } from 'primeng/dialog';
 import { DropdownModule } from 'primeng/dropdown';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 
 import { SharedModule } from '../shared/shared.module';
 import { MedicoesRoutingModule } from './medicoes-routing.module';
@@ -17,6 +18,7 @@ import { MedicaoCadastroComponent } from './medicao-cadastro/medicao-cadastro.co
 import { MedicoesPesquisaComponent } from './medicoes-pesquisa/medicoes-pesquisa.component';
 import { TextMaskModule } from 'angular2-text-mask';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MedicaoDialogNomeMedicaoComponent } from './medicao-dialog-nome-medicao/medicao-dialog-nome-medicao.component';
 
 @NgModule({
   imports: [
@@ -33,13 +35,18 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
     PanelModule,
     DialogModule,
     DropdownModule,
+    DynamicDialogModule,
 
     SharedModule,
     MedicoesRoutingModule
   ],
   declarations: [
     MedicaoCadastroComponent,
-    MedicoesPesquisaComponent
+    MedicoesPesquisaComponent,
+    MedicaoDialogNomeMedicaoComponent
+  ],
+  entryComponents: [
+    MedicaoDialogNomeMedicaoComponent
   ]
 })
 export class MedicoesModule { }
