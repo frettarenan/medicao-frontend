@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Contrato, Servico, UnidadeMedida } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { MessageService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ServicoService } from 'app/servicos/servico.service';
 import { UnidadeMedidaService } from 'app/unidades-medidas/unidade-medida.service';
+import { Util } from 'app/core/util';
 
 @Component({
   selector: 'app-contrato-cadastro-aba-servicos',
@@ -12,6 +13,11 @@ import { UnidadeMedidaService } from 'app/unidades-medidas/unidade-medida.servic
   styleUrls: ['./contrato-cadastro-aba-servicos.component.scss']
 })
 export class ContratoCadastroAbaServicosComponent implements OnInit {
+
+  changeArrayOrder = Util.changeArrayOrder;
+  moveArrayIndex = Util.moveArrayIndex;
+
+  @ViewChild("nomesField") nomesField: ElementRef;
 
   _contrato : Contrato;
 
@@ -58,10 +64,10 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
     }
   }
   
-  salvarServicos(nomes: FormControl) {
+  salvarServicos() {
     let servicosCadastro: Array<Servico> = new Array<Servico>();
     
-    let linhas = nomes.value.split('\n');
+    let linhas = this.nomesField.nativeElement.value.split('\n');
     let linha: string;
     
     for(var i = 0;i < linhas.length;i++){
@@ -84,6 +90,16 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
     this.servicoService.adicionarServicos(servicos)
       .then(servicosAdicionados => {
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
+        this.nomesField.nativeElement.value = "";
+        this.listarServicosPorContrato();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  salvarOrdenacao() {
+    this.servicoService.salvarOrdenacao(this.servicos)
+      .then(servicosSalvos => {
+        this.messageService.add({ severity: 'success', detail: 'Ordenação salva com sucesso!' });
         this.listarServicosPorContrato();
       })
       .catch(erro => this.errorHandler.handle(erro));

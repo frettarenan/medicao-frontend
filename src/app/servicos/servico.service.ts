@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
+import { Servico } from 'app/core/model';
 import { MoneyHttp } from 'app/seguranca/money-http';
 import { environment } from 'environments/environment';
-import { HttpParams } from '@angular/common/http';
-import { Servico } from 'app/core/model';
 
 @Injectable()
 export class ServicoService {
@@ -31,6 +30,10 @@ export class ServicoService {
 
   adicionarServicos(servicos: Array<Servico>): Promise<any> {
     return this.http.post<any>(`${this.servicosUrl}/cadastro-rapido`, servicos).toPromise();
+  }
+
+  salvarOrdenacao(servicos: Array<Servico>): Promise<any> {
+    return this.http.post<any>(`${this.servicosUrl}/ordenar`, servicos).toPromise();
   }
 
 }
