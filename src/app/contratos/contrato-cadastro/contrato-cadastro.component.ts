@@ -41,7 +41,10 @@ export class ContratoCadastroComponent implements OnInit {
       .then(contrato => {
         this.contrato = contrato;
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+        this.router.navigate(['/contratos']);
+      });
   }
 
   get isCadastro(): Boolean {

@@ -95,9 +95,6 @@ export class MedicaoCadastroComponent implements OnInit {
       this.lancamentos = null;
 
       this.carregarMedicao(idMedicao);
-      this.carregarServicos(idMedicao);
-      this.carregarGrupos(idMedicao);
-      this.carregarLancamentos(idMedicao);
     }
   }
 
@@ -105,8 +102,14 @@ export class MedicaoCadastroComponent implements OnInit {
     this.medicaoService.buscarPorId(id)
       .then(medicao => {
         this.medicao = medicao;
+        this.carregarServicos(id);
+        this.carregarGrupos(id);
+        this.carregarLancamentos(id);
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+        this.router.navigate(['/medicoes']);
+      });
   }
 
   carregarServicos(idMedicao: number) {

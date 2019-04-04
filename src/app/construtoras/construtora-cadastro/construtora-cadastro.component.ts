@@ -50,7 +50,10 @@ export class ConstrutoraCadastroComponent implements OnInit {
       .then(construtora => {
         this.construtora = construtora;
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+        this.router.navigate(['/construtoras']);
+      });
   }
 
   salvar(form: FormControl) {

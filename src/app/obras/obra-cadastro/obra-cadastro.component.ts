@@ -42,7 +42,10 @@ export class ObraCadastroComponent implements OnInit {
       .then(obra => {
         this.obra = obra;
       })
-      .catch(erro => this.errorHandler.handle(erro));
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+        this.router.navigate(['/obras']);
+      });
   }
 
   get isCadastro(): Boolean {
