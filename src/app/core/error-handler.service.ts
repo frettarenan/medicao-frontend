@@ -27,7 +27,7 @@ export class ErrorHandlerService {
         && errorResponse.status >= 400 && errorResponse.status <= 499) {
       msg = 'Ocorreu um erro ao processar a sua solicitação.';
 
-      if (errorResponse.status === 400) {
+      if (errorResponse.status === 401) {
         if (errorResponse.url.includes("/oauth/token")) {
           msg = errorResponse.error['error_description'] + ".";
         }
