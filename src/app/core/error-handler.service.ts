@@ -27,10 +27,8 @@ export class ErrorHandlerService {
         && errorResponse.status >= 400 && errorResponse.status <= 499) {
       msg = 'Ocorreu um erro ao processar a sua solicitação.';
 
-      if (errorResponse.status === 401) {
-        if (errorResponse.url.includes("/oauth/token")) {
-          msg = errorResponse.error['error_description'] + ".";
-        }
+      if (errorResponse.url.includes("/oauth/token") && (errorResponse.status === 400 || errorResponse.status === 401)) {
+        msg = errorResponse.error['error_description'] + ".";
       } else if (errorResponse.status === 403) {
         msg = 'Você não tem permissão para executar esta ação.';
       } else if (errorResponse.status === 404) {
