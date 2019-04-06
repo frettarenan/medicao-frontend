@@ -16,7 +16,7 @@
             <label for="descricao">Descrição</label>
             <input pInputText type="text" id="descricao" name="descricao" [(ngModel)]="filtro.descricao">
           </div>
-          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+          <div *ngIf="auth.jwtPayload.administrador" class="ui-g-12 ui-fluid">
             <label for="idConstrutoraSelecionada">Construtora</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idConstrutoraSelecionada"
@@ -40,7 +40,7 @@
             </div>
             <div class="ui-g-12">
               <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
-              <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
+              <button pButton icon="fa fa-eraser" type="button" label="Limpar" (click)="form.reset();"></button>
             </div>
         </div>
       </form>

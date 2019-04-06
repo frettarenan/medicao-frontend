@@ -50,7 +50,7 @@ export class MedicoesPesquisaComponent implements OnInit {
   }
 
   carregarConstrutoras() {
-    if (this.auth.jwtPayload.usuario.administrador) {
+    if (this.auth.jwtPayload.administrador) {
       this.construtoraService.listarConstrutorasAtivas().then(lista => {
         this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
       })
@@ -61,8 +61,8 @@ export class MedicoesPesquisaComponent implements OnInit {
   }
 
   carregarObras() {
-    if (!this.auth.jwtPayload.usuario.administrador) {
-      this.idConstrutoraSelecionada = this.auth.jwtPayload.usuario.construtora.id;
+    if (!this.auth.jwtPayload.administrador) {
+      this.idConstrutoraSelecionada = this.auth.jwtPayload.idConstrutora;
     }
     this.obraService.listarObrasAtivasPorConstrutora(this.idConstrutoraSelecionada).then(lista => {
       this.obras = lista.map(obra => ({ label: obra.nome, value: obra.id }));
@@ -88,7 +88,7 @@ export class MedicoesPesquisaComponent implements OnInit {
   validaSeExistemMedicoesCadastradas() {
     if (this.medicoes.length == 0) {
       this.confirmation.confirm({
-        message: 'Não existem medições para o contrato selecionado. Deseja cadastar uma nova?',
+        message: 'Nenhuma medição para o contrato selecionado. Deseja cadastrá-la?',
         accept: () => {
           this.criaPrimeiraMedicao();
         }

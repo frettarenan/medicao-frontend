@@ -16,7 +16,7 @@
             <label for="email">E-mail</label>
             <input pInputText type="text" id="email" name="email" [(ngModel)]="filtro.email">
           </div>
-          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+          <div *ngIf="auth.jwtPayload.administrador" class="ui-g-12 ui-fluid">
             <label for="idConstrutoraSelecionada">Construtora</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idConstrutoraSelecionada"
@@ -28,7 +28,7 @@
           </div>
           <div class="ui-g-12">
             <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
-            <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
+            <button pButton icon="fa fa-eraser" type="button" label="Limpar" (click)="form.reset();"></button>
           </div>
         </div>
       </form>
@@ -46,7 +46,7 @@
           <tr>
             <th>Nome</th>
             <th>E-mail</th>
-            <th *ngIf="auth.jwtPayload.usuario.administrador">Construtora</th>
+            <th *ngIf="auth.jwtPayload.administrador">Construtora</th>
             <th class="width100px">Situação</th>
             <th class="col-acoes-header">Ações</th>
           </tr>
@@ -56,10 +56,10 @@
           <tr>
             <td>{{ usuario.nome }}</td>
             <td>{{ usuario.email }}</td>
-            <td *ngIf="auth.jwtPayload.usuario.administrador">{{ (usuario.construtora == null) ? '' : usuario.construtora.razaoSocial }}</td>
+            <td *ngIf="auth.jwtPayload.administrador">{{ (usuario.construtora == null) ? '' : usuario.construtora.razaoSocial }}</td>
             <td>
-              <span *ngIf="usuario.administrador || usuario.id == auth.jwtPayload.usuario.id">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</span>
-              <a *ngIf="!usuario.administrador && usuario.id != auth.jwtPayload.usuario.id"
+              <span *ngIf="usuario.administrador || usuario.id == auth.jwtPayload.id">{{ usuario.ativo ? 'Ativo' : 'Inativo' }}</span>
+              <a *ngIf="!usuario.administrador && usuario.id != auth.jwtPayload.id"
                 href="javascript:;"
                 [pTooltip]="usuario.ativo ? 'Desativar' : 'Ativar'"
                 tooltipPosition="top"
@@ -78,7 +78,7 @@
               <button pButton
                       *ngIf="auth.temPermissao('ROLE_REMOVER_USUARIO')"
                       icon="fa fa-trash"
-                      [disabled]="usuario.administrador || usuario.id == auth.jwtPayload.usuario.id"
+                      [disabled]="usuario.administrador || usuario.id == auth.jwtPayload.id"
                       class="width25px"
                       pTooltip="Excluir"
                       tooltipPosition="top"

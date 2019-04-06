@@ -395,7 +395,7 @@ export class MedicaoCadastroComponent implements OnInit {
       if (nome) {
         var medicaoClone = Object.assign({}, this.medicao);
         medicaoClone.nome = nome;
-        this.medicaoService.atualizar(medicaoClone)
+        this.medicaoService.renomear(medicaoClone)
         .then(medicaoSalva => {
           this.medicao = medicaoSalva;
           this.messageService.add({ severity: 'success', detail: 'Medição renomeada com sucesso!' });

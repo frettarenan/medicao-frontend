@@ -40,7 +40,7 @@ export class ContratosPesquisaComponent implements OnInit {
   }
 
   carregarConstrutoras() {
-    if (this.auth.jwtPayload.usuario.administrador) {
+    if (this.auth.jwtPayload.administrador) {
       this.construtoraService.listarTodas().then(lista => {
         this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
       })
@@ -51,8 +51,8 @@ export class ContratosPesquisaComponent implements OnInit {
   }
 
   carregarObras() {
-    if (!this.auth.jwtPayload.usuario.administrador) {
-      this.idConstrutoraSelecionada = this.auth.jwtPayload.usuario.construtora.id;
+    if (!this.auth.jwtPayload.administrador) {
+      this.idConstrutoraSelecionada = this.auth.jwtPayload.idConstrutora;
     }
     this.obraService.listarTodasPorConstrutora(this.idConstrutoraSelecionada).then(lista => {
       this.obras = lista.map(obra => ({ label: obra.nome, value: obra.id }));

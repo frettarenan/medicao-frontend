@@ -8,7 +8,7 @@
     <p-panel header="Filtros da Pesquisa" [toggleable]="false" [collapsed]="false">
       <form #f="ngForm" autocomplete="off" (ngSubmit)="abrirMedicao()">
         <div class="ui-g">
-          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+          <div *ngIf="auth.jwtPayload.administrador" class="ui-g-12 ui-fluid">
             <label for="idConstrutoraSelecionada" class="required">Construtora</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idConstrutoraSelecionada"
@@ -85,7 +85,7 @@
                     type="submit"
                     label="Abrir"
                     [disabled]="f.invalid"></button>
-            <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="f.reset();"></button>
+            <button pButton icon="fa fa-eraser" type="button" label="Limpar" (click)="f.reset();"></button>
           </div>
         </div>
       </form>

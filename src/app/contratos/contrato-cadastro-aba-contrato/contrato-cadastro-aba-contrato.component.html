@@ -20,7 +20,7 @@
           text="Mínimo de {{ descricao.errors?.minlength?.requiredLength }} caracteres"></app-message>
       </div>
 
-    <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+    <div *ngIf="auth.jwtPayload.administrador" class="ui-g-12 ui-fluid">
       <label for="idConstrutoraSelecionada" class="required">Construtora</label>
       <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                   inputId="idConstrutoraSelecionada"
@@ -38,7 +38,7 @@
     </div>
 
     <div class="ui-g-12 ui-fluid">
-      <label for="idObraSelecionada" class="required">Usuário responsável</label>
+      <label for="idObraSelecionada" class="required">Obra</label>
       <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                   inputId="idObraSelecionada"
                   placeholder="Selecione..."

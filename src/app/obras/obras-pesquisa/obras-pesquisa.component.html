@@ -12,7 +12,7 @@
             <label for="nome">Nome</label>
             <input pInputText type="text" id="nome" name="nome" [(ngModel)]="filtro.nome">
           </div>
-          <div *ngIf="auth.jwtPayload.usuario.administrador" class="ui-g-12 ui-fluid">
+          <div *ngIf="auth.jwtPayload.administrador" class="ui-g-12 ui-fluid">
             <label for="idConstrutoraSelecionada">Construtora</label>
             <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
                         inputId="idConstrutoraSelecionada"
@@ -24,7 +24,7 @@
           </div>
           <div class="ui-g-12">
             <button pButton icon="fa fa-search" type="submit" label="Pesquisar"></button>
-            <button pButton icon="fa fa-eraser" type="submit" label="Limpar" (click)="form.reset();"></button>
+            <button pButton icon="fa fa-eraser" type="button" label="Limpar" (click)="form.reset();"></button>
           </div>
         </div>
       </form>
@@ -41,7 +41,7 @@
         <ng-template pTemplate="header">
           <tr>
             <th>Nome</th>
-            <th *ngIf="auth.jwtPayload.usuario.administrador">Construtora</th>
+            <th *ngIf="auth.jwtPayload.administrador">Construtora</th>
             <th>Usuário responsável</th>
             <th class="width100px">Situação</th>
             <th class="col-acoes-header">Ações</th>
@@ -51,7 +51,7 @@
         <ng-template pTemplate="body" let-obra>
           <tr>
             <td>{{ obra.nome }}</td>
-            <td *ngIf="auth.jwtPayload.usuario.administrador">{{ (obra.construtora == null) ? '' : obra.construtora.razaoSocial }}</td>
+            <td *ngIf="auth.jwtPayload.administrador">{{ (obra.construtora == null) ? '' : obra.construtora.razaoSocial }}</td>
             <td>{{ obra.usuarioResponsavel.nome }}</td>
             <td>
               <a href="javascript:;"

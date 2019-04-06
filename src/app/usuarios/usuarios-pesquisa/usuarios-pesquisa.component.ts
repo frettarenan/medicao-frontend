@@ -39,7 +39,7 @@ export class UsuariosPesquisaComponent implements OnInit {
   }
 
   carregarConstrutoras() {
-    if (this.auth.jwtPayload.usuario.administrador) {
+    if (this.auth.jwtPayload.administrador) {
       this.construtoraService.listarTodas().then(lista => {
         this.construtoras = lista.map(construtora => ({ label: construtora.razaoSocial, value: construtora.id }));
       })
@@ -48,10 +48,10 @@ export class UsuariosPesquisaComponent implements OnInit {
   }
 
   pesquisar(pagina = 0) {
-    if (this.auth.jwtPayload.usuario.administrador) {
+    if (this.auth.jwtPayload.administrador) {
       this.filtro.idConstrutora = this.idConstrutoraSelecionada;
     } else {
-      this.filtro.idConstrutora = this.auth.jwtPayload.usuario.construtora.id;
+      this.filtro.idConstrutora = this.auth.jwtPayload.idConstrutora;
     }
     this.filtro.pagina = pagina;
 
