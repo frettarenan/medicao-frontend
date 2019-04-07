@@ -21,14 +21,14 @@
             </div>
             <div class="ui-g-12 ui-fluid">
               <label for="nomes" class="vertical-align-middle-int-box required">Nomes dos serviços</label>
+              <!-- <textarea autoResize="autoResize" removido por causa de bug na rolagem -->
               <textarea #nomesField
                         placeholder="Tecle enter, dentro da caixa de texto, sempre que quiser incluir um novo registro"
                         id="nomes"
                         name="nomes"
                         [rows]="5"
                         [cols]="30"
-                        pInputTextarea
-                        autoResize="autoResize"></textarea>              
+                        pInputTextarea></textarea>              
             </div>
             <div class="ui-g-12">
               <button pButton icon="fa fa-save" type="submit" label="Salvar todos" class="primeNgButtonBugFix" [disabled]="!idUnidadeMedidaSelecionada || nomesField.value.trim().length == 0"></button>
