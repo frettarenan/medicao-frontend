@@ -54,7 +54,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
-                     [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
+                     [readonly]="grupo.tipoGrupo.id == tipoGrupoEnum.TOTAL || grupo.tipoGrupo.id == tipoGrupoEnum.SUBTOTAL || !usuarioLogadoContemRoleAdministrarMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id]?.quantidade | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'quantidade')"/>
             </td>
@@ -63,7 +63,7 @@
                      inputmode="numeric"
                      [textMask]="{mask: decimalMask}"
                      class="form-control width100px input-matriz-medicao"
-                     [readonly]="grupo.tipoGrupo.id != tipoGrupoEnum.TOTAL || !usuarioLogadoContemRoleAdministrarMatrizMedicao"
+                     [readonly]="grupo.tipoGrupo.id != tipoGrupoEnum.TOTAL || !usuarioLogadoContemRoleAdministrarMedicao"
                      value="{{matriz['idServico' + servico.id + 'idGrupo' + grupo.id]?.cub | number }}"
                      (change)="inputMatrizChange($event, matriz['idServico' + servico.id + 'idGrupo' + grupo.id], 'cub')"/>
             </td>
