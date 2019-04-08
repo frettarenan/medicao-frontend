@@ -338,7 +338,11 @@ export class MedicaoCadastroComponent implements OnInit {
 
   inputMatrizChange(event, obj, propriedadeObj) {
     // console.log(event.target.value);
-    obj[propriedadeObj] = parseFloat((event.target.value).replace('.', '').replace(',', '.'));
+    let valor = parseFloat((event.target.value).replace('.', '').replace(',', '.'));
+    if (isNaN(valor)) {
+      valor = null;
+    }
+    obj[propriedadeObj] = valor;
     // console.log(this.matriz);
     this.calcularTotais();
   }
