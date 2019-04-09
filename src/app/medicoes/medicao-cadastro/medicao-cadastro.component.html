@@ -16,12 +16,12 @@
               type="button"
               icon="fa fa-edit"
               label="Renomear"
-              (click)="renomear()"></button>
+              (click)="renomear(this.medicao.nome)"></button>
       <button pButton
               *ngIf="auth.temPermissao('ROLE_CADASTRAR_MEDICAO')"
               icon="fa fa-clone"
               label="Salvar cópia..."
-              (click)="salvarCopia()"></button>
+              (click)="salvarCopia(this.medicao.nome)"></button>
     </div>
   </div>
 </div>

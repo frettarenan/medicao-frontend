@@ -385,11 +385,11 @@ export class MedicaoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  renomear() {
+  renomear(nome: string) {
     const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
       data: {
           mensagem: 'Informe um novo nome para a medição.',
-          nome: this.medicao.nome
+          nome: nome
       },
       header: 'Renomear Medição',
       width: '60%'
@@ -404,16 +404,19 @@ export class MedicaoCadastroComponent implements OnInit {
           this.medicao = medicaoSalva;
           this.messageService.add({ severity: 'success', detail: 'Medição renomeada com sucesso!' });
         })
-        .catch(erro => this.errorHandler.handle(erro));
+        .catch(erro => {
+          this.errorHandler.handle(erro);
+          this.renomear(nome);
+        });
       }
     });
   }
 
-  salvarCopia() {
+  salvarCopia(nome:string) {
     const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
       data: {
           mensagem: 'Informe um novo nome para a cópia.',
-          nome: this.medicao.nome
+          nome: nome
       },
       header: 'Salvar Cópia da Medição',
       width: '60%'
@@ -426,7 +429,10 @@ export class MedicaoCadastroComponent implements OnInit {
           this.messageService.add({ severity: 'success', detail: 'Medição copiada com sucesso!' });
           this.router.navigate(['/medicoes', medicaoAdicionada.id]);
         })
-        .catch(erro => this.errorHandler.handle(erro));
+        .catch(erro => {
+          this.errorHandler.handle(erro);
+          this.salvarCopia(nome);
+        });
       }
     });
   }
