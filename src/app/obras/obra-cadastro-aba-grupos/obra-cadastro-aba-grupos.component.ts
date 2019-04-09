@@ -94,7 +94,7 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  confirmarExclusao(grupo: any) {
+  confirmarExclusao(grupo: Grupo) {
     this.confirmation.confirm({
       message: 'Tem certeza que deseja excluir?',
       accept: () => {
@@ -103,13 +103,17 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
     });
   }
 
-  excluir(grupo: any) {
+  excluir(grupo: Grupo) {
     this.grupoService.excluir(grupo.id)
       .then(() => {
         this.listarGruposPorObra();
         this.messageService.add({ severity: 'success', detail: 'Registro excluído com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  editar(grupo: Grupo) {
+    console.log(grupo.id);
   }
 
 }

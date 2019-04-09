@@ -106,7 +106,7 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  confirmarExclusao(servico: any) {
+  confirmarExclusao(servico: Servico) {
     this.confirmation.confirm({
       message: 'Tem certeza que deseja excluir?',
       accept: () => {
@@ -115,13 +115,17 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
     });
   }
 
-  excluir(servico: any) {
+  excluir(servico: Servico) {
     this.servicoService.excluir(servico.id)
       .then(() => {
         this.listarServicosPorContrato();
         this.messageService.add({ severity: 'success', detail: 'Registro excluído com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  editar(servico: Servico) {
+    console.log(servico.id);
   }
 
 }
