@@ -412,7 +412,7 @@ export class MedicaoCadastroComponent implements OnInit {
     });
   }
 
-  salvarCopia(nome:string) {
+  salvarCopia(nome: string) {
     const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
       data: {
           mensagem: 'Informe um novo nome para a cópia.',
