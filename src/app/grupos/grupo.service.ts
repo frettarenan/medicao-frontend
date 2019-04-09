@@ -36,4 +36,10 @@ export class GrupoService {
     return this.http.post<any>(`${this.gruposUrl}/ordenar`, grupos).toPromise();
   }
 
+  excluir(id: number): Promise<void> {
+    return this.http.delete(`${this.gruposUrl}/${id}`)
+      .toPromise()
+      .then(() => null);
+  }
+
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Contrato, Servico, UnidadeMedida } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ServicoService } from 'app/servicos/servico.service';
 import { UnidadeMedidaService } from 'app/unidades-medidas/unidade-medida.service';
@@ -30,7 +30,8 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
     private servicoService: ServicoService,
     private unidadeMedidaService: UnidadeMedidaService,
     private errorHandler: ErrorHandlerService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmation: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -101,6 +102,24 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
       .then(servicosSalvos => {
         this.messageService.add({ severity: 'success', detail: 'Ordenação salva com sucesso!' });
         this.listarServicosPorContrato();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  confirmarExclusao(servico: any) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluir(servico);
+      }
+    });
+  }
+
+  excluir(servico: any) {
+    this.servicoService.excluir(servico.id)
+      .then(() => {
+        this.listarServicosPorContrato();
+        this.messageService.add({ severity: 'success', detail: 'Registro excluído com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }

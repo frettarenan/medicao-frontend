@@ -36,4 +36,10 @@ export class ServicoService {
     return this.http.post<any>(`${this.servicosUrl}/ordenar`, servicos).toPromise();
   }
 
+  excluir(id: number): Promise<void> {
+    return this.http.delete(`${this.servicosUrl}/${id}`)
+      .toPromise()
+      .then(() => null);
+  }
+
 }

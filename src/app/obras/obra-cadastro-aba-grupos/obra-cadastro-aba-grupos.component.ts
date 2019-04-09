@@ -2,8 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Obra, Grupo } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { GrupoService } from 'app/grupos/grupo.service';
-import { FormControl } from '@angular/forms';
-import { MessageService } from 'primeng/api';
+import { MessageService, ConfirmationService } from 'primeng/api';
 import { TipoGrupoEnum } from 'app/core/enum';
 import { Util } from 'app/core/util';
 
@@ -26,7 +25,8 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
   constructor(
     private grupoService: GrupoService,
     private errorHandler: ErrorHandlerService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private confirmation: ConfirmationService
   ) { }
 
   ngOnInit() {
@@ -90,6 +90,24 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
       .then(gruposSalvos => {
         this.messageService.add({ severity: 'success', detail: 'Ordenação salva com sucesso!' });
         this.listarGruposPorObra();
+      })
+      .catch(erro => this.errorHandler.handle(erro));
+  }
+
+  confirmarExclusao(grupo: any) {
+    this.confirmation.confirm({
+      message: 'Tem certeza que deseja excluir?',
+      accept: () => {
+        this.excluir(grupo);
+      }
+    });
+  }
+
+  excluir(grupo: any) {
+    this.grupoService.excluir(grupo.id)
+      .then(() => {
+        this.listarGruposPorObra();
+        this.messageService.add({ severity: 'success', detail: 'Registro excluído com sucesso!' });
       })
       .catch(erro => this.errorHandler.handle(erro));
   }
