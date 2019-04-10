@@ -3,7 +3,7 @@ const app = express();
 
 app.use(express.static(__dirname + '/dist'));
 
-http.get('/', function (req, res) {
+app.get('/', function (req, res) {
   res.redirect('https://' + req.get('host') + req.url);
 });
 
