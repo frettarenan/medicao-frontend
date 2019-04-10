@@ -15,8 +15,10 @@ import { FormsModule } from '@angular/forms';
 import { ObrasRoutingModule } from './obras-routing.module';
 import { TabViewModule } from 'primeng/tabview';
 import {InputTextareaModule} from 'primeng/inputtextarea';
+import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import { ObraCadastroAbaObraComponent } from './obra-cadastro-aba-obra/obra-cadastro-aba-obra.component';
 import { ObraCadastroAbaGruposComponent } from './obra-cadastro-aba-grupos/obra-cadastro-aba-grupos.component';
+import { ObraDialogEdicaoGrupoComponent } from './obra-dialog-edicao-grupo/obra-dialog-edicao-grupo.component';
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { ObraCadastroAbaGruposComponent } from './obra-cadastro-aba-grupos/obra-
     DropdownModule,
     TabViewModule,
     InputTextareaModule,
+    DynamicDialogModule,
 
     SharedModule,
     ObrasRoutingModule
@@ -41,8 +44,11 @@ import { ObraCadastroAbaGruposComponent } from './obra-cadastro-aba-grupos/obra-
     ObrasPesquisaComponent,
     ObraCadastroComponent,
     ObraCadastroAbaObraComponent,
-    ObraCadastroAbaGruposComponent
+    ObraCadastroAbaGruposComponent,
+    ObraDialogEdicaoGrupoComponent
   ],
-  exports: []
+  entryComponents: [
+    ObraDialogEdicaoGrupoComponent
+  ]
 })
 export class ObrasModule { }

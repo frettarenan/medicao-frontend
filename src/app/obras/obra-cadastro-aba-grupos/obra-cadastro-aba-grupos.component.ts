@@ -2,14 +2,16 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Obra, Grupo } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
 import { GrupoService } from 'app/grupos/grupo.service';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { MessageService, ConfirmationService, DialogService } from 'primeng/api';
 import { TipoGrupoEnum } from 'app/core/enum';
 import { Util } from 'app/core/util';
+import { ObraDialogEdicaoGrupoComponent } from '../obra-dialog-edicao-grupo/obra-dialog-edicao-grupo.component';
 
 @Component({
   selector: 'app-obra-cadastro-aba-grupos',
   templateUrl: './obra-cadastro-aba-grupos.component.html',
-  styleUrls: ['./obra-cadastro-aba-grupos.component.scss']
+  styleUrls: ['./obra-cadastro-aba-grupos.component.scss'],
+  providers: [DialogService]
 })
 export class ObraCadastroAbaGruposComponent implements OnInit {
 
@@ -26,7 +28,8 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
     private grupoService: GrupoService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -114,6 +117,13 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
 
   editar(grupo: Grupo) {
     console.log(grupo.id);
+    this.dialogService.open(ObraDialogEdicaoGrupoComponent, {
+      data: {
+          grupo: grupo
+      },
+      header: 'Edição de Grupo',
+      width: '60%'
+    });
   }
 
 }
