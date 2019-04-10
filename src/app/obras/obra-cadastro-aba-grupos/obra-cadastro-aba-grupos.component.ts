@@ -116,7 +116,6 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
   }
 
   editar(grupo: Grupo) {
-    console.log(grupo.id);
     this.dialogService.open(ObraDialogEdicaoGrupoComponent, {
       data: {
           grupo: grupo

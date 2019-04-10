@@ -1,16 +1,18 @@
 import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
 import { Contrato, Servico, UnidadeMedida } from 'app/core/model';
 import { ErrorHandlerService } from 'app/core/error-handler.service';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { MessageService, ConfirmationService, DialogService } from 'primeng/api';
 import { FormControl } from '@angular/forms';
 import { ServicoService } from 'app/servicos/servico.service';
 import { UnidadeMedidaService } from 'app/unidades-medidas/unidade-medida.service';
 import { Util } from 'app/core/util';
+import { ContratoDialogEdicaoServicoComponent } from '../contrato-dialog-edicao-servico/contrato-dialog-edicao-servico.component';
 
 @Component({
   selector: 'app-contrato-cadastro-aba-servicos',
   templateUrl: './contrato-cadastro-aba-servicos.component.html',
-  styleUrls: ['./contrato-cadastro-aba-servicos.component.scss']
+  styleUrls: ['./contrato-cadastro-aba-servicos.component.scss'],
+  providers: [DialogService]
 })
 export class ContratoCadastroAbaServicosComponent implements OnInit {
 
@@ -31,7 +33,8 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
     private unidadeMedidaService: UnidadeMedidaService,
     private errorHandler: ErrorHandlerService,
     private messageService: MessageService,
-    private confirmation: ConfirmationService
+    private confirmation: ConfirmationService,
+    private dialogService: DialogService
   ) { }
 
   ngOnInit() {
@@ -125,7 +128,13 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
   }
 
   editar(servico: Servico) {
-    console.log(servico.id);
+    this.dialogService.open(ContratoDialogEdicaoServicoComponent, {
+      data: {
+          servico: servico
+      },
+      header: 'Edição de Serviço',
+      width: '60%'
+    });
   }
 
 }

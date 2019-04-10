@@ -17,6 +17,8 @@ import {TabViewModule} from 'primeng/tabview';
 import { ContratoCadastroAbaContratoComponent } from './contrato-cadastro-aba-contrato/contrato-cadastro-aba-contrato.component';
 import { ContratoCadastroAbaServicosComponent } from './contrato-cadastro-aba-servicos/contrato-cadastro-aba-servicos.component';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { ContratoDialogEdicaoServicoComponent } from './contrato-dialog-edicao-servico/contrato-dialog-edicao-servico.component';
+import { DynamicDialogModule } from 'primeng/dynamicdialog';
 
 @NgModule({
   imports: [
@@ -33,6 +35,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     DropdownModule,
     TabViewModule,
     InputTextareaModule,
+    DynamicDialogModule,
 
     SharedModule,
     ContratosRoutingModule
@@ -41,8 +44,11 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ContratoCadastroComponent,
     ContratosPesquisaComponent,
     ContratoCadastroAbaContratoComponent,
-    ContratoCadastroAbaServicosComponent
+    ContratoCadastroAbaServicosComponent,
+    ContratoDialogEdicaoServicoComponent
   ],
-  exports: []
+  entryComponents: [
+    ContratoDialogEdicaoServicoComponent
+  ]
 })
 export class ContratosModule { }
