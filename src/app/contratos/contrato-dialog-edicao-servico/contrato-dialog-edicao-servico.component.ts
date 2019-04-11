@@ -40,8 +40,9 @@ export class ContratoDialogEdicaoServicoComponent implements OnInit {
   }
 
   salvar() {
-    if (this.servico.nome.trim() != '' && this.servico.unidadeMedida.id) {
+    if (this.servico.nome.trim() != '' && this.idUnidadeMedidaSelecionada) {
       this.servico.nome = this.servico.nome.trim();
+      this.servico.unidadeMedida.id = this.idUnidadeMedidaSelecionada;
       this.servicoService.atualizar(this.servico)
       .then(servicoSalvo => {
         this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
