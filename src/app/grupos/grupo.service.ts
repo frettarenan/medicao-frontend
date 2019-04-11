@@ -42,4 +42,9 @@ export class GrupoService {
       .then(() => null);
   }
 
+  atualizar(grupo: Grupo): Promise<Grupo> {
+    return this.http.put<Grupo>(`${this.gruposUrl}/${grupo.id}`, grupo)
+      .toPromise();
+  }
+
 }

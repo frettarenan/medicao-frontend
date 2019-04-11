@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { DynamicDialogRef, DynamicDialogConfig, MessageService } from 'primeng/api';
 import { Grupo } from 'app/core/model';
+import { GrupoService } from 'app/grupos/grupo.service';
+import { ErrorHandlerService } from 'app/core/error-handler.service';
 
 @Component({
   selector: 'app-obra-dialog-edicao-grupo',
@@ -9,19 +11,34 @@ import { Grupo } from 'app/core/model';
 })
 export class ObraDialogEdicaoGrupoComponent implements OnInit {
 
+  @ViewChild("nomeField") nomeField: ElementRef;
+
   grupo : Grupo;
 
   constructor(
     private ref: DynamicDialogRef,
-    private config: DynamicDialogConfig
+    private config: DynamicDialogConfig,
+    private grupoService: GrupoService,
+    private messageService: MessageService,
+    private errorHandler: ErrorHandlerService
   ) { }
 
   ngOnInit() {
+    this.nomeField.nativeElement.focus();
     this.grupo = this.config.data.grupo;
   }
 
   salvar() {
-    this.ref.close();
+    if (this.grupo.nome.trim() != '') {
+      this.grupoService.atualizar(this.grupo)
+      .then(grupoSalvo => {
+        this.messageService.add({ severity: 'success', detail: 'Cadastro salvo com sucesso!' });
+        this.ref.close();
+      })
+      .catch(erro => {
+        this.errorHandler.handle(erro);
+      });
+    }
   }
 
 }

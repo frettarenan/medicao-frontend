@@ -385,53 +385,51 @@ export class MedicaoCadastroComponent implements OnInit {
       .catch(erro => this.errorHandler.handle(erro));
   }
 
-  renomear(nome: string) {
+  renomear(medicao: Medicao = this.medicao) {
     const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
       data: {
           mensagem: 'Informe um novo nome para a medição.',
-          nome: nome
+          medicao: Object.assign({}, medicao)
       },
       header: 'Renomear Medição',
       width: '60%'
     });
 
-    ref.onClose.subscribe((nome: string) => {
-      if (nome) {
-        var medicaoClone = Object.assign({}, this.medicao);
-        medicaoClone.nome = nome;
-        this.medicaoService.renomear(medicaoClone)
+    ref.onClose.subscribe((medicao: Medicao) => {
+      if (medicao.nome) {
+        this.medicaoService.renomear(medicao)
         .then(medicaoSalva => {
           this.medicao = medicaoSalva;
           this.messageService.add({ severity: 'success', detail: 'Medição renomeada com sucesso!' });
         })
         .catch(erro => {
+          this.renomear(medicao);
           this.errorHandler.handle(erro);
-          this.renomear(nome);
         });
       }
     });
   }
 
-  salvarCopia(nome: string) {
+  salvarCopia(medicao: Medicao = this.medicao) {
     const ref = this.dialogService.open(MedicaoDialogNomeMedicaoComponent, {
       data: {
           mensagem: 'Informe um novo nome para a cópia.',
-          nome: nome
+          medicao: Object.assign({}, this.medicao)
       },
       header: 'Salvar Cópia da Medição',
       width: '60%'
     });
 
-    ref.onClose.subscribe((nome: string) => {
-      if (nome) {
-        this.medicaoService.salvarComo(this.medicao, nome)
+    ref.onClose.subscribe((medicao: Medicao) => {
+      if (medicao.nome) {
+        this.medicaoService.salvarComo(medicao, medicao.nome)
         .then(medicaoAdicionada => {
           this.messageService.add({ severity: 'success', detail: 'Medição copiada com sucesso!' });
           this.router.navigate(['/medicoes', medicaoAdicionada.id]);
         })
         .catch(erro => {
+          this.salvarCopia(medicao);
           this.errorHandler.handle(erro);
-          this.salvarCopia(nome);
         });
       }
     });

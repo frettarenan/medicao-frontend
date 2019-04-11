@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/api';
+import { Medicao } from 'app/core/model';
 
 @Component({
   selector: 'app-medicao-dialog-nome-medicao',
@@ -11,7 +12,7 @@ export class MedicaoDialogNomeMedicaoComponent implements OnInit {
   @ViewChild("nomeField") nomeField: ElementRef;
 
   mensagem = "";
-  nome = "";
+  medicao: Medicao;
 
   constructor(
     private ref: DynamicDialogRef,
@@ -22,12 +23,13 @@ export class MedicaoDialogNomeMedicaoComponent implements OnInit {
     this.nomeField.nativeElement.focus();
     // console.log(this.config.data);
     this.mensagem = this.config.data.mensagem;
-    this.nome = this.config.data.nome;
+    this.medicao = this.config.data.medicao;
   }
 
   salvar() {
-    if (this.nome.trim() != '') {
-      this.ref.close(this.nome.trim());
+    if (this.medicao.nome.trim() != '') {
+      this.medicao.nome = this.medicao.nome.trim();
+      this.ref.close(this.medicao);
     }
   }
 

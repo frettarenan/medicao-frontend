@@ -116,12 +116,16 @@ export class ObraCadastroAbaGruposComponent implements OnInit {
   }
 
   editar(grupo: Grupo) {
-    this.dialogService.open(ObraDialogEdicaoGrupoComponent, {
+    const ref = this.dialogService.open(ObraDialogEdicaoGrupoComponent, {
       data: {
-          grupo: grupo
+          grupo: Object.assign({}, grupo)
       },
       header: 'Edição de Grupo',
       width: '60%'
+    });
+
+    ref.onClose.subscribe(() => {
+      this.listarGruposPorObra();
     });
   }
 
