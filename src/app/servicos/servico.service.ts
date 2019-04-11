@@ -42,4 +42,9 @@ export class ServicoService {
       .then(() => null);
   }
 
+  atualizar(servico: Servico): Promise<Servico> {
+    return this.http.put<Servico>(`${this.servicosUrl}/${servico.id}`, servico)
+      .toPromise();
+  }
+
 }

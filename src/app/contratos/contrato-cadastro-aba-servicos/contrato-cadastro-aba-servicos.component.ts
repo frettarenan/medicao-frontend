@@ -128,12 +128,16 @@ export class ContratoCadastroAbaServicosComponent implements OnInit {
   }
 
   editar(servico: Servico) {
-    this.dialogService.open(ContratoDialogEdicaoServicoComponent, {
+    const ref = this.dialogService.open(ContratoDialogEdicaoServicoComponent, {
       data: {
-          servico: servico
+          servico: Object.assign({}, servico)
       },
       header: 'Edição de Serviço',
       width: '60%'
+    });
+
+    ref.onClose.subscribe(() => {
+      this.listarServicosPorContrato();
     });
   }
 

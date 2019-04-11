@@ -1,3 +1,30 @@
-<p>
-  contrato-dialog-edicao-servico works!
-</p>
+<form #f="ngForm" autocomplete="off" (ngSubmit)="salvar()">
+  <div class="ui-g">
+    <div class="ui-g-12 ui-fluid">
+      <label for="idUnidadeMedidaSelecionada" class="required">Unidade de Medida</label>
+      <p-dropdown emptyFilterMessage="Nenhum registro encontrado"
+                  inputId="idUnidadeMedidaSelecionada"
+                  placeholder="Selecione..."
+                  [filter]="true"
+                  [options]="unidadesMedidas"
+                  [(ngModel)]="idUnidadeMedidaSelecionada"
+                  name="idUnidadeMedidaSelecionada"
+                  #ddUnidadeMedida="ngModel"
+                  required></p-dropdown>
+    </div>
+    <div class="ui-g-12 ui-fluid">
+      <label for="nome" class="required">Nome</label>
+      <input type="text"
+            #nomeField
+            id="nome"
+            name="nome"
+            [(ngModel)]="servico.nome"
+            pInputText
+            required
+            class="form-control">
+    </div>
+    <div class="ui-g-12">
+      <button pButton type="submit" icon="fa fa-save" label="Salvar" [disabled]="nomeField.value.trim() == '' || !idUnidadeMedidaSelecionada"></button>
+    </div>
+  </div>
+</form>
