@@ -46,4 +46,10 @@ export class MedicaoService {
       .toPromise();
   }
 
+  relatorioMedicao(idMedicao: number) {
+    return this.http.get(`${this.medicoesUrl}/${idMedicao}/relatorio`,
+      { responseType: 'blob' })
+      .toPromise();
+  }
+
 }

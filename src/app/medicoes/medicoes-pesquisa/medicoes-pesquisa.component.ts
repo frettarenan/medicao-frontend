@@ -114,4 +114,12 @@ export class MedicoesPesquisaComponent implements OnInit {
     this.router.navigate(['/medicoes', this.idMedicaoSelecionada]);
   }
 
+  gerarRelatorio() {
+    this.medicaoService.relatorioMedicao(this.idMedicaoSelecionada)
+      .then(relatorio => {
+        const url = window.URL.createObjectURL(relatorio);
+        window.open(url);
+      });
+  }
+
 }

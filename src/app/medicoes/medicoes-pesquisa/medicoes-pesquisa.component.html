@@ -85,6 +85,12 @@
                     type="submit"
                     label="Abrir"
                     [disabled]="f.invalid"></button>
+            <button pButton
+                    icon="fa fa-file-pdf"
+                    type="button"
+                    label="Relatório"
+                    [disabled]="f.invalid"
+                    (click)="gerarRelatorio()"></button>
             <button pButton icon="fa fa-eraser" type="button" label="Limpar" (click)="f.reset();"></button>
           </div>
         </div>
